@@ -88,121 +88,96 @@ const Navigation = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <img
-              src="/lovable-uploads/a44481e1-bf8c-43ab-b259-b833b252e1ed.png"
-              alt="Amass Middle East Shipping Services LLC"
-              className="h-6 sm:h-10 lg:h-12 w-auto object-contain"
-            />
+            <Link to="/">
+              <img
+                src="/haixun-logo.svg"
+                alt="Haixun Global Co., Ltd"
+                className="h-8 sm:h-12 lg:h-14 w-auto object-contain"
+              />
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
             <Link
-              to={getNavLink("/home")}
-              className={`nav-link font-medium text-base xl:text-lg hover:text-amass-blue transition-colors ${
-                isActive(getNavLink("/home")) ||
-                (currentCountry.code === "SG" && isActive("/"))
-                  ? "text-amass-blue"
-                  : "text-black"
+              to="/"
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
+                isActive("/") ? "text-red-600" : "text-gray-900"
               }`}
             >
               Home
             </Link>
 
-            <DropdownMenu open={isCompanyDropdownOpen} onOpenChange={setIsCompanyDropdownOpen}>
-              <DropdownMenuTrigger
-                className={`nav-link font-medium text-base xl:text-lg flex items-center gap-1 hover:text-amass-blue transition-colors ${
-                  isCompanyLinkActive() ? "text-amass-blue" : "text-black"
-                }`}
-              >
-                Info <ChevronDown className="w-4 h-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white shadow-lg border rounded-md p-2 z-50">
-                <DropdownMenuItem asChild>
-                  <Link to={getNavLink("/about-us")} className="w-full px-3 py-2 text-base hover:bg-gray-100 rounded-md block">
-                    About Us
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to={getNavLink("/gallery")} className="w-full px-3 py-2 text-base hover:bg-gray-100 rounded-md block">
-                    Gallery
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to={getNavLink("/career")} className="w-full px-3 py-2 text-base hover:bg-gray-100 rounded-md block">
-                    Career
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
             <Link
-              to={getNavLink("/services")}
-              className={`nav-link font-medium text-base xl:text-lg hover:text-amass-blue transition-colors ${
-                isActive(getNavLink("/services")) ? "text-amass-blue" : "text-black"
+              to="/services"
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
+                isActive("/services") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              Services
+              Our Services
             </Link>
 
             <Link
-              to={getNavLink("/blog")}
-              className={`nav-link font-medium text-base xl:text-lg hover:text-amass-blue transition-colors ${
-                isActive(getNavLink("/blog")) || isActive(getNavLink("/blogs"))
-                  ? "text-amass-blue"
-                  : "text-black"
+              to="/about-us"
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
+                isActive("/about-us") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              Blogs
+              About Us
             </Link>
 
             <Link
-              to={getNavLink("/global-presence")}
-              className={`nav-link font-medium text-base xl:text-lg transition-colors ${
-                isActive(getNavLink("/global-presence")) ? "text-amass-blue" : "text-black"
+              to="/blog"
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
+                isActive("/blog") ? "text-red-600" : "text-gray-900"
+              }`}
+            >
+              News
+            </Link>
+
+            <Link
+              to="/advantages"
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
+                isActive("/advantages") ? "text-red-600" : "text-gray-900"
+              }`}
+            >
+              Advantage
+            </Link>
+
+            <Link
+              to="/global-presence"
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
+                isActive("/global-presence") ? "text-red-600" : "text-gray-900"
               }`}
             >
               Global Presence
             </Link>
 
             <Link
-              to={getNavLink("/contact")}
-              className={`nav-link font-medium text-base xl:text-lg transition-colors ${
-                isActive(getNavLink("/contact")) ? "text-amass-blue" : "text-black"
+              to="/contact"
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
+                isActive("/contact") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              Contact
+              Contact Us
             </Link>
-          </div>
 
-          {/* Right side: CountrySelector + Socials */}
-          <div className="hidden md:flex items-center gap-2 lg:gap-3">
-            <CountrySelector />
-
-            <div className="ml-1 flex items-center gap-2">
-              {SOCIALS.map(({ name, href, Icon }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={name}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 hover:border-amass-blue hover:text-amass-blue text-gray-700 transition-all"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
+            <Button className="bg-gray-100 hover:bg-gray-200 text-gray-900 rounded-md">
+              中文 / EN
+            </Button>
           </div>
 
           {/* Mobile Toggle */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2"
-            aria-label="Toggle Menu"
-          >
-            {isMenuOpen ? <X className="text-black" size={20} /> : <Menu className="text-black" size={20} />}
-          </button>
+          <div className="lg:hidden flex items-center gap-2">
+
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2"
+              aria-label="Toggle Menu"
+            >
+              {isMenuOpen ? <X className="text-gray-900" size={24} /> : <Menu className="text-gray-900" size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -212,60 +187,28 @@ const Navigation = () => {
           <div className="container mx-auto px-4">
             <nav className="flex flex-col space-y-4">
               {[
-                { label: "HOME", path: "/home" },
-                { label: "ABOUT US", path: "/about-us" },
-                { label: "GALLERY", path: "/gallery" },
-                { label: "CAREER", path: "/career" },
-                { label: "SERVICES", path: "/services" },
-                { label: "BLOGS", path: "/blog" },
-                { label: "CONTACT", path: "/contact" },
+                { label: "Home", path: "/" },
+                { label: "Our Services", path: "/services" },
+                { label: "About Us", path: "/about-us" },
+                { label: "News", path: "/blog" },
+                { label: "Advantage", path: "/advantages" },
+                { label: "Global Presence", path: "/global-presence" },
+                { label: "Contact Us", path: "/contact" },
               ].map((item) => (
                 <Link
                   key={item.path}
-                  to={item.path === "/gallery" ? "/gallery" : getNavLink(item.path)}
-                  className={`font-medium py-2 text-lg hover:text-amass-blue transition-colors ${
-                    isActive(item.path === "/gallery" ? "/gallery" : getNavLink(item.path)) ||
-                    (item.path === "/home" && currentCountry.code === "SG" && isActive("/"))
-                      ? "text-amass-blue"
-                      : "text-black"
+                  to={item.path}
+                  className={`font-medium py-2 text-lg hover:text-red-600 transition-colors ${
+                    isActive(item.path) ? "text-red-600" : "text-gray-900"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
-
-              {/* Mobile: country selector */}
-              <div className="pt-4 border-t border-gray-200">
-                <div className="flex items-center gap-2">
-                  <CountrySelector />
-                </div>
-              </div>
-
-              <Link
-                to={`${getNavLink("/contact")}#contact-form`}
-                onClick={() => setIsMenuOpen(false)}
-                className="pt-2"
-              >
-                <Button className="bg-amass-blue hover:bg-amass-dark-blue text-white w-full rounded-md">
-                  GET QUOTE
-                </Button>
-              </Link>
-
-              <div className="pt-3 flex items-center gap-3">
-                {SOCIALS.map(({ name, href, Icon }) => (
-                  <a
-                    key={name}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={name}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 hover:border-amass-blue hover:text-amass-blue text-gray-700 transition-all"
-                  >
-                    <Icon className="h-5 w-5" />
-                  </a>
-                ))}
-              </div>
+              <Button className="bg-gray-100 hover:bg-gray-200 text-gray-900 w-full rounded-md mt-4">
+                中文 / EN
+              </Button>
             </nav>
           </div>
         </div>

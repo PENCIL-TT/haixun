@@ -1,21 +1,13 @@
 
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
-import HeroSection from "@/components/HeroSection";
-import TrackOrder from "@/components/TrackOrder";
-import ServicesCards from "@/components/ServicesCards";
+import HaixunHeroSection from "@/components/HaixunHeroSection";
+import HaixunServicesSection from "@/components/HaixunServicesSection";
 import AboutSection from "@/components/AboutSection";
-import StatsSection from "@/components/StatsSection";
-import VisionMissionSection from "@/components/VisionMissionSection";
-import WhatMakesUsUniqueSection from "@/components/WhatMakesUsUniqueSection";
-import GlobalPresence from "@/components/GlobalPresence";
-import ServicesSection from "@/components/ServicesSection";
-import WorkflowSection from "@/components/WorkflowSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import UpdatesSection from "@/components/UpdatesSection";
+import AdvantagesSection from "@/components/AdvantagesSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -58,10 +50,10 @@ const Index = () => {
     <div className="bg-white">
       <Navigation />
       <ScrollToTop />
-      <HeroSection />
+      <HaixunHeroSection />
+      <HaixunServicesSection />
       <AboutSection />
-      <StatsSection />
-      <ServicesSection />
+      <AdvantagesSection />
       <ContactForm />
       <Footer />
     </div>

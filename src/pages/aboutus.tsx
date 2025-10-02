@@ -74,10 +74,10 @@ const AboutUs = () => {
               className="text-center mb-16"
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
-                About <span className="text-kargon-red">Amass</span>
+                About <span className="text-red-600">Haixun Global</span>
               </h1>
               <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
-                Neutral LCL Consolidation Service Provider
+                30+ Years of Logistics Excellence
               </p>
             </motion.div>
 
@@ -91,26 +91,20 @@ const AboutUs = () => {
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-bold mb-4 text-kargon-blue">Who We Are</h2>
+                  <h2 className="text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    Amass Middle East Shipping Services LLC, a Neutral LCL Consolidation Service Provider
-                    to serve the UAE market. Our Office is in Oudh Metha-Dubai and the CFS is in Jebel Ali.
+                    Haixun Global Shenzhen, leverages over 30 years of expertise in logistics, including sea, land, air transportation, customs declaration, warehousing, and distribution. The Group has expanded its network to regions such as China, India, Malaysia, the UAE, and beyond.
                   </p>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    As a part of an expansion of our business all over the world, we have opened our branches
-                    in Saudi Arabia with 3 branches in Dammam, Riyadh, and Jeddah; our headquarters is in
-                    Dammam, and we have our own bonded warehouse facilities in Jeddah and Dammam.
+                    Established in 2019, Haixun Global Shenzhen upholds the Group's commitment to integrity, customer satisfaction, and rapid response, ensuring a reliable and customer-focused service experience in China.
                   </p>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    Our growth has been phenomenal in the last 9 years, and we are now one of the leading
-                    consolidators in the region. The strength of any organization is its individuals, and
-                    we are no different. We have approximately 40 staff members catering to the business
-                    needs of the market.
+                    Our services include tailored shipping plans with the selection of appropriate transport modes and equipment, such as Flat Rack, Open Top Containers, and Breakbulk Shipping. Focused on punctuality and cost-efficiency, we guarantee safe and on-time deliveries.
                   </p>
                 </div>
 
-                <Link to={getNavLink("/contact")} className="inline-block pt-4">
-                  <Button className="bg-amass-blue hover:bg-amass-dark-blue text-white">
+                <Link to="/contact" className="inline-block pt-4">
+                  <Button className="bg-red-600 hover:bg-red-700 text-white">
                     Contact Us
                   </Button>
                 </Link>

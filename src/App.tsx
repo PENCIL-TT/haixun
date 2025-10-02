@@ -20,6 +20,7 @@ import GlobalPresenceB from '@/pages/GlobalPresenceB';
 import AboutUs from '@/pages/aboutus';
 import Gallery from '@/pages/Gallery';
 import Career from '@/pages/Career';
+import Advantages from '@/pages/Advantages';
 import Login from '@/pages/Login';
 import Signup from '@/pages/Signup';
 import ForgotPassword from '@/pages/ForgotPassword';
@@ -125,6 +126,7 @@ const App: React.FC = () => {
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/career" element={<Career />} />
+              <Route path="/advantages" element={<Advantages />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blogs" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
