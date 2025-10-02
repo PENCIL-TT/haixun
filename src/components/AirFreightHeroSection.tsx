@@ -1,3 +1,5 @@
+"use client";
+
 import { Link } from "react-router-dom";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,7 +9,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-type Slide = {
+type Slide = Readonly<{
   id: number;
   numberLabel: string;
   backgroundImage: string;
@@ -15,7 +17,7 @@ type Slide = {
   mainImage: string;
   iconOne: string;
   iconTwo: string;
-};
+}>;
 
 const slides: readonly Slide[] = [
   {
@@ -45,7 +47,7 @@ const slides: readonly Slide[] = [
     iconOne: "/img/icon/slider-v1-icon1.png",
     iconTwo: "/img/icon/slider-v1-icon2.png"
   }
-];
+] as const;
 
 const AirFreightHeroSection = () => {
   return (
