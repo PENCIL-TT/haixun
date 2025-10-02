@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import CountrySelector from "@/components/CountrySelector";
 import { getCurrentCountryFromPath, detectCountryByIP } from "@/services/countryDetection";
 import {
@@ -39,6 +41,7 @@ function FlagIcon({
 }
 
 const Navigation = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
   const [ipCountry, setIpCountry] = useState<{ code: string; name: string } | null>(null);
@@ -105,7 +108,7 @@ const Navigation = () => {
                 isActive("/") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              Home
+              {t('nav.home')}
             </Link>
 
             <Link
@@ -114,7 +117,7 @@ const Navigation = () => {
                 isActive("/services") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              Our Services
+              {t('nav.services')}
             </Link>
 
             <Link
@@ -123,7 +126,7 @@ const Navigation = () => {
                 isActive("/about-us") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              About Us
+              {t('nav.about')}
             </Link>
 
             <Link
@@ -132,7 +135,7 @@ const Navigation = () => {
                 isActive("/blog") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              News
+              {t('nav.news')}
             </Link>
 
             <Link
@@ -141,7 +144,7 @@ const Navigation = () => {
                 isActive("/advantages") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              Advantage
+              {t('nav.advantage')}
             </Link>
 
             <Link
@@ -150,7 +153,7 @@ const Navigation = () => {
                 isActive("/global-presence") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              Global Presence
+              {t('nav.globalPresence')}
             </Link>
 
             <Link
@@ -159,12 +162,10 @@ const Navigation = () => {
                 isActive("/contact") ? "text-red-600" : "text-gray-900"
               }`}
             >
-              Contact Us
+              {t('nav.contact')}
             </Link>
 
-            <Button className="bg-gray-100 hover:bg-gray-200 text-gray-900 rounded-md">
-              中文 / EN
-            </Button>
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Toggle */}
@@ -187,13 +188,13 @@ const Navigation = () => {
           <div className="container mx-auto px-4">
             <nav className="flex flex-col space-y-4">
               {[
-                { label: "Home", path: "/" },
-                { label: "Our Services", path: "/services" },
-                { label: "About Us", path: "/about-us" },
-                { label: "News", path: "/blog" },
-                { label: "Advantage", path: "/advantages" },
-                { label: "Global Presence", path: "/global-presence" },
-                { label: "Contact Us", path: "/contact" },
+                { labelKey: "nav.home", path: "/" },
+                { labelKey: "nav.services", path: "/services" },
+                { labelKey: "nav.about", path: "/about-us" },
+                { labelKey: "nav.news", path: "/blog" },
+                { labelKey: "nav.advantage", path: "/advantages" },
+                { labelKey: "nav.globalPresence", path: "/global-presence" },
+                { labelKey: "nav.contact", path: "/contact" },
               ].map((item) => (
                 <Link
                   key={item.path}
@@ -203,12 +204,10 @@ const Navigation = () => {
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               ))}
-              <Button className="bg-gray-100 hover:bg-gray-200 text-gray-900 w-full rounded-md mt-4">
-                中文 / EN
-              </Button>
+              <LanguageSwitcher />
             </nav>
           </div>
         </div>

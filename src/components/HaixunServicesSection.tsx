@@ -1,77 +1,72 @@
 import { motion } from "framer-motion";
 import { Ship, Boxes, Warehouse, Package, Plane, FileCheck, ArrowDownToLine, Container } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import ScrollAnimation from "./ScrollAnimation";
 
-const services = [
-  {
-    icon: Boxes,
-    title: "LCL Services",
-    description:
-      "HAIXUN operate own consolidation service on many trade routes. HAIXUN Provide complete transparency of all the pricing at the origin, destination and ocean freight charges...",
-    link: "/services/lcl",
-  },
-  {
-    icon: Ship,
-    title: "FCL Services",
-    description:
-      "HAIXUN has own fleet of containers including special equipment's to accommodate special requirements of customers and specializes in many trade lanes.",
-    link: "/services",
-  },
-  {
-    icon: Warehouse,
-    title: "Warehouse Management",
-    description:
-      "HAIXUN is well equipped to handle the warehousing of various commodities including cold storage with cutting edge technology.",
-    link: "/services",
-  },
-  {
-    icon: Package,
-    title: "Project Logistics",
-    description:
-      "With Dedicated project division having experts in the field inherited from major project handlers.",
-    link: "/services",
-  },
-  {
-    icon: Plane,
-    title: "Air Shipments",
-    description:
-      "HAIXUN can provide customized sea-air & air-sea options to meet customer's deadline/timeliness and achieve cost savings.",
-    link: "/services",
-  },
-  {
-    icon: FileCheck,
-    title: "Customs Declaration & Inspection",
-    description:
-      "As one of the leading custom clearing agents, we ensure that all clearance formalities are done in a smooth and easy manner.",
-    link: "/services",
-  },
-  {
-    icon: ArrowDownToLine,
-    title: "Import",
-    description:
-      "Comprehensive import handling services with warehouse and yard facilities, crane and container handling equipment's.",
-    link: "/services",
-  },
-  {
-    icon: Container,
-    title: "LCL Consolidation",
-    description:
-      "Export Direct Consol to various destinations including Singapore, Colombo, Karachi, and connecting to major hubs worldwide.",
-    link: "/services/lcl",
-  },
-];
-
 export default function HaixunServicesSection() {
+  const { t } = useTranslation();
+  
+  const services = [
+    {
+      icon: Boxes,
+      titleKey: "services.lcl.title",
+      descriptionKey: "services.lcl.description",
+      link: "/services/lcl",
+    },
+    {
+      icon: Ship,
+      titleKey: "services.fcl.title",
+      descriptionKey: "services.fcl.description",
+      link: "/services",
+    },
+    {
+      icon: Warehouse,
+      titleKey: "services.warehouse.title",
+      descriptionKey: "services.warehouse.description",
+      link: "/services",
+    },
+    {
+      icon: Package,
+      titleKey: "services.project.title",
+      descriptionKey: "services.project.description",
+      link: "/services",
+    },
+    {
+      icon: Plane,
+      titleKey: "services.air.title",
+      descriptionKey: "services.air.description",
+      link: "/services",
+    },
+    {
+      icon: FileCheck,
+      titleKey: "services.customs.title",
+      descriptionKey: "services.customs.description",
+      link: "/services",
+    },
+    {
+      icon: ArrowDownToLine,
+      titleKey: "services.import.title",
+      descriptionKey: "services.import.description",
+      link: "/services",
+    },
+    {
+      icon: Container,
+      titleKey: "services.consolidation.title",
+      descriptionKey: "services.consolidation.description",
+      link: "/services/lcl",
+    },
+  ];
+
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <ScrollAnimation className="text-center mb-14">
           <h2 className="font-bold text-gray-900 text-4xl md:text-5xl mb-4">
-            Our Services
+            {t('services.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Comprehensive logistics solutions tailored to your needs
+            {t('services.subtitle')}
           </p>
         </ScrollAnimation>
 
@@ -87,13 +82,13 @@ export default function HaixunServicesSection() {
                     <service.icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
-                    {service.title}
+                    {t(service.titleKey)}
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    {service.description}
+                    {t(service.descriptionKey)}
                   </p>
                   <div className="mt-4 text-red-600 font-medium text-sm group-hover:underline">
-                    Read more →
+                    {t('services.readMore')} →
                   </div>
                 </motion.div>
               </Link>

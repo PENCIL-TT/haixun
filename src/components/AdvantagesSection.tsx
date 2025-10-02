@@ -1,38 +1,38 @@
 import { motion } from "framer-motion";
 import { Truck, Settings, Users } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 import ScrollAnimation from "./ScrollAnimation";
 
-const advantages = [
-  {
-    icon: Truck,
-    title: "Transportation Capacity",
-    description:
-      "With a registered capital of 50 million yuan, the company has Jiefang, Dongfeng and Isuzu light format transportation vehicles, which are engaged in cargo transportation services all over the country.",
-  },
-  {
-    icon: Settings,
-    title: "Logistics Service",
-    description:
-      "The company has advanced information system, which can be seen in the whole process, so that you can master the progress of each business at any time, and strict system prevents errors and accidents.",
-  },
-  {
-    icon: Users,
-    title: "Team Personnel",
-    description:
-      "The company has a highly competitive operation team, has been engaged in domestic cargo transportation services for many years, and has a rigorous transportation organization team.",
-  },
-];
-
 export default function AdvantagesSection() {
+  const { t } = useTranslation();
+  
+  const advantages = [
+    {
+      icon: Truck,
+      titleKey: "advantages.transportation.title",
+      descriptionKey: "advantages.transportation.description",
+    },
+    {
+      icon: Settings,
+      titleKey: "advantages.logistics.title",
+      descriptionKey: "advantages.logistics.description",
+    },
+    {
+      icon: Users,
+      titleKey: "advantages.team.title",
+      descriptionKey: "advantages.team.description",
+    },
+  ];
+
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <ScrollAnimation className="text-center mb-14">
           <h2 className="font-bold text-gray-900 text-4xl md:text-5xl mb-4">
-            Our Advantages
+            {t('advantages.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Delivering excellence through capacity, service, and expertise
+            {t('advantages.subtitle')}
           </p>
         </ScrollAnimation>
 
@@ -47,10 +47,10 @@ export default function AdvantagesSection() {
                   <advantage.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                  {advantage.title}
+                  {t(advantage.titleKey)}
                 </h3>
                 <p className="text-gray-600 leading-relaxed text-center">
-                  {advantage.description}
+                  {t(advantage.descriptionKey)}
                 </p>
               </motion.div>
             </ScrollAnimation>

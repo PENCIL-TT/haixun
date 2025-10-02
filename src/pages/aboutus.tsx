@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Truck, Ship, Globe, Users, Award, TrendingUp } from "lucide-react";
@@ -16,6 +17,7 @@ const ScrollToTop = () => {
 };
 
 const AboutUs = () => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   // Safe fallback (mirrors your first section’s pattern)
@@ -74,10 +76,10 @@ const AboutUs = () => {
               className="text-center mb-16"
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
-                About <span className="text-red-600">Haixun Global</span>
+                {t('about.title')}
               </h1>
               <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
-                30+ Years of Logistics Excellence
+                {t('about.subtitle')}
               </p>
             </motion.div>
 
@@ -91,21 +93,21 @@ const AboutUs = () => {
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
+                  <h2 className="text-3xl font-bold mb-4 text-gray-900">{t('about.whoWeAre')}</h2>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    Haixun Global Shenzhen, leverages over 30 years of expertise in logistics, including sea, land, air transportation, customs declaration, warehousing, and distribution. The Group has expanded its network to regions such as China, India, Malaysia, the UAE, and beyond.
+                    {t('about.paragraph1')}
                   </p>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    Established in 2019, Haixun Global Shenzhen upholds the Group's commitment to integrity, customer satisfaction, and rapid response, ensuring a reliable and customer-focused service experience in China.
+                    {t('about.paragraph2')}
                   </p>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    Our services include tailored shipping plans with the selection of appropriate transport modes and equipment, such as Flat Rack, Open Top Containers, and Breakbulk Shipping. Focused on punctuality and cost-efficiency, we guarantee safe and on-time deliveries.
+                    {t('about.paragraph3')}
                   </p>
                 </div>
 
                 <Link to="/contact" className="inline-block pt-4">
                   <Button className="bg-red-600 hover:bg-red-700 text-white">
-                    Contact Us
+                    {t('nav.contact')}
                   </Button>
                 </Link>
               </motion.div>
