@@ -70,7 +70,7 @@ const HeroSection: React.FC = () => {
         {heroImages.map((src, i) => (
           <img
             key="/hero1.mp4"
-            src={src}
+            src="/hero1.mp4"
             alt={`Hero background ${i + 1}`}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out
               ${i === index ? "opacity-100" : "opacity-0"}`}
