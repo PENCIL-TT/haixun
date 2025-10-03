@@ -27,10 +27,9 @@ const HeroSection: React.FC = () => {
 
   // === Hero images array ===
   const heroImages = [
-    "/hero1.jpg",
-    "/hero2.jpg",
-    "/hero3.jpg",
-    "/hero4.jpg", // add or remove images as needed
+    "/truck.png",
+    "/oceanfreight.png",
+    "/airfreight.png", // add or remove images as needed
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
