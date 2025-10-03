@@ -13,46 +13,76 @@ const HeroSection: React.FC = () => {
     []
   );
 
+  // Background assets
   const heroImages = useMemo(() => ["/oceanfreight.png", "/airfreight.png", "/truck.png"], []);
+  const videoMp4 = "/hero1.mp4";          // put file in /public
+  const videoWebm = "/hero1.webm";        // optional, if you have it
+  const videoPoster = "/hero-poster.jpg"; // optional poster frame while loading
+
+  // Slider state (used for fallback images)
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState<boolean[]>(() => heroImages.map(() => false));
   const [autoPlay, setAutoPlay] = useState(true);
+
+  // Video state
+  const [useVideo, setUseVideo] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Respect reduced motion
   const prefersReducedMotion = useRef<boolean>(
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   ).current;
 
-  // Preload images
+  // Preload fallback images
   useEffect(() => {
     const imgs = heroImages.map((src, i) => {
       const img = new Image();
       img.src = src;
-      img.onload = () => setLoaded((prev) => {
-        const next = [...prev];
-        next[i] = true;
-        return next;
-      });
+      img.onload = () =>
+        setLoaded((prev) => {
+          const next = [...prev];
+          next[i] = true;
+          return next;
+        });
       return img;
     });
-    return () => {
-      imgs.forEach((img) => (img.onload = null));
-    };
+    return () => imgs.forEach((img) => (img.onload = null));
   }, [heroImages]);
 
-  // Autoplay
+  // Fallback image autoplay
   useEffect(() => {
-    if (prefersReducedMotion || !autoPlay) return;
+    if (prefersReducedMotion || !autoPlay || useVideo) return;
     const id = setInterval(() => {
       setIndex((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(id);
-  }, [heroImages.length, prefersReducedMotion, autoPlay]);
+  }, [heroImages.length, prefersReducedMotion, autoPlay, useVideo]);
 
-  // Pause on tab hidden
+  // Try to play video; fall back to images if blocked
   useEffect(() => {
-    const onVis = () => setAutoPlay(!document.hidden);
+    if (prefersReducedMotion) {
+      setUseVideo(false);
+      return;
+    }
+    const tryPlay = async () => {
+      try {
+        await videoRef.current?.play();
+        setUseVideo(true);
+      } catch {
+        setUseVideo(false);
+      }
+    };
+    tryPlay();
+
+    // Pause when tab hidden
+    const onVis = () => {
+      if (!videoRef.current) return;
+      if (document.hidden) videoRef.current.pause();
+      else videoRef.current.play().catch(() => setUseVideo(false));
+    };
     document.addEventListener("visibilitychange", onVis);
     return () => document.removeEventListener("visibilitychange", onVis);
-  }, []);
+  }, [prefersReducedMotion]);
 
   const goNext = () => {
     setAutoPlay(false);
@@ -65,69 +95,92 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative h-[100svh] w-full overflow-hidden">
-      {/* Backdrop images */}
+      {/* === BACKDROP LAYER === */}
       <div className="absolute inset-0">
-        {heroImages.map((src, i) => (
-          <img
-            key="/hero1.mp4"
-            src="/hero1.mp4"
-            alt={`Hero background ${i + 1}`}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out
-              ${i === index ? "opacity-100" : "opacity-0"}`}
-            aria-hidden={i !== index}
-            draggable={false}
-            loading={i === 0 ? "eager" : "lazy"}
-          />
-        ))}
+        {useVideo ? (
+          <video
+            ref={videoRef}
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster={videoPoster}
+          >
+            {/* WebM first if available */}
+            <source src={videoWebm} type="video/webm" />
+            <source src={videoMp4} type="video/mp4" />
+          </video>
+        ) : (
+          heroImages.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={`Hero background ${i + 1}`}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
+                i === index ? "opacity-100" : "opacity-0"
+              }`}
+              aria-hidden={i !== index}
+              draggable={false}
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+          ))
+        )}
       </div>
 
-      {/* Readability overlays */}
+      {/* Overlays */}
       <div className="absolute inset-0 bg-black/40" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-      {/* Content (kept minimal to stay “hero only”) */}
+      {/* Content */}
       <div className="relative z-10 h-full w-full">
-        {/* Optional headline block — hide if you truly want only imagery + buttons */}
+        {/* Optional headline */}
         <div className="absolute inset-x-0 top-20 mx-auto max-w-6xl px-6">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow">
             Global Freight. <span className="text-white/80">On Time. Every Time.</span>
           </h1>
-          <p className="mt-4 max-w-2xl text-white/80">
-            Ocean • Air • Road • Integrated tracking & schedules.
-          </p>
+          <p className="mt-4 max-w-2xl text-white/80">Ocean • Air • Road • Integrated tracking & schedules.</p>
         </div>
 
-        {/* Prev / Next arrows */}
-        <button
-          aria-label="Previous slide"
-          onClick={goPrev}
-          className="group absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-3 text-white backdrop-blur hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-white/50"
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </button>
-        <button
-          aria-label="Next slide"
-          onClick={goNext}
-          className="group absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-3 text-white backdrop-blur hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-white/50"
-        >
-          <ChevronRight className="h-6 w-6" />
-        </button>
-
-        {/* Dots */}
-        <div className="absolute bottom-28 left-0 right-0 z-20 flex items-center justify-center gap-2">
-          {heroImages.map((_, i) => (
+        {/* Prev / Next arrows (hidden when video is active) */}
+        {!useVideo && (
+          <>
             <button
-              key={i}
-              aria-label={`Go to slide ${i + 1}`}
-              onClick={() => {
-                setAutoPlay(false);
-                setIndex(i);
-              }}
-              className={`h-2.5 w-2.5 rounded-full border border-white/60 transition
-                ${i === index ? "bg-white" : "bg-white/30 hover:bg-white/50"}`}
-            />
-          ))}
-        </div>
+              aria-label="Previous slide"
+              onClick={goPrev}
+              className="group absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-3 text-white backdrop-blur hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+            <button
+              aria-label="Next slide"
+              onClick={goNext}
+              className="group absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-3 text-white backdrop-blur hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </>
+        )}
+
+        {/* Dots (hidden when video is active) */}
+        {!useVideo && (
+          <div className="absolute bottom-28 left-0 right-0 z-20 flex items-center justify-center gap-2">
+            {heroImages.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => {
+                  setAutoPlay(false);
+                  setIndex(i);
+                }}
+                className={`h-2.5 w-2.5 rounded-full border border-white/60 transition ${
+                  i === index ? "bg-white" : "bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Buttons Bar */}
         <div className="absolute bottom-8 left-0 right-0 z-20">
@@ -148,13 +201,11 @@ const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Soft vignette edges (subtle polish) */}
+      {/* Subtle frame */}
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
 
-      {/* Lazy state helper (optional): tiny shimmer while first image loads */}
-      {!loaded[0] && (
-        <div className="absolute inset-0 z-0 animate-pulse bg-neutral-900" aria-hidden />
-      )}
+      {/* Shimmer while first image loads (fallback only) */}
+      {!useVideo && !loaded[0] && <div className="absolute inset-0 z-0 animate-pulse bg-neutral-900" aria-hidden />}
     </section>
   );
 };
