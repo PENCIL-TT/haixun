@@ -45,6 +45,7 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
   const [ipCountry, setIpCountry] = useState<{ code: string; name: string } | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
 
@@ -68,6 +69,15 @@ const Navigation = () => {
     };
     detect();
   }, []);
+
+  // Handle scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const isActive = (path: string) => location.pathname === path;
 
   const getNavLink = (basePath: string) => {
@@ -86,7 +96,11 @@ const Navigation = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full z-50 shadow-md backdrop-blur supports-[backdrop-filter]:backdrop-blur transition-all duration-300 bg-slate-50">
+    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-white shadow-md' 
+        : 'bg-transparent'
+    }`}>
       <div className="container mx-auto px-3 sm:px-4 md:px-6 py-2 sm:py-4 lg:py-[18px]">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -105,7 +119,7 @@ const Navigation = () => {
             <Link
               to="/"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/") ? "text-red-600" : "text-gray-900"
+                isActive("/") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.home')}
@@ -114,7 +128,7 @@ const Navigation = () => {
             <Link
               to="/services"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/services") ? "text-red-600" : "text-gray-900"
+                isActive("/services") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.services')}
@@ -123,7 +137,7 @@ const Navigation = () => {
             <Link
               to="/about-us"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/about-us") ? "text-red-600" : "text-gray-900"
+                isActive("/about-us") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.about')}
@@ -132,7 +146,7 @@ const Navigation = () => {
             <Link
               to="/blog"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/blog") ? "text-red-600" : "text-gray-900"
+                isActive("/blog") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.news')}
@@ -141,7 +155,7 @@ const Navigation = () => {
             <Link
               to="/advantages"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/advantages") ? "text-red-600" : "text-gray-900"
+                isActive("/advantages") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.advantage')}
@@ -150,7 +164,7 @@ const Navigation = () => {
             <Link
               to="/global-presence"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/global-presence") ? "text-red-600" : "text-gray-900"
+                isActive("/global-presence") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.globalPresence')}
@@ -159,7 +173,7 @@ const Navigation = () => {
             <Link
               to="/contact"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/contact") ? "text-red-600" : "text-gray-900"
+                isActive("/contact") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.contact')}
@@ -176,7 +190,11 @@ const Navigation = () => {
               className="p-2"
               aria-label="Toggle Menu"
             >
-              {isMenuOpen ? <X className="text-gray-900" size={24} /> : <Menu className="text-gray-900" size={24} />}
+              {isMenuOpen ? (
+                <X className={isScrolled ? "text-gray-900" : "text-white"} size={24} />
+              ) : (
+                <Menu className={isScrolled ? "text-gray-900" : "text-white"} size={24} />
+              )}
             </button>
           </div>
         </div>
