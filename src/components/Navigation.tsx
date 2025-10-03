@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import CountrySelector from "@/components/CountrySelector";
 import { getCurrentCountryFromPath, detectCountryByIP } from "@/services/countryDetection";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
-/** Small flag component */
+/** Small flag component that never shows raw text like '/lk.svg' */
 function FlagIcon({
   code,
   className = "h-5 w-7 object-contain rounded-[2px]",
@@ -21,11 +28,12 @@ function FlagIcon({
   return (
     <img
       src={src}
-      alt=""
-      aria-hidden="true"
+      alt=""                /* alt intentionally empty so no text shows */
+      aria-hidden="true"    /* decorative */
       className={className}
       draggable={false}
       onError={(e) => {
+        // If missing, hide image (no text fallback ever rendered)
         (e.currentTarget as HTMLImageElement).style.display = "none";
       }}
     />
@@ -35,20 +43,28 @@ function FlagIcon({
 const Navigation = () => {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
+  const [ipCountry, setIpCountry] = useState<{ code: string; name: string } | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
+
+  // We use the URL to decide the current country flag
   const currentCountry = getCurrentCountryFromPath(location.pathname);
 
-  // Detect country by IP
+  // Detect country by IP for flag display
   useEffect(() => {
     const detect = async () => {
       try {
         const saved = localStorage.getItem("preferredCountry");
-        if (saved) return;
-        await detectCountryByIP();
+        if (saved) {
+          setIpCountry(JSON.parse(saved));
+          return;
+        }
+        const country = await detectCountryByIP();
+        setIpCountry({ code: country.code, name: country.name });
       } catch {
-        return;
+        setIpCountry(null);
       }
     };
     detect();
@@ -59,23 +75,33 @@ const Navigation = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const isActive = (path: string) => location.pathname === path;
 
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
-      } relative`}
-    >
-      {/* 🔴 Red Attached Box */}
-      <div className="absolute top-0 right-0 h-full w-1/2 bg-red-700 clip-path-attached"></div>
+  const getNavLink = (basePath: string) => {
+    if (currentCountry.code === "SG") return basePath;
+    return `/${currentCountry.name.toLowerCase().replace(" ", "-")}${basePath}`;
+  };
 
-      {/* Main container */}
-      <div className="container relative mx-auto px-3 sm:px-4 md:px-6 py-2 sm:py-4 lg:py-[18px]">
+  const isCompanyLinkActive = () =>
+    isActive(getNavLink("/about-us")) ||
+    isActive(getNavLink("/gallery")) ||
+    isActive(getNavLink("/career"));
+
+  const SOCIALS = [
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/amassmiddleeast/", Icon: FaLinkedinIn },
+    { name: "Facebook", href: "https://www.facebook.com/Amassmiddleeast?mibextid=ZbWKwL", Icon: FaFacebookF },
+  ];
+
+  return (
+    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-white shadow-md' 
+        : 'bg-transparent'
+    }`}>
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 py-2 sm:py-4 lg:py-[18px]">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
@@ -96,7 +122,7 @@ const Navigation = () => {
                 isActive("/") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
-              {t("nav.home")}
+              {t('nav.home')}
             </Link>
 
             <Link
@@ -105,7 +131,7 @@ const Navigation = () => {
                 isActive("/services") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
-              {t("nav.services")}
+              {t('nav.services')}
             </Link>
 
             <Link
@@ -114,7 +140,7 @@ const Navigation = () => {
                 isActive("/about-us") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
-              {t("nav.about")}
+              {t('nav.about')}
             </Link>
 
             <Link
@@ -123,7 +149,7 @@ const Navigation = () => {
                 isActive("/blog") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
-              {t("nav.news")}
+              {t('nav.news')}
             </Link>
 
             <Link
@@ -132,7 +158,7 @@ const Navigation = () => {
                 isActive("/advantages") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
-              {t("nav.advantage")}
+              {t('nav.advantage')}
             </Link>
 
             <Link
@@ -141,7 +167,7 @@ const Navigation = () => {
                 isActive("/global-presence") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
-              {t("nav.globalPresence")}
+              {t('nav.globalPresence')}
             </Link>
 
             <Link
@@ -150,7 +176,7 @@ const Navigation = () => {
                 isActive("/contact") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
               }`}
             >
-              {t("nav.contact")}
+              {t('nav.contact')}
             </Link>
 
             <LanguageSwitcher />
@@ -158,6 +184,7 @@ const Navigation = () => {
 
           {/* Mobile Toggle */}
           <div className="lg:hidden flex items-center gap-2">
+
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2"
