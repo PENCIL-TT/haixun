@@ -111,7 +111,7 @@ const AboutSection: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Need Help?</p>
-                  <p className="text-lg font-bold text-gray-900">+00 264 566 579</p>
+                  <p className="text-lg font-bold text-gray-900">+86 75582222447</p>
                 </div>
               </div>
             </div>
