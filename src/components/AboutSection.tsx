@@ -15,12 +15,12 @@ const AboutSection: React.FC = () => {
 
           <div className="grid grid-cols-2 gap-4 relative">
             <img
-              src="/containers.jpg"
+              src="/truck1.png"
               alt="Containers"
               className="rounded-lg shadow-lg object-cover w-full h-[320px]"
             />
             <img
-              src="/workers.jpg"
+              src="/about-v3-img1.jpg"
               alt="Workers"
               className="rounded-lg shadow-lg object-cover w-full h-[320px] mt-8"
             />
