@@ -51,8 +51,8 @@ const Index = () => {
       <Navigation />
       <HeroSection />
       <ScrollToTop />
-      <HaixunServicesSection />
       <AboutSection />
+      <HaixunServicesSection />
       <AdvantagesSection />
       <ContactForm />
       <Footer />
