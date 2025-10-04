@@ -3,13 +3,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Globe2, ShieldCheck } from "lucide-react";
 
-/**
- * AboutSection
- * - Left: two stacked images with an offset, red L-frame block behind, circular badge
- * - Right: heading, paragraph, two feature rows, CTA + contact
- * 
- * Replace the image src paths below with your actual assets.
- */
 const AboutSection: React.FC = () => {
   const ACCENT = "#BC0018"; // Haixun red
 
@@ -18,7 +11,7 @@ const AboutSection: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* LEFT — Image Composition */}
         <div className="relative flex justify-center lg:justify-start">
-          {/* Red L-frame block (behind images) */}
+          {/* Red L-frame block */}
           <div
             className="absolute -top-8 -left-8 rounded-lg -z-10"
             style={{
@@ -33,23 +26,32 @@ const AboutSection: React.FC = () => {
             }}
           />
 
-          {/* Two images with offset like the reference */}
-          <div className="grid grid-cols-2 gap-4">
-            {/* Left / main image */}
+          {/* Two images with offset and logo centered between */}
+          <div className="relative grid grid-cols-2 gap-4 items-center">
+            {/* Left image */}
             <img
-              src="/about-v3-img1.jpg"          // <-- change to your image
+              src="/containers.jpg"
               alt="Container stacks"
               className="rounded-lg shadow-xl object-cover w-full h-[340px] md:h-[380px] lg:h-[420px]"
             />
-            {/* Right / secondary image slightly lower */}
+            {/* Right image */}
             <img
-              src="/truck1.png"             // <-- change to your image
-              alt="Crew at work"
+              src="/workers.jpg"
+              alt="Workers"
               className="rounded-lg shadow-xl object-cover w-full h-[340px] md:h-[380px] lg:h-[420px] mt-10"
             />
+
+            {/* Centered round logo between two images */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-28 h-28 md:w-32 md:h-32 rounded-full bg-white shadow-2xl border-4" style={{ borderColor: ACCENT }}>
+              <img
+                src="/haixun-logo.png" // replace with your logo filename
+                alt="Haixun Logo"
+                className="w-16 h-16 object-contain"
+              />
+            </div>
           </div>
 
-          {/* Circular award badge overlapping the images */}
+          {/* Award badge */}
           <div className="absolute -bottom-8 left-10">
             <div
               className="relative rounded-full border-4 border-white shadow-2xl"
@@ -65,7 +67,10 @@ const AboutSection: React.FC = () => {
 
         {/* RIGHT — Text & Features */}
         <div>
-          <p className="uppercase tracking-wide font-semibold flex items-center gap-2 text-[13px]" style={{ color: ACCENT }}>
+          <p
+            className="uppercase tracking-wide font-semibold flex items-center gap-2 text-[13px]"
+            style={{ color: ACCENT }}
+          >
             About Company
           </p>
 
@@ -118,7 +123,7 @@ const AboutSection: React.FC = () => {
 
             <div className="flex items-center gap-3">
               <img
-                src="/support-person.jpg"     // optional helper avatar
+                src="/support-person.jpg"
                 alt="Support"
                 className="w-12 h-12 rounded-full object-cover border-2"
                 style={{ borderColor: ACCENT }}
