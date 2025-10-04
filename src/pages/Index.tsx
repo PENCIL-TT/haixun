@@ -49,8 +49,8 @@ const Index = () => {
   return (
     <div className="bg-white">
       <Navigation />
-      <ScrollToTop />
       <HeroSection />
+      <ScrollToTop />
       <HaixunServicesSection />
       <AboutSection />
       <AdvantagesSection />
