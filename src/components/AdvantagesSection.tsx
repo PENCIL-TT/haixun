@@ -19,7 +19,7 @@ export default function AdvantagesSection() {
     titleKey: "advantages.team.title",
     descriptionKey: "advantages.team.description"
   }];
-  return <section className="py-20 bg-white">
+  return <section className="py-8 bg-white">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <ScrollAnimation className="text-center mb-16">
