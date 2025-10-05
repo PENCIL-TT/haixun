@@ -21,34 +21,34 @@ export default function ContactUsSection() {
       });
       setFormStatus("success");
       e.currentTarget.reset();
-    } catch (error) {
+    } catch {
       setFormStatus("error");
     }
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-[#f9fafb]">
       <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        {/* LEFT SIDE: Contact Info */}
+        {/* LEFT SIDE */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="space-y-8"
         >
-          <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
+          <h2 className="text-4xl font-extrabold text-gray-900 mb-6">
             Contact Us
           </h2>
-          <p className="text-gray-600 text-lg max-w-md">
-            Need to get in touch? No problem! You can use our contact form to
-            send us a message.
+          <p className="text-gray-700 text-lg max-w-md mb-10 leading-relaxed">
+            Need to get in touch? <span className="text-red-600 font-semibold">No problem!</span> 
+            You can use our contact form to send us a message.
           </p>
 
           <div className="space-y-6">
+            {/* Office */}
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-orange-600" />
+              <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-red-600" />
               </div>
               <div>
                 <h4 className="text-lg font-semibold text-gray-900">
@@ -61,30 +61,32 @@ export default function ContactUsSection() {
               </div>
             </div>
 
+            {/* Email */}
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
-                <Mail className="w-6 h-6 text-orange-600" />
+              <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                <Mail className="w-6 h-6 text-red-600" />
               </div>
               <div>
                 <h4 className="text-lg font-semibold text-gray-900">Email Us</h4>
                 <a
                   href="mailto:helen@haixun.co"
-                  className="text-orange-600 text-sm hover:underline"
+                  className="text-red-600 text-sm hover:underline"
                 >
                   helen@haixun.co
                 </a>
               </div>
             </div>
 
+            {/* Phone */}
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
-                <Phone className="w-6 h-6 text-orange-600" />
+              <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                <Phone className="w-6 h-6 text-red-600" />
               </div>
               <div>
                 <h4 className="text-lg font-semibold text-gray-900">Call Us</h4>
                 <a
                   href="tel:+8675582222447"
-                  className="text-orange-600 text-sm hover:underline"
+                  className="text-red-600 text-sm hover:underline"
                 >
                   +86 75582222447
                 </a>
@@ -93,13 +95,13 @@ export default function ContactUsSection() {
           </div>
         </motion.div>
 
-        {/* RIGHT SIDE: Contact Form */}
+        {/* RIGHT SIDE FORM */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-white p-10 rounded-2xl shadow-xl border border-gray-100"
+          className="bg-white p-10 rounded-2xl shadow-lg border border-gray-100"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
@@ -110,7 +112,7 @@ export default function ContactUsSection() {
                 name="Name"
                 placeholder="Enter your name"
                 required
-                className="border-gray-200 focus-visible:ring-orange-500"
+                className="border-gray-200 focus-visible:ring-red-500"
               />
             </div>
 
@@ -123,7 +125,7 @@ export default function ContactUsSection() {
                 type="email"
                 placeholder="Enter your email"
                 required
-                className="border-gray-200 focus-visible:ring-orange-500"
+                className="border-gray-200 focus-visible:ring-red-500"
               />
             </div>
 
@@ -135,7 +137,7 @@ export default function ContactUsSection() {
                 name="Subject"
                 placeholder="Enter subject"
                 required
-                className="border-gray-200 focus-visible:ring-orange-500"
+                className="border-gray-200 focus-visible:ring-red-500"
               />
             </div>
 
@@ -148,13 +150,13 @@ export default function ContactUsSection() {
                 placeholder="Write your message"
                 rows={5}
                 required
-                className="border-gray-200 focus-visible:ring-orange-500"
+                className="border-gray-200 focus-visible:ring-red-500"
               />
             </div>
 
             <Button
               type="submit"
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold text-lg py-6 flex items-center justify-center gap-2"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold text-lg py-6 flex items-center justify-center gap-2"
             >
               <Send className="w-5 h-5" />
               Send Message
