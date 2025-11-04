@@ -43,7 +43,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      /* FLEX on md+: equal heights, no white strip */
       className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group md:flex md:items-stretch"
     >
       {/* Image side */}
@@ -92,7 +91,7 @@ const Services: React.FC = () => {
     baseUrl = "/services";
   }
 
-  // ✅ Only two services (LCL & CFS) with exact content + images
+  // ✅ Only two services (LCL & CFS)
   const allServices: Service[] = [
     {
       id: 1,
@@ -114,12 +113,16 @@ const Services: React.FC = () => {
     }
   ];
 
+  // Brand reds
+  const RED = "#BC0018";      // primary
+  const DARK_RED = "#9B111E"; // deeper accent
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <ScrollToTop />
       <Navigation />
       <main className="flex-grow pt-20">
-        {/* Hero Section */}
+        {/* Hero Section (unchanged content) */}
         <section className="bg-gradient-to-r from-gc-dark-blue via-gc-blue to-gc-dark-blue text-white relative overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
@@ -148,9 +151,40 @@ const Services: React.FC = () => {
           </div>
         </section>
 
-        {/* Services Grid — ONLY TWO CARDS */}
-        <section className="py-20 bg-gradient-to-b from-white to-gc-light-gold/10">
-          <div className="container mx-auto px-4">
+        {/* Services Grid with RED page-side shapes */}
+        <section className="relative py-20 bg-gradient-to-b from-white to-gc-light-gold/10 overflow-hidden">
+          {/* Top-left diagonal red corner */}
+          <div
+            className="absolute -top-20 -left-24 z-0 rounded-2xl"
+            style={{
+              width: 420,
+              height: 420,
+              background: RED,
+              transform: "rotate(45deg)"
+            }}
+          />
+
+          {/* Bottom-right diagonal red band */}
+          <div
+            className="absolute -bottom-40 -right-56 z-0 rounded-2xl"
+            style={{
+              width: 900,
+              height: 280,
+              background: DARK_RED,
+              transform: "rotate(-32deg)"
+            }}
+          />
+
+          {/* Subtle white dots like reference (optional, super light) */}
+          <div className="pointer-events-none absolute inset-0 z-0">
+            <div className="absolute left-10 top-24 grid grid-cols-12 gap-6 opacity-10">
+              {Array.from({ length: 60 }).map((_, i) => (
+                <span key={i} className="w-1 h-1 bg-white rounded-full" />
+              ))}
+            </div>
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {allServices.map(service => (
                 <ServiceCard key={service.id} {...service} baseUrl={baseUrl} />
