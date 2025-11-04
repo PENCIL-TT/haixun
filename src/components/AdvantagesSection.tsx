@@ -1,4 +1,3 @@
-// src/Components/AdvantagesSection.jsx
 import { motion } from "framer-motion";
 import { Truck, Settings, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -26,10 +25,10 @@ export default function AdvantagesSection() {
   ];
 
   return (
-    <section className="py-16 bg-[#9B111E] relative overflow-hidden">
+    <section className="py-16 bg-white relative overflow-hidden">
       {/* Optional subtle HX logo background watermark */}
       <div
-        className="absolute inset-0 opacity-10 bg-center bg-no-repeat bg-contain"
+        className="absolute inset-0 opacity-5 bg-center bg-no-repeat bg-contain"
         style={{
           backgroundImage: `url('/path-to-your-HX-logo.png')`,
         }}
@@ -38,15 +37,15 @@ export default function AdvantagesSection() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <ScrollAnimation className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#9B111E] mb-3">
             {t("advantages.title")}
           </h2>
-          <p className="text-gray-100 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
             {t("advantages.subtitle")}
           </p>
         </ScrollAnimation>
 
-        {/* Cards */}
+        {/* Advantage Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
           {advantages.map((advantage, index) => {
             const Icon = advantage.icon;
@@ -54,9 +53,10 @@ export default function AdvantagesSection() {
               <ScrollAnimation key={index} delay={index * 100}>
                 <motion.div
                   whileHover={{ y: -8, scale: 1.03 }}
+                  transition={{ duration: 0.3 }}
                   className="rounded-2xl p-8 w-full max-w-[380px] text-center 
-                             bg-white/10 backdrop-blur-sm border border-white/20 
-                             shadow-lg hover:shadow-2xl transition-all duration-300"
+                             bg-[#9B111E] text-white shadow-md hover:shadow-xl 
+                             transition-all duration-300 border border-[#9B111E]/20"
                 >
                   <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-6 shadow-inner">
                     <Icon className="w-8 h-8 text-white" />
