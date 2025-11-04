@@ -41,17 +41,18 @@ export default function HaixunServicesSection() {
     <section
       className="relative py-20 overflow-hidden"
       style={{
-        background: "linear-gradient(to top, #8B1617 0%, #a33c3d 60%, #fafafa 100%)",
+        background:
+          "linear-gradient(to top, #A33C3D 0%, #8B1617 50%, #fafafa 100%)",
       }}
     >
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <ScrollAnimation className="text-center mb-14">
           <h2 className="font-extrabold text-gray-900 text-4xl md:text-5xl mb-4">
-            {t("services.title")}
+            {t('services.title')}
           </h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-            {t("services.subtitle")}
+            {t('services.subtitle')}
           </p>
         </ScrollAnimation>
 
@@ -95,7 +96,7 @@ export default function HaixunServicesSection() {
                         {t(service.descriptionKey)}
                       </p>
                       <div className="mt-4 text-[#8B1617] font-medium text-sm group-hover:underline">
-                        {t("services.readMore")} →
+                        {t('services.readMore')} →
                       </div>
                     </div>
                   </motion.div>
