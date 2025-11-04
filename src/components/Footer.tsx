@@ -91,14 +91,16 @@ const Footer = () => {
             variants={footerAnim}
             className="flex flex-col items-start"
           >
-            {/* Logo with white border */}
+            {/* Logo block with white tile background */}
             <div className="mb-4 p-2 rounded-xl border-2 border-white/80 bg-white/10 backdrop-blur-sm inline-block shadow-lg">
-              <img
-                src="/haixun-logo.svg"
-                alt="Haixun Global"
-                className="h-20 w-auto object-contain"
-                loading="lazy"
-              />
+              <div className="rounded-lg bg-white p-3 shadow-md flex items-center justify-center">
+                <img
+                  src="/haixun-logo.svg"
+                  alt="Haixun Global"
+                  className="h-16 w-auto object-contain md:h-20"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             <h3 className="text-lg font-semibold mb-2 text-white">
