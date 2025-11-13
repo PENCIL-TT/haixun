@@ -1,10 +1,11 @@
-import { useLocation, Link } from "react-router-dom";
-import { useState } from "react";
+// src/components/Navigation.tsx
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
-export const Header = () => {
+const Navigation = () => {
   const location = useLocation();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const isHome = location.pathname === "/";
 
@@ -12,57 +13,67 @@ export const Header = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "How It Works", href: "/how-it-works" },
-    { name: "Sustainability", href: "/sustainability" }
+    { name: "Sustainability", href: "/sustainability" },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between">
-      {/* Logo */}
-      <Link to="/">
-        <img src="/logo.png" className="h-10" />
-      </Link>
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div className="mx-auto flex items-center justify-between px-6 py-4">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/logo.png" alt="Logo" className="h-10" />
+        </Link>
 
-      {/* Desktop Menu */}
-      <nav className="hidden md:flex gap-8">
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            to={item.href}
-            className={`
-              transition font-medium
-              ${isHome ? "text-white" : "text-black"}
-              hover:text-red-600
-            `}
-          >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
-
-      {/* Mobile Button */}
-      <button className="md:hidden" onClick={() => setIsMobile(true)}>
-        <Menu className={`${isHome ? "text-white" : "text-black"}`} />
-      </button>
-
-      {/* Mobile Menu */}
-      {isMobile && (
-        <div className="fixed inset-0 bg-white p-6 flex flex-col gap-4">
-          <button onClick={() => setIsMobile(false)}>
-            <X className="text-black" />
-          </button>
-
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <Link
               key={item.href}
               to={item.href}
-              onClick={() => setIsMobile(false)}
-              className="text-black text-lg font-medium hover:text-red-600"
+              className={`
+                text-sm font-medium transition-colors
+                ${isHome ? "text-white" : "text-black"}
+                hover:text-red-600
+              `}
             >
               {item.name}
             </Link>
           ))}
-        </div>
-      )}
+        </nav>
+
+        {/* Mobile button */}
+        <button
+          className="md:hidden"
+          onClick={() => setIsMobileOpen(true)}
+        >
+          <Menu className={isHome ? "text-white" : "text-black"} />
+        </button>
+
+        {/* Mobile nav */}
+        {isMobileOpen && (
+          <div className="fixed inset-0 bg-white flex flex-col p-6 gap-4">
+            <button
+              className="self-end"
+              onClick={() => setIsMobileOpen(false)}
+            >
+              <X className="text-black" />
+            </button>
+
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={() => setIsMobileOpen(false)}
+                className="text-lg font-medium text-black hover:text-red-600"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </header>
   );
 };
+
+export default Navigation;
