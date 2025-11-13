@@ -20,7 +20,6 @@ const AboutUs = () => {
   const { t } = useTranslation();
   const location = useLocation();
 
-  // Safe fallback (mirrors your first section’s pattern)
   const detected = getCurrentCountryFromPath(location.pathname);
   const currentCountry = detected ?? { code: "SG", name: "Singapore" };
 
@@ -47,8 +46,6 @@ const AboutUs = () => {
     "Strategic location advantages",
   ];
 
-  // ======= NEW: image scroller like your first section =======
-  // Place these in /public; reuse your earlier images for consistency
   const images = ["/Dubai.jpg", "/jebelali1.png", "/burj-khalifa.jpg"];
   const [index, setIndex] = useState(0);
 
@@ -57,7 +54,6 @@ const AboutUs = () => {
     const id = setInterval(() => setIndex((i) => (i + 1) % images.length), 4000);
     return () => clearInterval(id);
   }, [images.length]);
-  // ===========================================================
 
   return (
     <div className="bg-white text-gray-900 min-h-screen flex flex-col">
@@ -66,7 +62,12 @@ const AboutUs = () => {
       <main className="flex-grow pt-20">
         {/* Hero Section */}
         <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-slate-50"></div>
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/quote-two-bg.png')" }}
+          ></div>
+          <div className="absolute inset-0 bg-white/40"></div>
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -93,7 +94,9 @@ const AboutUs = () => {
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-bold mb-4 text-gray-900">{t('about.whoWeAre')}</h2>
+                  <h2 className="text-3xl font-bold mb-4 text-gray-900">
+                    {t('about.whoWeAre')}
+                  </h2>
                   <p className="text-lg leading-relaxed text-gray-700">
                     {t('about.paragraph1')}
                   </p>
@@ -112,7 +115,7 @@ const AboutUs = () => {
                 </Link>
               </motion.div>
 
-              {/* Image Section: replaced with auto-fading scroller */}
+              {/* Image Section: auto-fading scroller */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -137,7 +140,6 @@ const AboutUs = () => {
                   ))}
                 </div>
 
-                {/* Optional badge (kept from your design) */}
                 <div className="absolute -bottom-6 -right-6 p-4 rounded-xl shadow-lg bg-kargon-red">
                   <Ship className="w-8 h-8 text-white" />
                 </div>
@@ -156,7 +158,7 @@ const AboutUs = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-kargon-blue mb-6">Our Core Services</h2>
+              <h2 className="text-4xl font-bold text-kargon-red mb-6">Our Core Services</h2>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -166,20 +168,23 @@ const AboutUs = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="rounded-2xl p-8 bg-slate-100"
+                className="rounded-2xl p-8"
               >
                 <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-kargon-blue rounded-full flex items-center justify-center mr-4">
+                  <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
                     <Ship className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-kargon-blue">LCL Services</h3>
+                  <h3 className="text-2xl font-bold text-kargon-red">LCL Services</h3>
                 </div>
                 <p className="text-gray-700 mb-4">
                   Amass Freight, Dubai is one of the leading logistics providers in the region providing
                   Less-Than Container load (LCL) for the ultimate convenience of our customers to help in
                   transporting their products to any location required.
                 </p>
-                <Link to={getNavLink("/services/lcl")} className="text-kargon-red font-medium hover:underline">
+                <Link
+                  to={getNavLink("/services/lcl")}
+                  className="text-kargon-red font-medium hover:underline"
+                >
                   Read more →
                 </Link>
               </motion.div>
@@ -190,20 +195,23 @@ const AboutUs = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
-                className="rounded-2xl p-8 bg-slate-100"
+                className="rounded-2xl p-8"
               >
                 <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-kargon-blue rounded-full flex items-center justify-center mr-4">
+                  <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
                     <Truck className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-kargon-blue">CFS Services</h3>
+                  <h3 className="text-2xl font-bold text-kargon-red">CFS Services</h3>
                 </div>
                 <p className="text-gray-700 mb-4">
                   Take full advantage of our state-of-the-art CFS, which is equipped with the latest
                   equipment, technology and staffed by experienced professionals at every level. Our
                   warehouses are designed to handle your cargo efficiently across all regions.
                 </p>
-                <Link to={getNavLink("/services/cfs")} className="text-kargon-red font-medium hover:underline">
+                <Link
+                  to={getNavLink("/services/cfs")}
+                  className="text-kargon-red font-medium hover:underline"
+                >
                   Read more →
                 </Link>
               </motion.div>
@@ -211,7 +219,7 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* Stats Section (kept placeholder) */}
+        {/* Stats Section (placeholder, unchanged) */}
         <section className="py-20 bg-slate-50">
           {/* Add your stats/tiles here if needed */}
         </section>
