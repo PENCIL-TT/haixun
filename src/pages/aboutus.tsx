@@ -49,9 +49,9 @@ const AboutUs = () => {
       <main className="flex-grow pt-0">
 
         {/* ======================= BREADCRUMB ======================= */}
-        <section className="relative h-[520px] md:h-[620px] w-full flex items-center justify-center overflow-hidden">
+        <section className="relative h-[350px] md:h-[420px] w-full flex items-center justify-center overflow-hidden">
           <div
-            className="absolute inset-0 bg-cover bg-center scale-125 md:scale-110"
+            className="absolute inset-0 bg-cover bg-center scale-110"
             style={{ backgroundImage: "url('/breadcrumb-bg.png')" }}
           ></div>
 
@@ -79,7 +79,7 @@ const AboutUs = () => {
         {/* ======================= HERO SECTION ======================= */}
         <section className="relative bg-white py-20 md:py-24 overflow-hidden">
 
-          {/* Moved plane image down */}
+          {/* Plane image moved down */}
           <img
             src="/plan-location.png"
             alt="plane-path"
@@ -155,7 +155,7 @@ const AboutUs = () => {
                 <p className="text-base text-gray-700">{t("about.paragraph2")}</p>
                 <p className="text-base text-gray-700">{t("about.paragraph3")}</p>
 
-                {/* CTA moved lower */}
+                {/* CTA lower */}
                 <div className="pt-10">
                   <Link to="/contact">
                     <Button
