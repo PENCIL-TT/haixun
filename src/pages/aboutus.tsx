@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Truck, Ship, Globe, Users, Award, TrendingUp } from "lucide-react";
+import { Truck, Ship } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 const ScrollToTop = () => {
@@ -45,12 +45,13 @@ const AboutUs = () => {
       <main className="flex-grow pt-20">
         {/* HERO SECTION */}
         <section className="py-20 relative overflow-hidden">
+          {/* Background image */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('/quote-two-bg.png')" }}
           ></div>
-
-          <div className="absolute inset-0 bg-white/40"></div>
+          {/* Soft overlay */}
+          <div className="absolute inset-0 bg-white/40" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <motion.div
@@ -63,7 +64,6 @@ const AboutUs = () => {
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
                 {t("about.title")}
               </h1>
-
               <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
                 {t("about.subtitle")}
               </p>
@@ -81,10 +81,15 @@ const AboutUs = () => {
                 <h2 className="text-3xl font-bold mb-4 text-gray-900">
                   {t("about.whoWeAre")}
                 </h2>
-
-                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph1")}</p>
-                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph2")}</p>
-                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph3")}</p>
+                <p className="text-lg leading-relaxed text-gray-700">
+                  {t("about.paragraph1")}
+                </p>
+                <p className="text-lg leading-relaxed text-gray-700">
+                  {t("about.paragraph2")}
+                </p>
+                <p className="text-lg leading-relaxed text-gray-700">
+                  {t("about.paragraph3")}
+                </p>
 
                 <Link to="/contact" className="inline-block pt-4">
                   <Button className="bg-red-600 hover:bg-red-700 text-white">
@@ -93,7 +98,7 @@ const AboutUs = () => {
                 </Link>
               </motion.div>
 
-              {/* RIGHT FADE IMAGE SLIDER */}
+              {/* RIGHT IMAGE SLIDER */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -106,7 +111,7 @@ const AboutUs = () => {
                     <motion.img
                       key={src}
                       src={src}
-                      alt={src}
+                      alt={`about-slide-${i}`}
                       className="absolute inset-0 w-full h-full object-cover"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: i === index ? 1 : 0 }}
@@ -133,31 +138,34 @@ const AboutUs = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-kargon-red mb-6">Our Core Services</h2>
+              <h2 className="text-4xl font-bold text-kargon-red mb-6">
+                Our Core Services
+              </h2>
             </motion.div>
 
-            {/* UPDATED GRID WITH LEFT IMAGE */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-
-              {/* LEFT SIDE IMAGE – NO BOX */}
-              <motion.div
-                initial={{ opacity: 0, x: -60 }}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 items-center relative">
+              {/* LEFT SIDE IMAGE – SMALLER, USING LEFT SPACE */}
+              <motion.img
+                src="/plan-location.png"
+                alt="service-map"
+                initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.9 }}
+                transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="md:col-span-1 flex justify-center"
-              >
-                <img
-                  src="/plan-location.png"
-                  alt="service-map"
-                  className="w-full max-w-sm object-contain"
-                />
-              </motion.div>
+                className="
+                  md:col-span-1
+                  w-[85%]
+                  max-w-[380px]
+                  object-contain
+                  -ml-10
+                  -mt-24
+                  opacity-80
+                "
+              />
 
               {/* SERVICE CARDS */}
               <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-12">
-
-                {/* LCL SERVICE */}
+                {/* LCL Service */}
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -169,19 +177,25 @@ const AboutUs = () => {
                     <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
                       <Ship className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-kargon-red">LCL Services</h3>
+                    <h3 className="text-2xl font-bold text-kargon-red">
+                      LCL Services
+                    </h3>
                   </div>
-
                   <p className="text-gray-700 mb-4">
-                    Amass Freight, Dubai is one of the leading logistics providers...
+                    Amass Freight, Dubai is one of the leading logistics providers
+                    in the region providing Less-Than Container load (LCL) for the
+                    ultimate convenience of our customers to help in transporting
+                    their products to any location required.
                   </p>
-
-                  <Link to={getNavLink("/services/lcl")} className="text-kargon-red font-medium hover:underline">
+                  <Link
+                    to={getNavLink("/services/lcl")}
+                    className="text-kargon-red font-medium hover:underline"
+                  >
                     Read more →
                   </Link>
                 </motion.div>
 
-                {/* CFS SERVICE */}
+                {/* CFS Service */}
                 <motion.div
                   initial={{ opacity: 0, x: 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -193,25 +207,32 @@ const AboutUs = () => {
                     <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
                       <Truck className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-kargon-red">CFS Services</h3>
+                    <h3 className="text-2xl font-bold text-kargon-red">
+                      CFS Services
+                    </h3>
                   </div>
-
                   <p className="text-gray-700 mb-4">
-                    Take full advantage of our state-of-the-art CFS...
+                    Take full advantage of our state-of-the-art CFS, which is
+                    equipped with the latest equipment, technology and staffed by
+                    experienced professionals at every level. Our warehouses are
+                    designed to handle your cargo efficiently across all regions.
                   </p>
-
-                  <Link to={getNavLink("/services/cfs")} className="text-kargon-red font-medium hover:underline">
+                  <Link
+                    to={getNavLink("/services/cfs")}
+                    className="text-kargon-red font-medium hover:underline"
+                  >
                     Read more →
                   </Link>
                 </motion.div>
-
               </div>
             </div>
           </div>
         </section>
 
-        {/* PLACEHOLDER STATS SECTION */}
-        <section className="py-20 bg-slate-50"></section>
+        {/* OPTIONAL STATS / EXTRA SECTION */}
+        <section className="py-20 bg-slate-50">
+          {/* Add stats / tiles if needed */}
+        </section>
       </main>
 
       <Footer />
