@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Truck, Ship, Globe, Users, Award, TrendingUp } from "lucide-react";
@@ -62,10 +62,12 @@ const AboutUs = () => {
       <main className="flex-grow pt-20">
         {/* Hero Section */}
         <section className="py-20 relative overflow-hidden">
+          {/* Background image */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('/quote-two-bg.png')" }}
           ></div>
+          {/* Soft white overlay to keep text readable */}
           <div className="absolute inset-0 bg-white/40"></div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -77,10 +79,10 @@ const AboutUs = () => {
               className="text-center mb-16"
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
-                {t('about.title')}
+                {t("about.title")}
               </h1>
               <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
-                {t('about.subtitle')}
+                {t("about.subtitle")}
               </p>
             </motion.div>
 
@@ -95,22 +97,22 @@ const AboutUs = () => {
               >
                 <div className="space-y-4">
                   <h2 className="text-3xl font-bold mb-4 text-gray-900">
-                    {t('about.whoWeAre')}
+                    {t("about.whoWeAre")}
                   </h2>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    {t('about.paragraph1')}
+                    {t("about.paragraph1")}
                   </p>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    {t('about.paragraph2')}
+                    {t("about.paragraph2")}
                   </p>
                   <p className="text-lg leading-relaxed text-gray-700">
-                    {t('about.paragraph3')}
+                    {t("about.paragraph3")}
                   </p>
                 </div>
 
                 <Link to="/contact" className="inline-block pt-4">
                   <Button className="bg-red-600 hover:bg-red-700 text-white">
-                    {t('nav.contact')}
+                    {t("nav.contact")}
                   </Button>
                 </Link>
               </motion.div>
@@ -140,6 +142,7 @@ const AboutUs = () => {
                   ))}
                 </div>
 
+                {/* Badge */}
                 <div className="absolute -bottom-6 -right-6 p-4 rounded-xl shadow-lg bg-kargon-red">
                   <Ship className="w-8 h-8 text-white" />
                 </div>
@@ -158,68 +161,94 @@ const AboutUs = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-kargon-red mb-6">Our Core Services</h2>
+              <h2 className="text-4xl font-bold text-kargon-red mb-6">
+                Our Core Services
+              </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {/* LCL Service */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+              {/* LEFT IMAGE WITH ANIMATION */}
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, x: -60 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.9 }}
                 viewport={{ once: true }}
-                className="rounded-2xl p-8"
+                className="md:col-span-1 flex justify-center"
               >
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
-                    <Ship className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-kargon-red">LCL Services</h3>
-                </div>
-                <p className="text-gray-700 mb-4">
-                  Amass Freight, Dubai is one of the leading logistics providers in the region providing
-                  Less-Than Container load (LCL) for the ultimate convenience of our customers to help in
-                  transporting their products to any location required.
-                </p>
-                <Link
-                  to={getNavLink("/services/lcl")}
-                  className="text-kargon-red font-medium hover:underline"
-                >
-                  Read more →
-                </Link>
+                <img
+                  src="/plan-location.png"
+                  alt="service-plan-location"
+                  className="w-full max-w-sm rounded-2xl shadow-lg"
+                />
               </motion.div>
 
-              {/* CFS Service */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="rounded-2xl p-8"
-              >
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
-                    <Truck className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-kargon-red">CFS Services</h3>
-                </div>
-                <p className="text-gray-700 mb-4">
-                  Take full advantage of our state-of-the-art CFS, which is equipped with the latest
-                  equipment, technology and staffed by experienced professionals at every level. Our
-                  warehouses are designed to handle your cargo efficiently across all regions.
-                </p>
-                <Link
-                  to={getNavLink("/services/cfs")}
-                  className="text-kargon-red font-medium hover:underline"
+              {/* SERVICES GRID */}
+              <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-12">
+                {/* LCL Service */}
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="rounded-2xl p-8"
                 >
-                  Read more →
-                </Link>
-              </motion.div>
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
+                      <Ship className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-kargon-red">
+                      LCL Services
+                    </h3>
+                  </div>
+                  <p className="text-gray-700 mb-4">
+                    Amass Freight, Dubai is one of the leading logistics providers
+                    in the region providing Less-Than Container load (LCL) for the
+                    ultimate convenience of our customers to help in transporting
+                    their products to any location required.
+                  </p>
+                  <Link
+                    to={getNavLink("/services/lcl")}
+                    className="text-kargon-red font-medium hover:underline"
+                  >
+                    Read more →
+                  </Link>
+                </motion.div>
+
+                {/* CFS Service */}
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className="rounded-2xl p-8"
+                >
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
+                      <Truck className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-kargon-red">
+                      CFS Services
+                    </h3>
+                  </div>
+                  <p className="text-gray-700 mb-4">
+                    Take full advantage of our state-of-the-art CFS, which is
+                    equipped with the latest equipment, technology and staffed by
+                    experienced professionals at every level. Our warehouses are
+                    designed to handle your cargo efficiently across all regions.
+                  </p>
+                  <Link
+                    to={getNavLink("/services/cfs")}
+                    className="text-kargon-red font-medium hover:underline"
+                  >
+                    Read more →
+                  </Link>
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Stats Section (placeholder, unchanged) */}
+        {/* Stats Section (placeholder) */}
         <section className="py-20 bg-slate-50">
           {/* Add your stats/tiles here if needed */}
         </section>
