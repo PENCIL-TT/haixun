@@ -127,7 +127,7 @@ const AboutUs = () => {
                   className="absolute -bottom-10 left-10 rounded-3xl px-8 py-5 text-white shadow-xl"
                   style={{ backgroundColor: BRAND_RED }}
                 >
-                  <span className="text-4xl font-bold">9+</span>
+                  <span className="text-4xl font-bold">30+</span>
                   <p className="text-sm text-white/90">Years of Growth</p>
                 </div>
               </motion.div>
