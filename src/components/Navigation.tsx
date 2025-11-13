@@ -78,6 +78,7 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
   const isActive = (path: string) => location.pathname === path;
 
   const getNavLink = (basePath: string) => {
@@ -90,6 +91,9 @@ const Navigation = () => {
     isActive(getNavLink("/gallery")) ||
     isActive(getNavLink("/career"));
 
+  // Check if we're on homepage
+  const isHomePage = location.pathname === "/";
+
   const SOCIALS = [
     { name: "LinkedIn", href: "https://www.linkedin.com/company/amassmiddleeast/", Icon: FaLinkedinIn },
     { name: "Facebook", href: "https://www.facebook.com/Amassmiddleeast?mibextid=ZbWKwL", Icon: FaFacebookF },
@@ -97,7 +101,7 @@ const Navigation = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
-      isScrolled 
+      isScrolled || !isHomePage
         ? 'bg-white shadow-md' 
         : 'bg-transparent'
     }`}>
@@ -119,7 +123,7 @@ const Navigation = () => {
             <Link
               to="/"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
+                isActive("/") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.home')}
@@ -127,7 +131,7 @@ const Navigation = () => {
 
             <DropdownMenu>
               <DropdownMenuTrigger className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors flex items-center gap-1 ${
-                location.pathname.includes("/services") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
+                location.pathname.includes("/services") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
               }`}>
                 {t('nav.services')} <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
@@ -198,7 +202,7 @@ const Navigation = () => {
             <Link
               to="/about-us"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/about-us") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
+                isActive("/about-us") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.about')}
@@ -207,7 +211,7 @@ const Navigation = () => {
             <Link
               to="/blog"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/blog") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
+                isActive("/blog") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.news')}
@@ -216,7 +220,7 @@ const Navigation = () => {
             <Link
               to="/advantages"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/advantages") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
+                isActive("/advantages") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.advantage')}
@@ -225,7 +229,7 @@ const Navigation = () => {
             <Link
               to="/global-presence"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/global-presence") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
+                isActive("/global-presence") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.globalPresence')}
@@ -234,7 +238,7 @@ const Navigation = () => {
             <Link
               to="/contact"
               className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/contact") ? "text-red-600" : isScrolled ? "text-gray-900" : "text-white"
+                isActive("/contact") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
               }`}
             >
               {t('nav.contact')}
@@ -245,16 +249,15 @@ const Navigation = () => {
 
           {/* Mobile Toggle */}
           <div className="lg:hidden flex items-center gap-2">
-
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2"
               aria-label="Toggle Menu"
             >
               {isMenuOpen ? (
-                <X className={isScrolled ? "text-gray-900" : "text-white"} size={24} />
+                <X className={(isScrolled || !isHomePage) ? "text-gray-900" : "text-white"} size={24} />
               ) : (
-                <Menu className={isScrolled ? "text-gray-900" : "text-white"} size={24} />
+                <Menu className={(isScrolled || !isHomePage) ? "text-gray-900" : "text-white"} size={24} />
               )}
             </button>
           </div>
