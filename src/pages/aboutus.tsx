@@ -47,7 +47,6 @@ const AboutUs = () => {
       <Navigation />
 
       <main className="flex-grow pt-0">
-
         {/* ======================= BREADCRUMB ======================= */}
         <section className="relative h-[380px] w-full flex items-center justify-center overflow-hidden">
           <div
@@ -58,7 +57,10 @@ const AboutUs = () => {
           <div className="absolute inset-0 bg-black/60"></div>
 
           <div className="relative text-center text-white">
-            <p className="font-semibold tracking-wide mb-2" style={{ color: BRAND_RED }}>
+            <p
+              className="font-semibold tracking-wide mb-2"
+              style={{ color: BRAND_RED }}
+            >
               About Us
             </p>
 
@@ -75,15 +77,15 @@ const AboutUs = () => {
 
         {/* ======================= HERO SECTION ======================= */}
         <section className="relative bg-white py-20 md:py-24 overflow-hidden">
+          {/* plane path background – moved a bit down */}
           <img
             src="/plan-location.png"
             alt="plane-path"
-            className="pointer-events-none hidden lg:block absolute -left-40 top-1/3 w-[360px] opacity-25"
+            className="pointer-events-none hidden lg:block absolute -left-40 top-1/2 w-[360px] opacity-25"
           />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-
               {/* LEFT IMAGE */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
@@ -107,7 +109,7 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                {/* CIRCLE BADGE */}
+                {/* circular badge */}
                 <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-white shadow-lg hidden sm:flex items-center justify-center">
                   <div
                     className="w-20 h-20 rounded-full flex items-center justify-center"
@@ -117,7 +119,7 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                {/* RED BOX */}
+                {/* red stats box */}
                 <div
                   className="absolute -bottom-10 left-10 rounded-3xl px-8 py-5 text-white shadow-xl"
                   style={{ backgroundColor: BRAND_RED }}
@@ -150,14 +152,17 @@ const AboutUs = () => {
                 <p className="text-base text-gray-700">{t("about.paragraph2")}</p>
                 <p className="text-base text-gray-700">{t("about.paragraph3")}</p>
 
-                <Link to="/contact">
-                  <Button
-                    className="text-white px-7 py-5 text-sm rounded-full"
-                    style={{ backgroundColor: BRAND_RED }}
-                  >
-                    {t("nav.contact")}
-                  </Button>
-                </Link>
+                {/* CTA moved a bit down */}
+                <div className="pt-6 md:pt-8">
+                  <Link to="/contact">
+                    <Button
+                      className="text-white px-7 py-5 text-sm rounded-full"
+                      style={{ backgroundColor: BRAND_RED }}
+                    >
+                      {t("nav.contact")}
+                    </Button>
+                  </Link>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -166,7 +171,6 @@ const AboutUs = () => {
         {/* ======================= SERVICES ======================= */}
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
             <h2
               className="text-center text-4xl font-bold mb-14"
               style={{ color: BRAND_RED }}
@@ -175,12 +179,11 @@ const AboutUs = () => {
             </h2>
 
             <div className="flex justify-center gap-10 flex-wrap">
-
               {/* LCL CARD */}
               <div className="w-full sm:w-[360px]">
                 <div
                   className="rounded-3xl px-8 py-10 shadow-xl text-center"
-                  style={{ backgroundColor: BRAND_RED }}
+                  style={{ backgroundColor: BRANDRED }}
                 >
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2"
@@ -229,7 +232,6 @@ const AboutUs = () => {
                   </Link>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
