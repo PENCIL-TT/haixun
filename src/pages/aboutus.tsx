@@ -23,28 +23,10 @@ const AboutUs = () => {
   const detected = getCurrentCountryFromPath(location.pathname);
   const currentCountry = detected ?? { code: "SG", name: "Singapore" };
 
-  const isSriLanka = currentCountry.code === "LK";
-
   const getNavLink = (basePath: string) => {
     if (currentCountry.code === "SG") return basePath;
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
-
-  const stats = [
-    { number: "9+", label: "Years of Growth", icon: TrendingUp },
-    { number: "40+", label: "Dedicated Staff", icon: Users },
-    { number: "100+", label: "Ports Worldwide", icon: Globe },
-    { number: "2000+", label: "Destinations", icon: Award },
-  ];
-
-  const features = [
-    "Global freight forwarding expertise",
-    "Reliable network of agents",
-    "30+ years industry experience",
-    "Dedicated warehouse facilities",
-    "Own fleet of trucks",
-    "Strategic location advantages",
-  ];
 
   const images = ["/Dubai.jpg", "/jebelali1.png", "/burj-khalifa.jpg"];
   const [index, setIndex] = useState(0);
@@ -59,15 +41,15 @@ const AboutUs = () => {
     <div className="bg-white text-gray-900 min-h-screen flex flex-col">
       <ScrollToTop />
       <Navigation />
+
       <main className="flex-grow pt-20">
-        {/* Hero Section */}
+        {/* HERO SECTION */}
         <section className="py-20 relative overflow-hidden">
-          {/* Background image */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('/quote-two-bg.png')" }}
           ></div>
-          {/* Soft white overlay to keep text readable */}
+
           <div className="absolute inset-0 bg-white/40"></div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -81,13 +63,14 @@ const AboutUs = () => {
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
                 {t("about.title")}
               </h1>
+
               <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
                 {t("about.subtitle")}
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-              {/* Text Section */}
+              {/* LEFT TEXT */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -95,20 +78,13 @@ const AboutUs = () => {
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <div className="space-y-4">
-                  <h2 className="text-3xl font-bold mb-4 text-gray-900">
-                    {t("about.whoWeAre")}
-                  </h2>
-                  <p className="text-lg leading-relaxed text-gray-700">
-                    {t("about.paragraph1")}
-                  </p>
-                  <p className="text-lg leading-relaxed text-gray-700">
-                    {t("about.paragraph2")}
-                  </p>
-                  <p className="text-lg leading-relaxed text-gray-700">
-                    {t("about.paragraph3")}
-                  </p>
-                </div>
+                <h2 className="text-3xl font-bold mb-4 text-gray-900">
+                  {t("about.whoWeAre")}
+                </h2>
+
+                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph1")}</p>
+                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph2")}</p>
+                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph3")}</p>
 
                 <Link to="/contact" className="inline-block pt-4">
                   <Button className="bg-red-600 hover:bg-red-700 text-white">
@@ -117,7 +93,7 @@ const AboutUs = () => {
                 </Link>
               </motion.div>
 
-              {/* Image Section: auto-fading scroller */}
+              {/* RIGHT FADE IMAGE SLIDER */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -130,19 +106,15 @@ const AboutUs = () => {
                     <motion.img
                       key={src}
                       src={src}
-                      alt={`about-slide-${i}`}
+                      alt={src}
                       className="absolute inset-0 w-full h-full object-cover"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: i === index ? 1 : 0 }}
                       transition={{ duration: 0.8 }}
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.display = "none";
-                      }}
                     />
                   ))}
                 </div>
 
-                {/* Badge */}
                 <div className="absolute -bottom-6 -right-6 p-4 rounded-xl shadow-lg bg-kargon-red">
                   <Ship className="w-8 h-8 text-white" />
                 </div>
@@ -151,7 +123,7 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* Core Services Section */}
+        {/* CORE SERVICES SECTION */}
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -161,13 +133,13 @@ const AboutUs = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-kargon-red mb-6">
-                Our Core Services
-              </h2>
+              <h2 className="text-4xl font-bold text-kargon-red mb-6">Our Core Services</h2>
             </motion.div>
 
+            {/* UPDATED GRID WITH LEFT IMAGE */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-              {/* LEFT IMAGE WITH ANIMATION */}
+
+              {/* LEFT SIDE IMAGE – NO BOX */}
               <motion.div
                 initial={{ opacity: 0, x: -60 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -177,81 +149,69 @@ const AboutUs = () => {
               >
                 <img
                   src="/plan-location.png"
-                  alt="service-plan-location"
-                  className="w-full max-w-sm rounded-2xl shadow-lg"
+                  alt="service-map"
+                  className="w-full max-w-sm object-contain"
                 />
               </motion.div>
 
-              {/* SERVICES GRID */}
+              {/* SERVICE CARDS */}
               <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-12">
-                {/* LCL Service */}
+
+                {/* LCL SERVICE */}
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="rounded-2xl p-8"
+                  className="p-8"
                 >
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
                       <Ship className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-kargon-red">
-                      LCL Services
-                    </h3>
+                    <h3 className="text-2xl font-bold text-kargon-red">LCL Services</h3>
                   </div>
+
                   <p className="text-gray-700 mb-4">
-                    Amass Freight, Dubai is one of the leading logistics providers
-                    in the region providing Less-Than Container load (LCL) for the
-                    ultimate convenience of our customers to help in transporting
-                    their products to any location required.
+                    Amass Freight, Dubai is one of the leading logistics providers...
                   </p>
-                  <Link
-                    to={getNavLink("/services/lcl")}
-                    className="text-kargon-red font-medium hover:underline"
-                  >
+
+                  <Link to={getNavLink("/services/lcl")} className="text-kargon-red font-medium hover:underline">
                     Read more →
                   </Link>
                 </motion.div>
 
-                {/* CFS Service */}
+                {/* CFS SERVICE */}
                 <motion.div
                   initial={{ opacity: 0, x: 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="rounded-2xl p-8"
+                  className="p-8"
                 >
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 bg-kargon-red rounded-full flex items-center justify-center mr-4">
                       <Truck className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-kargon-red">
-                      CFS Services
-                    </h3>
+                    <h3 className="text-2xl font-bold text-kargon-red">CFS Services</h3>
                   </div>
+
                   <p className="text-gray-700 mb-4">
-                    Take full advantage of our state-of-the-art CFS, which is
-                    equipped with the latest equipment, technology and staffed by
-                    experienced professionals at every level. Our warehouses are
-                    designed to handle your cargo efficiently across all regions.
+                    Take full advantage of our state-of-the-art CFS...
                   </p>
-                  <Link
-                    to={getNavLink("/services/cfs")}
-                    className="text-kargon-red font-medium hover:underline"
-                  >
+
+                  <Link to={getNavLink("/services/cfs")} className="text-kargon-red font-medium hover:underline">
                     Read more →
                   </Link>
                 </motion.div>
+
               </div>
             </div>
           </div>
         </section>
 
-        {/* Stats Section (placeholder) */}
-        <section className="py-20 bg-slate-50">
-          {/* Add your stats/tiles here if needed */}
-        </section>
+        {/* PLACEHOLDER STATS SECTION */}
+        <section className="py-20 bg-slate-50"></section>
       </main>
 
       <Footer />
