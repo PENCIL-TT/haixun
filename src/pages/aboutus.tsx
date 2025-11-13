@@ -47,10 +47,11 @@ const AboutUs = () => {
       <Navigation />
 
       <main className="flex-grow pt-0">
+
         {/* ======================= BREADCRUMB ======================= */}
-        <section className="relative h-[380px] w-full flex items-center justify-center overflow-hidden">
+        <section className="relative h-[520px] md:h-[620px] w-full flex items-center justify-center overflow-hidden">
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center scale-125 md:scale-110"
             style={{ backgroundImage: "url('/breadcrumb-bg.png')" }}
           ></div>
 
@@ -77,15 +78,17 @@ const AboutUs = () => {
 
         {/* ======================= HERO SECTION ======================= */}
         <section className="relative bg-white py-20 md:py-24 overflow-hidden">
-          {/* plane path background – moved a bit down */}
+
+          {/* Moved plane image down */}
           <img
             src="/plan-location.png"
             alt="plane-path"
-            className="pointer-events-none hidden lg:block absolute -left-40 top-1/2 w-[360px] opacity-25"
+            className="pointer-events-none hidden lg:block absolute -left-40 top-[60%] w-[360px] opacity-25"
           />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
+
               {/* LEFT IMAGE */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
@@ -152,8 +155,8 @@ const AboutUs = () => {
                 <p className="text-base text-gray-700">{t("about.paragraph2")}</p>
                 <p className="text-base text-gray-700">{t("about.paragraph3")}</p>
 
-                {/* CTA moved a bit down */}
-                <div className="pt-6 md:pt-8">
+                {/* CTA moved lower */}
+                <div className="pt-10">
                   <Link to="/contact">
                     <Button
                       className="text-white px-7 py-5 text-sm rounded-full"
@@ -171,6 +174,7 @@ const AboutUs = () => {
         {/* ======================= SERVICES ======================= */}
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
             <h2
               className="text-center text-4xl font-bold mb-14"
               style={{ color: BRAND_RED }}
@@ -179,6 +183,7 @@ const AboutUs = () => {
             </h2>
 
             <div className="flex justify-center gap-10 flex-wrap">
+
               {/* LCL CARD */}
               <div className="w-full sm:w-[360px]">
                 <div
@@ -193,6 +198,7 @@ const AboutUs = () => {
                   </div>
 
                   <h3 className="text-2xl text-white font-semibold">LCL Services</h3>
+
                   <p className="text-sm text-white/90 mt-2">
                     Amass Freight, Dubai is one of the leading logistics providers...
                   </p>
@@ -220,6 +226,7 @@ const AboutUs = () => {
                   </div>
 
                   <h3 className="text-2xl text-white font-semibold">CFS Services</h3>
+
                   <p className="text-sm text-white/90 mt-2">
                     Take full advantage of our state-of-the-art CFS...
                   </p>
@@ -232,6 +239,7 @@ const AboutUs = () => {
                   </Link>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
