@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
-import HaixunHeroSection from "@/components/HaixunHeroSection";
+import HeroSection from "@/components/HeroSection";
 import HaixunServicesSection from "@/components/HaixunServicesSection";
 import AboutSection from "@/components/AboutSection";
 import AdvantagesSection from "@/components/AdvantagesSection";
@@ -49,10 +49,10 @@ const Index = () => {
   return (
     <div className="bg-white">
       <Navigation />
+      <HeroSection />
       <ScrollToTop />
-      <HaixunHeroSection />
-      <HaixunServicesSection />
       <AboutSection />
+      <HaixunServicesSection />
       <AdvantagesSection />
       <ContactForm />
       <Footer />

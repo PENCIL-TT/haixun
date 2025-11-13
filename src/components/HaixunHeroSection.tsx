@@ -8,13 +8,7 @@ export default function HaixunHeroSection() {
   const { t } = useTranslation();
   
   return (
-    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-red-900">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
+    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-transparent">
 
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
@@ -50,9 +44,6 @@ export default function HaixunHeroSection() {
         </div>
       </div>
 
-      {/* Animated shapes */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-red-600/20 rounded-full blur-2xl animate-pulse" />
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-red-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
     </section>
   );
 }
