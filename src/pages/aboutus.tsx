@@ -63,7 +63,6 @@ const AboutUs = () => {
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
                 {t("about.title")}
               </h1>
-
               <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
                 {t("about.subtitle")}
               </p>
@@ -74,7 +73,7 @@ const AboutUs = () => {
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.45, ease: "easeOut" }}
+                transition={{ duration: 0.45 }}
                 viewport={{ once: true }}
                 className="space-y-6"
               >
@@ -82,15 +81,9 @@ const AboutUs = () => {
                   {t("about.whoWeAre")}
                 </h2>
 
-                <p className="text-lg leading-relaxed text-gray-700">
-                  {t("about.paragraph1")}
-                </p>
-                <p className="text-lg leading-relaxed text-gray-700">
-                  {t("about.paragraph2")}
-                </p>
-                <p className="text-lg leading-relaxed text-gray-700">
-                  {t("about.paragraph3")}
-                </p>
+                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph1")}</p>
+                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph2")}</p>
+                <p className="text-lg leading-relaxed text-gray-700">{t("about.paragraph3")}</p>
 
                 <Link to="/contact" className="inline-block pt-4">
                   <Button className="bg-red-600 hover:bg-red-700 text-white">
@@ -103,7 +96,7 @@ const AboutUs = () => {
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.45, ease: "easeOut" }}
+                transition={{ duration: 0.45 }}
                 viewport={{ once: true }}
                 className="relative"
               >
@@ -130,102 +123,91 @@ const AboutUs = () => {
         </section>
 
         {/* SERVICES */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
+        <section className="py-24 bg-white relative overflow-visible">
+          {/* LEFT IMAGE MOVED TO SCREEN EDGE */}
+          <motion.img
+            src="/plan-location.png"
+            alt="left-plane"
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.45 }}
+            viewport={{ once: true }}
+            className="
+              hidden md:block
+              absolute 
+              left-0 
+              top-1/2 
+              -translate-y-1/2
+              w-[300px]
+              opacity-80
+              pointer-events-none
+            "
+          />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            {/* FIXED CENTERED TITLE */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
+              transition={{ duration: 0.4 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center text-4xl font-bold text-kargon-red mb-20"
             >
-              <h2 className="text-4xl font-bold text-kargon-red mb-6">
-                Our Core Services
-              </h2>
-            </motion.div>
+              Our Core Services
+            </motion.h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 items-center relative">
-              {/* LEFT IMAGE */}
-              <motion.img
-                src="/plan-location.png"
-                alt="service-map"
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.45, ease: "easeOut" }}
+            {/* CENTER THE CARDS */}
+            <div className="flex justify-center gap-12 flex-wrap">
+
+              {/* LCL CARD */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45 }}
                 viewport={{ once: true }}
-                className="
-                  md:col-span-1
-                  w-[60%]
-                  max-w-[260px]
-                  object-contain
-                  -ml-8
-                  -mt-10
-                  opacity-80
-                "
-              />
-
-              {/* SERVICE CARDS */}
-              <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* LCL CARD */}
-                <motion.div
-                  initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="p-3"
-                >
-                  <div className="w-full h-full bg-kargon-red rounded-3xl shadow-[0_18px_35px_rgba(0,0,0,0.16)] px-8 py-10 flex flex-col items-center text-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-white/15 flex items-center justify-center">
-                      <Ship className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-white">
-                      LCL Services
-                    </h3>
-                    <p className="text-sm md:text-base leading-relaxed text-white/90">
-                      Amass Freight, Dubai is one of the leading logistics providers
-                      in the region providing Less-Than Container load (LCL) for the
-                      ultimate convenience of our customers to help in transporting
-                      their products to any location required.
-                    </p>
-                    <Link
-                      to={getNavLink("/services/lcl")}
-                      className="mt-2 text-sm font-semibold text-white underline-offset-4 hover:underline"
-                    >
-                      Read more →
-                    </Link>
+                className="w-[350px]"
+              >
+                <div className="bg-kargon-red rounded-3xl shadow-[0_18px_35px_rgba(0,0,0,0.16)] px-8 py-10 text-center">
+                  <div className="w-16 h-16 rounded-full bg-white/15 flex items-center justify-center mx-auto mb-4">
+                    <Ship className="w-8 h-8 text-white" />
                   </div>
-                </motion.div>
 
-                {/* CFS CARD */}
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.45, ease: "easeOut", delay: 0.15 }}
-                  viewport={{ once: true }}
-                  className="p-3"
-                >
-                  <div className="w-full h-full bg-kargon-red rounded-3xl shadow-[0_18px_35px_rgba(0,0,0,0.16)] px-8 py-10 flex flex-col items-center text-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-white/15 flex items-center justify-center">
-                      <Truck className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-white">
-                      CFS Services
-                    </h3>
-                    <p className="text-sm md:text-base leading-relaxed text-white/90">
-                      Take full advantage of our state-of-the-art CFS, which is
-                      equipped with the latest equipment, technology and staffed by
-                      experienced professionals at every level. Our warehouses are
-                      designed to handle your cargo efficiently across all regions.
-                    </p>
-                    <Link
-                      to={getNavLink("/services/cfs")}
-                      className="mt-2 text-sm font-semibold text-white underline-offset-4 hover:underline"
-                    >
-                      Read more →
-                    </Link>
+                  <h3 className="text-2xl font-semibold text-white mb-4">LCL Services</h3>
+
+                  <p className="text-white/90 text-sm leading-relaxed mb-4">
+                    Amass Freight, Dubai is one of the leading logistics providers in the region...
+                  </p>
+
+                  <Link to={getNavLink("/services/lcl")} className="text-white underline">
+                    Read more →
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* CFS CARD */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="w-[350px]"
+              >
+                <div className="bg-kargon-red rounded-3xl shadow-[0_18px_35px_rgba(0,0,0,0.16)] px-8 py-10 text-center">
+                  <div className="w-16 h-16 rounded-full bg-white/15 flex items-center justify-center mx-auto mb-4">
+                    <Truck className="w-8 h-8 text-white" />
                   </div>
-                </motion.div>
-              </div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-4">CFS Services</h3>
+
+                  <p className="text-white/90 text-sm leading-relaxed mb-4">
+                    Take full advantage of our state-of-the-art CFS...
+                  </p>
+
+                  <Link to={getNavLink("/services/cfs")} className="text-white underline">
+                    Read more →
+                  </Link>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
