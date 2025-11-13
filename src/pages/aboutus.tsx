@@ -183,7 +183,7 @@ const AboutUs = () => {
               <div className="w-full sm:w-[360px]">
                 <div
                   className="rounded-3xl px-8 py-10 shadow-xl text-center"
-                  style={{ backgroundColor: BRANDRED }}
+                  style={{ backgroundColor: BRAND_RED }}
                 >
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2"
