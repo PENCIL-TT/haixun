@@ -273,7 +273,7 @@ const AboutUs = () => {
                   className="text-2xl md:text-3xl font-bold"
                   style={{ color: BRAND_RED }}
                 >
-                  +1 718-904-4450
+                  +86 75582222447
                 </p>
               </div>
 
@@ -282,12 +282,13 @@ const AboutUs = () => {
                 <div className="bg-white rounded-2xl shadow-md px-6 py-5 space-y-2">
                   <p className="font-semibold text-slate-900 flex items-center gap-2">
                     <MapPin className="w-4 h-4" style={{ color: BRAND_RED }} />
-                    Headquarter
+                    Shenzhen Office • China
                   </p>
                   <p className="text-xs text-slate-600">
-                    4517 Washington Ave.
+                    13C02, Block A,
+Zhaoxin Huijin Plaza 3085 Shennan East Road,
                     <br />
-                    Manchester, Kentucky 39495
+                   Luohu, Shenzhen.
                   </p>
                 </div>
 
