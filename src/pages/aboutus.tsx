@@ -34,10 +34,7 @@ const AboutUs = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(
-      () => setIndex((i) => (i + 1) % sliderImages.length),
-      4000
-    );
+    const id = setInterval(() => setIndex((i) => (i + 1) % sliderImages.length), 4000);
     return () => clearInterval(id);
   }, []);
 
@@ -47,34 +44,38 @@ const AboutUs = () => {
       <Navigation />
 
       <main className="flex-grow pt-0">
-        {/* ======================= HERO / BREADCRUMB (like TIPS) ======================= */}
+
+        {/* ======================= HERO / BREADCRUMB (UPDATED) ======================= */}
         <section className="relative h-[260px] md:h-[320px] w-full flex items-center justify-center text-center px-6">
-          {/* Background image */}
           <img
             src="/breadcrumb-bg.png"
             alt="About Haixun Global"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          {/* Dark overlay */}
+
           <div className="absolute inset-0 bg-black/60" />
 
-          {/* Content */}
           <div className="relative z-10 container mx-auto max-w-5xl pt-4 md:pt-6">
-            <p className="text-xs md:text-sm text-white/80 mb-2">
-              <Link to="/" className="hover:text-white transition-colors">
+            {/* Larger Breadcrumb */}
+            <p className="text-sm md:text-lg text-white/80 mb-3">
+              <Link to="/" className="hover:text-white transition-colors font-medium">
                 Home
               </Link>
               <span className="mx-2 opacity-70">›</span>
-              <span className="text-white">About Us</span>
+              <span className="text-white font-semibold">About Us</span>
             </p>
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
+            {/* Big Red Title */}
+            <h1
+              className="text-4xl md:text-6xl lg:text-7xl font-bold"
+              style={{ color: BRAND_RED }}
+            >
               About Us
             </h1>
           </div>
         </section>
 
-        {/* ======================= WHO WE ARE ======================= */}
+        {/* ======================= WHO WE ARE BLOCK ======================= */}
         <section className="relative bg-white py-20 md:py-24 overflow-hidden">
           <img
             src="/plan-location.png"
@@ -84,7 +85,8 @@ const AboutUs = () => {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* LEFT IMAGE */}
+
+              {/* LEFT IMAGE PANEL */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -107,7 +109,7 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                {/* badge */}
+                {/* circular badge */}
                 <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-white shadow-lg hidden sm:flex items-center justify-center">
                   <div
                     className="w-20 h-20 rounded-full flex items-center justify-center"
@@ -117,7 +119,7 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                {/* stats */}
+                {/* red stats box */}
                 <div
                   className="absolute -bottom-10 left-10 rounded-3xl px-8 py-5 text-white shadow-xl"
                   style={{ backgroundColor: BRAND_RED }}
@@ -127,7 +129,7 @@ const AboutUs = () => {
                 </div>
               </motion.div>
 
-              {/* RIGHT TEXT */}
+              {/* RIGHT TEXT PANEL */}
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -168,15 +170,12 @@ const AboutUs = () => {
         {/* ======================= SERVICES ======================= */}
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-              className="text-center text-4xl font-bold mb-14"
-              style={{ color: BRAND_RED }}
-            >
+            <h2 className="text-center text-4xl font-bold mb-14" style={{ color: BRAND_RED }}>
               Our Core Services
             </h2>
 
             <div className="flex justify-center gap-10 flex-wrap">
-              {/* LCL */}
+              {/* LCL CARD */}
               <div className="w-full sm:w-[360px]">
                 <div
                   className="rounded-3xl px-8 py-10 shadow-xl text-center"
@@ -189,23 +188,18 @@ const AboutUs = () => {
                     <Ship className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-2xl text-white font-semibold">
-                    LCL Services
-                  </h3>
+                  <h3 className="text-2xl text-white font-semibold">LCL Services</h3>
                   <p className="text-sm text-white/90 mt-2">
                     Amass Freight, Dubai is one of the leading logistics providers...
                   </p>
 
-                  <Link
-                    to={getNavLink("/services/lcl")}
-                    className="text-white underline mt-3 inline-block"
-                  >
+                  <Link to={getNavLink("/services/lcl")} className="text-white underline mt-3 inline-block">
                     Read more →
                   </Link>
                 </div>
               </div>
 
-              {/* CFS */}
+              {/* CFS CARD */}
               <div className="w-full sm:w-[360px]">
                 <div
                   className="rounded-3xl px-8 py-10 shadow-xl text-center"
@@ -218,17 +212,12 @@ const AboutUs = () => {
                     <Truck className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-2xl text-white font-semibold">
-                    CFS Services
-                  </h3>
+                  <h3 className="text-2xl text-white font-semibold">CFS Services</h3>
                   <p className="text-sm text-white/90 mt-2">
                     Take full advantage of our state-of-the-art CFS...
                   </p>
 
-                  <Link
-                    to={getNavLink("/services/cfs")}
-                    className="text-white underline mt-3 inline-block"
-                  >
+                  <Link to={getNavLink("/services/cfs")} className="text-white underline mt-3 inline-block">
                     Read more →
                   </Link>
                 </div>
@@ -237,47 +226,32 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ======================= CONTACT ======================= */}
+        {/* ======================= GET IN TOUCH ======================= */}
         <section className="py-24 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* LEFT */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.45 }}
               className="space-y-6"
             >
-              <p
-                className="text-sm font-semibold uppercase tracking-wide"
-                style={{ color: BRAND_RED }}
-              >
+              <p className="text-sm font-semibold uppercase tracking-wide" style={{ color: BRAND_RED }}>
                 Safe Transportation & Logistics
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-                Get In Touch
-              </h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Get In Touch</h2>
 
               <p className="text-sm md:text-base text-slate-600 max-w-xl">
-                Get in touch with our team for logistics solutions, freight
-                inquiries, and global shipping support. We are here to assist you
-                across time zones and regions.
+                Get in touch with our team for logistics solutions, freight inquiries, and global shipping support.
               </p>
 
-              {/* phone */}
               <div className="pt-4 space-y-2">
-                <p className="text-xs font-semibold text-slate-500">
-                  24/7 Support Center
-                </p>
-                <p
-                  className="text-2xl md:text-3xl font-bold"
-                  style={{ color: BRAND_RED }}
-                >
+                <p className="text-xs font-semibold text-slate-500">24/7 Support Center</p>
+                <p className="text-2xl md:text-3xl font-bold" style={{ color: BRAND_RED }}>
                   +1 718-904-4450
                 </p>
               </div>
 
-              {/* cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                 <div className="bg-white rounded-2xl shadow-md px-6 py-5 space-y-2">
                   <p className="font-semibold text-slate-900 flex items-center gap-2">
@@ -305,7 +279,6 @@ const AboutUs = () => {
               </div>
             </motion.div>
 
-            {/* RIGHT MAP */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -314,7 +287,7 @@ const AboutUs = () => {
             >
               <div className="w-full h-[320px] md:h-[420px] rounded-3xl overflow-hidden shadow-xl">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18..."
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.174783742364!2d-122.40137852347925!3d37.79228127197342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b1c95a1f%3A0x0000000000000000!2sYour%20Office!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
