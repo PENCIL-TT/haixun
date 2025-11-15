@@ -1,12 +1,27 @@
-import React, { useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Boxes, Building2 } from "lucide-react"; // only what we use
+import {
+  Truck,
+  Ship,
+  MapPin,
+  Mail,
+  Plane,
+  Package,
+  FileText,
+  ClipboardList,
+  Boxes,
+  ArrowRight,
+} from "lucide-react";
+import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
-// Scroll to top on route change
-const ScrollToTop: React.FC = () => {
+const BRAND_RED = "#BC0018";
+
+const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -14,154 +29,349 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
-interface Service {
-  id: number;
-  title: string;
-  description: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  image: string;
-  slug: string;
-}
-interface ServiceCardProps extends Service {
-  baseUrl: string;
-}
-
-const ServiceCard: React.FC<ServiceCardProps> = ({
-  title,
-  description,
-  icon: Icon,
-  image,
-  slug,
-  baseUrl
-}) => {
-  // Avoid /services/services
-  const url = slug === 'services' ? baseUrl : `${baseUrl}/${slug}`;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-      /* FLEX on md+: equal heights, no white strip */
-      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group md:flex md:items-stretch"
-    >
-      {/* Image side */}
-      <div className="relative w-full md:w-1/2 min-h-[12rem] md:min-h-[16rem]">
-        <img
-          src={image}
-          alt={title}
-          loading="lazy"
-          className="absolute inset-0 block w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-
-      {/* Content side */}
-      <div className="w-full md:w-1/2 p-6 flex flex-col justify-center bg-gradient-to-br from-gc-light-gold/10 to-gc-gold/5 bg-stone-200">
-        <div className="bg-blue-200 text-gc-dark-blue p-2 rounded-full inline-block mb-2 w-fit">
-          <Icon className="w-5 h-5" />
-        </div>
-        <h3 className="text-xl font-semibold text-gc-dark-blue mb-3">{title}</h3>
-        <p className="text-gray-600 text-sm mb-4">{description}</p>
-        <Link
-          to={url}
-          className="text-gc-blue font-medium hover:text-gc-dark-blue inline-flex items-center text-sm transition-colors duration-300"
-        >
-          Learn More
-          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </Link>
-      </div>
-    </motion.div>
-  );
-};
-
-const Services: React.FC = () => {
+const AboutUs = () => {
+  const { t } = useTranslation();
   const location = useLocation();
-  const pathSegments = location.pathname.split('/').filter(Boolean);
 
-  // Determine baseUrl for links
-  const firstSegment = pathSegments[0] || "";
-  const secondSegment = pathSegments[1] || "";
-  let baseUrl = "/services";
-  if (firstSegment && firstSegment !== "services") {
-    baseUrl = `/${firstSegment}/services`;
-    if (secondSegment === "services") baseUrl = `/${firstSegment}/services`;
-  } else if (firstSegment === "services") {
-    baseUrl = "/services";
-  }
+  const detected = getCurrentCountryFromPath(location.pathname);
+  const currentCountry = detected ?? { code: "SG", name: "Singapore" };
 
-  // ✅ Only two services (LCL & CFS) with exact content + images
-  const allServices: Service[] = [
+  const getNavLink = (basePath: string) => {
+    if (currentCountry.code === "SG") return basePath;
+    return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
+  };
+
+  const sliderImages = ["/Dubai.jpg", "/jebelali1.png", "/burj-khalifa.jpg"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % sliderImages.length),
+      4000
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  const services = [
     {
-      id: 1,
-      title: "LCL",
+      title: "LCL Services",
       description:
-        "Amass Freight, Dubai is one of the leading logistics providers in the region providing Less-Than Container load (LCL) for the ultimate convenience of our customers to help in transporting their products to any location required.",
-      icon: Boxes,
-      image: "/lcl1.JPG",
-      slug: "lcl"
+        "HAIXUN operate own consolidation service on many trade routes. HAIXUN provide complete LCL solutions for your cargo...",
+      path: "/services/lcl",
+      Icon: Ship,
     },
     {
-      id: 2,
-      title: "CFS",
+      title: "FCL Services",
       description:
-        "Take full advantage of our state-of-the-art CFS, which is equipped with the latest equipment, technology and staffed by experienced professionals at every level. Our warehouses are designed to handle your cargo efficiently across all regions.",
-      icon: Building2,
-      image: "/container.jpg",
-      slug: "cfs"
-    }
+        "HAIXUN has its own fleet of containers including special equipment to accommodate special cargo requirements...",
+      path: "/services/fcl",
+      Icon: Ship,
+    },
+    {
+      title: "Warehouse Management",
+      description:
+        "HAIXUN is well equipped to handle warehousing of various commodities including cold and special storage needs...",
+      path: "/services/warehouse-management",
+      Icon: Boxes,
+    },
+    {
+      title: "Project Logistics",
+      description:
+        "With a dedicated project division and experts in the field, we manage complex project logistics from end to end...",
+      path: "/services/project-logistics",
+      Icon: Truck,
+    },
+    {
+      title: "Air Shipments",
+      description:
+        "HAIXUN can provide customized sea–air and air–sea options to meet customer deadlines and time-critical shipments...",
+      path: "/services/air-shipments",
+      Icon: Plane,
+    },
+    {
+      title: "Customs Declaration & Ins.",
+      description:
+        "We ensure that all clearance formalities are done in a smooth and easy manner so that your cargo moves without delay...",
+      path: "/services/customs-declaration",
+      Icon: FileText,
+    },
+    {
+      title: "OOG Shipments",
+      description:
+        "Services offered: cargo loading, lashing, surveyor coordination, and inter-island movement to main ports for OOG cargo...",
+      path: "/services/oog-shipments",
+      Icon: Package,
+    },
+    {
+      title: "LCL Consolidation",
+      description:
+        "We provide efficient LCL consolidation ensuring smooth formalities and cost-effective movement for smaller shipments...",
+      path: "/services/lcl-consolidation",
+      Icon: ClipboardList,
+    },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="bg-white text-gray-900 min-h-screen flex flex-col">
       <ScrollToTop />
       <Navigation />
-      <main className="flex-grow pt-20">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-r from-gc-dark-blue via-gc-blue to-gc-dark-blue text-white relative overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <img
-              src="/lovable-uploads/gp.jpg"
-              alt="Services"
-              className="w-full h-full object-cover opacity-20"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-gc-dark-blue/90 to-gc-blue/90" />
-          </div>
-          <div className="container mx-auto px-4 py-16 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center max-w-4xl mx-auto"
-            >
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 text-black mt-7">
-                Our Logistics Services
-              </h1>
-              <div className="w-20 h-1 bg-gc-gold mx-auto mb-6"></div>
-              <p className="text-xl text-blac leading-relaxed">
-                Comprehensive end-to-end global logistics solutions tailored to your business needs
-              </p>
-            </motion.div>
+
+      <main className="flex-grow pt-0">
+        {/* ======================= HERO / BREADCRUMB (TIPS-style) ======================= */}
+        <section className="relative h-[260px] md:h-[320px] w-full flex items-center justify-center text-center px-6">
+          <img
+            src="/breadcrumb-bg.png"
+            alt="About Haixun Global"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="relative z-10 container mx-auto max-w-5xl pt-4 md:pt-6">
+            <p className="text-xs md:text-sm text-white/80 mb-2">
+              <Link to="/" className="hover:text-white transition-colors">
+                Home
+              </Link>
+              <span className="mx-2 opacity-70">›</span>
+              <span className="text-white">About Us</span>
+            </p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
+              About Us
+            </h1>
           </div>
         </section>
 
-        {/* Services Grid — ONLY TWO CARDS */}
-        <section className="py-20 bg-gradient-to-b from-white to-gc-light-gold/10">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {allServices.map(service => (
-                <ServiceCard key={service.id} {...service} baseUrl={baseUrl} />
+        {/* ======================= WHO WE ARE BLOCK ======================= */}
+        <section className="relative bg-white py-20 md:py-24 overflow-hidden">
+          <img
+            src="/plan-location.png"
+            alt="plane-path"
+            className="pointer-events-none hidden lg:block absolute -left-40 top-[60%] w-[360px] opacity-25"
+          />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* LEFT IMAGE PANEL */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.45 }}
+                className="relative"
+              >
+                <div className="relative rounded-[32px] overflow-hidden shadow-[0_28px_60px_rgba(0,0,0,0.22)] bg-slate-900/5">
+                  <div className="w-full aspect-[4/3] bg-slate-200 relative">
+                    {sliderImages.map((src, i) => (
+                      <motion.img
+                        key={src}
+                        src={src}
+                        alt={src}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: i === index ? 1 : 0 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* circular badge */}
+                <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-white shadow-lg hidden sm:flex items-center justify-center">
+                  <div
+                    className="w-20 h-20 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: `${BRAND_RED}20` }}
+                  >
+                    <Ship className="w-10 h-10" style={{ color: BRAND_RED }} />
+                  </div>
+                </div>
+
+                {/* red stats box */}
+                <div
+                  className="absolute -bottom-10 left-10 rounded-3xl px-8 py-5 text-white shadow-xl"
+                  style={{ backgroundColor: BRAND_RED }}
+                >
+                  <span className="text-4xl font-bold">9+</span>
+                  <p className="text-sm text-white/90">Years of Growth</p>
+                </div>
+              </motion.div>
+
+              {/* RIGHT TEXT PANEL */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.45 }}
+                className="space-y-6 md:space-y-7"
+              >
+                <p
+                  className="text-sm font-semibold uppercase tracking-wide"
+                  style={{ color: BRAND_RED }}
+                >
+                  {t("about.whoWeAre")}
+                </p>
+
+                <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
+                  {t("about.title")}
+                </h1>
+
+                <p className="text-lg text-gray-700">{t("about.subtitle")}</p>
+                <p className="text-base text-gray-700">{t("about.paragraph1")}</p>
+                <p className="text-base text-gray-700">{t("about.paragraph2")}</p>
+                <p className="text-base text-gray-700">{t("about.paragraph3")}</p>
+
+                <div className="pt-10">
+                  <Link to="/contact">
+                    <Button
+                      className="text-white px-7 py-5 text-sm rounded-full"
+                      style={{ backgroundColor: BRAND_RED }}
+                    >
+                      {t("nav.contact")}
+                    </Button>
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================= SERVICES CARDS (HAIXUN STYLE) ======================= */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+              className="text-center text-4xl font-bold mb-14"
+              style={{ color: BRAND_RED }}
+            >
+              Our Core Services
+            </h2>
+
+            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+              {services.map(({ title, description, path, Icon }) => (
+                <div
+                  key={title}
+                  className="rounded-3xl border border-slate-200 bg-white px-8 py-10 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-16 h-16 rounded-full bg-[#F5F5F7] flex items-center justify-center mb-6">
+                      <Icon className="w-8 h-8" style={{ color: BRAND_RED }} />
+                    </div>
+
+                    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                      {title}
+                    </h3>
+
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
+
+                  <Link
+                    to={getNavLink(path)}
+                    className="mt-6 inline-flex items-center"
+                  >
+                    <span
+                      className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
+                      style={{ color: BRAND_RED }}
+                    >
+                      READ MORE
+                      <span className="w-5 h-5 rounded-full bg-white flex items-center justify-center">
+                        <ArrowRight className="w-3 h-3" style={{ color: BRAND_RED }} />
+                      </span>
+                    </span>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>
         </section>
+
+        {/* ======================= GET IN TOUCH / CONTACT BLOCK ======================= */}
+        <section className="py-24 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* LEFT: TEXT + PHONE + SMALL CARDS */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45 }}
+              className="space-y-6"
+            >
+              <p
+                className="text-sm font-semibold uppercase tracking-wide"
+                style={{ color: BRAND_RED }}
+              >
+                Safe Transportation &amp; Logistics
+              </p>
+
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+                Get In Touch
+              </h2>
+
+              <p className="text-sm md:text-base text-slate-600 max-w-xl">
+                Get in touch with our team for logistics solutions, freight
+                inquiries, and global shipping support. We are here to assist you
+                across time zones and regions.
+              </p>
+
+              <div className="pt-4 space-y-2">
+                <p className="text-xs font-semibold text-slate-500">
+                  24/7 Support Center
+                </p>
+                <p
+                  className="text-2xl md:text-3xl font-bold"
+                  style={{ color: BRAND_RED }}
+                >
+                  +1 718-904-4450
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                <div className="bg-white rounded-2xl shadow-md px-6 py-5 space-y-2">
+                  <p className="font-semibold text-slate-900 flex items-center gap-2">
+                    <MapPin className="w-4 h-4" style={{ color: BRAND_RED }} />
+                    Headquarter
+                  </p>
+                  <p className="text-xs text-slate-600">
+                    4517 Washington Ave.
+                    <br />
+                    Manchester, Kentucky 39495
+                  </p>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-md px-6 py-5 space-y-2">
+                  <p className="font-semibold text-slate-900 flex items-center gap-2">
+                    <Mail className="w-4 h-4" style={{ color: BRAND_RED }} />
+                    Email Us
+                  </p>
+                  <p className="text-xs text-slate-600">
+                    info@haixun-global.com
+                    <br />
+                    support@haixun-global.com
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* RIGHT: GOOGLE MAP EMBED */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45 }}
+              className="relative"
+            >
+              <div className="w-full h-[320px] md:h-[420px] rounded-3xl overflow-hidden shadow-xl">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.174783742364!2d-122.40137852347925!3d37.79228127197342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b1c95a1f%3A0x0000000000000000!2sYour%20Office!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </motion.div>
+          </div>
+        </section>
       </main>
+
       <Footer />
     </div>
   );
 };
 
-export default Services;
+export default AboutUs;
