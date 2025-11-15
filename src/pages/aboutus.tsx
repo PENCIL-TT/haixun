@@ -47,37 +47,50 @@ const AboutUs = () => {
       <Navigation />
 
       <main className="flex-grow pt-0">
-        {/* ======================= BREADCRUMB ======================= */}
-        <section className="relative h-[350px] md:h-[420px] w-full flex items-center justify-center overflow-hidden">
+        {/* ======================= BREADCRUMB / HERO (TIPS-style) ======================= */}
+        <section className="relative h-[320px] md:h-[380px] w-full flex items-center justify-center overflow-hidden">
+          {/* Background */}
           <div
-            className="absolute inset-0 bg-cover bg-center scale-110"
+            className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: "url('/breadcrumb-bg.png')" }}
-          ></div>
-
+          />
           <div className="absolute inset-0 bg-black/60" />
 
-          <div className="relative text-center text-white">
-            <p
-              className="font-semibold tracking-wide mb-2"
-              style={{ color: BRAND_RED }}
-            >
-              About Us
-            </p>
+          {/* Center card */}
+          <div className="relative z-10 w-full px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white/95 backdrop-blur-md rounded-3xl px-6 md:px-10 py-6 md:py-8 shadow-2xl text-center">
 
-            <h1 className="text-5xl md:text-6xl font-bold">About Us</h1>
+                {/* pill */}
+                <div
+                  className="inline-block mb-3 md:mb-4 px-4 py-1 rounded-full text-xs md:text-sm font-semibold"
+                  style={{ backgroundColor: `${BRAND_RED}15`, color: BRAND_RED }}
+                >
+                  About Haixun Global
+                </div>
 
-            <p className="mt-4 text-white/80 text-sm">
-              <Link to="/" className="hover:text-white">
-                Home
-              </Link>{" "}
-              / <span className="text-white">About Us</span>
-            </p>
+                {/* 🔥 RED TITLE */}
+                <h1
+                  className="text-3xl md:text-5xl font-bold"
+                  style={{ color: BRAND_RED }}
+                >
+                  About Us
+                </h1>
+
+                {/* breadcrumb */}
+                <p className="mt-3 text-xs md:text-sm text-slate-600">
+                  <Link to="/" className="hover:text-slate-900 font-medium">
+                    Home
+                  </Link>{" "}
+                  / <span className="text-slate-900 font-semibold">About Us</span>
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* ======================= WHO WE ARE BLOCK ======================= */}
+        {/* ======================= WHO WE ARE ======================= */}
         <section className="relative bg-white py-20 md:py-24 overflow-hidden">
-          {/* Plane path, subtle on the left */}
           <img
             src="/plan-location.png"
             alt="plane-path"
@@ -86,7 +99,7 @@ const AboutUs = () => {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* LEFT IMAGE PANEL */}
+              {/* LEFT IMAGE */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -109,7 +122,7 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                {/* circular badge */}
+                {/* badge */}
                 <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-white shadow-lg hidden sm:flex items-center justify-center">
                   <div
                     className="w-20 h-20 rounded-full flex items-center justify-center"
@@ -119,7 +132,7 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                {/* red stats box */}
+                {/* stats */}
                 <div
                   className="absolute -bottom-10 left-10 rounded-3xl px-8 py-5 text-white shadow-xl"
                   style={{ backgroundColor: BRAND_RED }}
@@ -129,7 +142,7 @@ const AboutUs = () => {
                 </div>
               </motion.div>
 
-              {/* RIGHT TEXT PANEL */}
+              {/* RIGHT TEXT */}
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -152,7 +165,6 @@ const AboutUs = () => {
                 <p className="text-base text-gray-700">{t("about.paragraph2")}</p>
                 <p className="text-base text-gray-700">{t("about.paragraph3")}</p>
 
-                {/* CTA */}
                 <div className="pt-10">
                   <Link to="/contact">
                     <Button
@@ -179,7 +191,7 @@ const AboutUs = () => {
             </h2>
 
             <div className="flex justify-center gap-10 flex-wrap">
-              {/* LCL CARD */}
+              {/* LCL */}
               <div className="w-full sm:w-[360px]">
                 <div
                   className="rounded-3xl px-8 py-10 shadow-xl text-center"
@@ -206,7 +218,7 @@ const AboutUs = () => {
                 </div>
               </div>
 
-              {/* CFS CARD */}
+              {/* CFS */}
               <div className="w-full sm:w-[360px]">
                 <div
                   className="rounded-3xl px-8 py-10 shadow-xl text-center"
@@ -236,10 +248,10 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ======================= GET IN TOUCH / CONTACT BLOCK ======================= */}
+        {/* ======================= CONTACT ======================= */}
         <section className="py-24 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* LEFT: TEXT + PHONE + SMALL CARDS */}
+            {/* LEFT */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -250,7 +262,7 @@ const AboutUs = () => {
                 className="text-sm font-semibold uppercase tracking-wide"
                 style={{ color: BRAND_RED }}
               >
-                Safe Transportation &amp; Logistics
+                Safe Transportation & Logistics
               </p>
 
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
@@ -259,11 +271,10 @@ const AboutUs = () => {
 
               <p className="text-sm md:text-base text-slate-600 max-w-xl">
                 Get in touch with our team for logistics solutions, freight
-                inquiries, and global shipping support. We are here to assist you
-                across time zones and regions.
+                inquiries, and global shipping support.
               </p>
 
-              {/* Support center */}
+              {/* phone */}
               <div className="pt-4 space-y-2">
                 <p className="text-xs font-semibold text-slate-500">
                   24/7 Support Center
@@ -276,7 +287,7 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              {/* small cards: HQ + Email */}
+              {/* cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                 <div className="bg-white rounded-2xl shadow-md px-6 py-5 space-y-2">
                   <p className="font-semibold text-slate-900 flex items-center gap-2">
@@ -304,7 +315,7 @@ const AboutUs = () => {
               </div>
             </motion.div>
 
-            {/* RIGHT: GOOGLE MAP EMBED (replaces box) */}
+            {/* RIGHT MAP */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -312,9 +323,8 @@ const AboutUs = () => {
               className="relative"
             >
               <div className="w-full h-[320px] md:h-[420px] rounded-3xl overflow-hidden shadow-xl">
-                {/* Replace the src with your exact Google Maps embed URL */}
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.174783742364!2d-122.40137852347925!3d37.79228127197342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b1c95a1f%3A0x0000000000000000!2sYour%20Office!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18..."
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
