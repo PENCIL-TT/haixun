@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Truck, Ship, MapPin, PhoneCall, Mail } from "lucide-react";
+import { Truck, Ship, MapPin, Mail } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 const BRAND_RED = "#BC0018";
@@ -94,7 +94,7 @@ const AboutUs = () => {
                 className="relative"
               >
                 <div className="relative rounded-[32px] overflow-hidden shadow-[0_28px_60px_rgba(0,0,0,0.22)] bg-slate-900/5">
-                  <div className="w-full aspect-[4/3] bg-slate-200">
+                  <div className="w-full aspect-[4/3] bg-slate-200 relative">
                     {sliderImages.map((src, i) => (
                       <motion.img
                         key={src}
@@ -304,65 +304,24 @@ const AboutUs = () => {
               </div>
             </motion.div>
 
-            {/* RIGHT: MAP + RED CONTACT CARD LIKE SCREENSHOT */}
+            {/* RIGHT: GOOGLE MAP EMBED (replaces box) */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.45 }}
               className="relative"
             >
-              {/* world map background (you can replace src with your map image) */}
-              <div className="relative bg-white rounded-3xl shadow-xl px-6 py-10 md:px-10 md:py-14 overflow-hidden">
-                <div className="absolute inset-6 opacity-80 pointer-events-none">
-                  <img
-                    src="/world-map-dots.png"
-                    alt="Global Offices"
-                    className="w-full h-full object-contain"
-                    onError={(e) => {
-                      // hide broken image if file is not present yet
-                      (e.currentTarget as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                </div>
-
-                {/* center placeholder so box keeps height even without image */}
-                <div className="relative h-[260px] md:h-[300px] flex items-center justify-center text-xs text-slate-400">
-                  {/* empty, purely for height; image is absolute above */}
-                </div>
-
-                {/* floating contact card (Shenzhen office style) */}
-                <div
-                  className="absolute left-1/2 bottom-6 -translate-x-1/2 bg-white rounded-2xl shadow-[0_20px_45px_rgba(0,0,0,0.18)] px-6 py-5 w-[90%] md:w-[70%]"
-                  style={{ backgroundColor: BRAND_RED }}
-                >
-                  <div className="space-y-3 text-white text-sm">
-                    <p className="text-base font-semibold">Contact Us</p>
-                    <p className="font-semibold text-sm">
-                      Shenzhen Office · China
-                    </p>
-
-                    <div className="flex items-start gap-2 text-xs">
-                      <MapPin className="w-4 h-4 mt-[2px]" />
-                      <p>
-                        13C02, Block A,
-                        <br />
-                        Zhaoxin Huijin Plaza 3085 Shennan East Road,
-                        <br />
-                        Luohu, Shenzhen.
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-xs">
-                      <PhoneCall className="w-4 h-4" />
-                      <p>+86 75582222447</p>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-xs">
-                      <PhoneCall className="w-4 h-4" />
-                      <p>Fax: +86 75582192854</p>
-                    </div>
-                  </div>
-                </div>
+              <div className="w-full h-[320px] md:h-[420px] rounded-3xl overflow-hidden shadow-xl">
+                {/* Replace the src with your exact Google Maps embed URL */}
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.174783742364!2d-122.40137852347925!3d37.79228127197342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b1c95a1f%3A0x0000000000000000!2sYour%20Office!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </motion.div>
           </div>
