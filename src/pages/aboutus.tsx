@@ -34,7 +34,10 @@ const AboutUs = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % sliderImages.length), 4000);
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % sliderImages.length),
+      4000
+    );
     return () => clearInterval(id);
   }, []);
 
@@ -44,32 +47,28 @@ const AboutUs = () => {
       <Navigation />
 
       <main className="flex-grow pt-0">
-
-        {/* ======================= HERO / BREADCRUMB (UPDATED) ======================= */}
+        {/* ======================= HERO / BREADCRUMB (TIPS-style) ======================= */}
         <section className="relative h-[260px] md:h-[320px] w-full flex items-center justify-center text-center px-6">
+          {/* background image */}
           <img
             src="/breadcrumb-bg.png"
             alt="About Haixun Global"
             className="absolute inset-0 w-full h-full object-cover"
           />
-
+          {/* dark overlay */}
           <div className="absolute inset-0 bg-black/60" />
 
+          {/* centered breadcrumb + title */}
           <div className="relative z-10 container mx-auto max-w-5xl pt-4 md:pt-6">
-            {/* Larger Breadcrumb */}
-            <p className="text-sm md:text-lg text-white/80 mb-3">
-              <Link to="/" className="hover:text-white transition-colors font-medium">
+            <p className="text-xs md:text-sm text-white/80 mb-2">
+              <Link to="/" className="hover:text-white transition-colors">
                 Home
               </Link>
               <span className="mx-2 opacity-70">›</span>
-              <span className="text-white font-semibold">About Us</span>
+              <span className="text-white">About Us</span>
             </p>
 
-            {/* Big Red Title */}
-            <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold"
-              style={{ color: BRAND_RED }}
-            >
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
               About Us
             </h1>
           </div>
@@ -85,7 +84,6 @@ const AboutUs = () => {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-
               {/* LEFT IMAGE PANEL */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
@@ -170,7 +168,10 @@ const AboutUs = () => {
         {/* ======================= SERVICES ======================= */}
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-center text-4xl font-bold mb-14" style={{ color: BRAND_RED }}>
+            <h2
+              className="text-center text-4xl font-bold mb-14"
+              style={{ color: BRAND_RED }}
+            >
               Our Core Services
             </h2>
 
@@ -188,12 +189,17 @@ const AboutUs = () => {
                     <Ship className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-2xl text-white font-semibold">LCL Services</h3>
+                  <h3 className="text-2xl text-white font-semibold">
+                    LCL Services
+                  </h3>
                   <p className="text-sm text-white/90 mt-2">
                     Amass Freight, Dubai is one of the leading logistics providers...
                   </p>
 
-                  <Link to={getNavLink("/services/lcl")} className="text-white underline mt-3 inline-block">
+                  <Link
+                    to={getNavLink("/services/lcl")}
+                    className="text-white underline mt-3 inline-block"
+                  >
                     Read more →
                   </Link>
                 </div>
@@ -212,12 +218,17 @@ const AboutUs = () => {
                     <Truck className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-2xl text-white font-semibold">CFS Services</h3>
+                  <h3 className="text-2xl text-white font-semibold">
+                    CFS Services
+                  </h3>
                   <p className="text-sm text-white/90 mt-2">
                     Take full advantage of our state-of-the-art CFS...
                   </p>
 
-                  <Link to={getNavLink("/services/cfs")} className="text-white underline mt-3 inline-block">
+                  <Link
+                    to={getNavLink("/services/cfs")}
+                    className="text-white underline mt-3 inline-block"
+                  >
                     Read more →
                   </Link>
                 </div>
@@ -226,32 +237,47 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ======================= GET IN TOUCH ======================= */}
+        {/* ======================= GET IN TOUCH / CONTACT BLOCK ======================= */}
         <section className="py-24 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* LEFT: TEXT + PHONE + SMALL CARDS */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.45 }}
               className="space-y-6"
             >
-              <p className="text-sm font-semibold uppercase tracking-wide" style={{ color: BRAND_RED }}>
-                Safe Transportation & Logistics
+              <p
+                className="text-sm font-semibold uppercase tracking-wide"
+                style={{ color: BRAND_RED }}
+              >
+                Safe Transportation &amp; Logistics
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Get In Touch</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+                Get In Touch
+              </h2>
 
               <p className="text-sm md:text-base text-slate-600 max-w-xl">
-                Get in touch with our team for logistics solutions, freight inquiries, and global shipping support.
+                Get in touch with our team for logistics solutions, freight
+                inquiries, and global shipping support. We are here to assist you
+                across time zones and regions.
               </p>
 
+              {/* Support center */}
               <div className="pt-4 space-y-2">
-                <p className="text-xs font-semibold text-slate-500">24/7 Support Center</p>
-                <p className="text-2xl md:text-3xl font-bold" style={{ color: BRAND_RED }}>
+                <p className="text-xs font-semibold text-slate-500">
+                  24/7 Support Center
+                </p>
+                <p
+                  className="text-2xl md:text-3xl font-bold"
+                  style={{ color: BRAND_RED }}
+                >
                   +1 718-904-4450
                 </p>
               </div>
 
+              {/* small cards: HQ + Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                 <div className="bg-white rounded-2xl shadow-md px-6 py-5 space-y-2">
                   <p className="font-semibold text-slate-900 flex items-center gap-2">
@@ -279,6 +305,7 @@ const AboutUs = () => {
               </div>
             </motion.div>
 
+            {/* RIGHT: GOOGLE MAP EMBED */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
