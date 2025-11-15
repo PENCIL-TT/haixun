@@ -47,45 +47,30 @@ const AboutUs = () => {
       <Navigation />
 
       <main className="flex-grow pt-0">
-        {/* ======================= BREADCRUMB / HERO (TIPS-style) ======================= */}
-        <section className="relative h-[320px] md:h-[380px] w-full flex items-center justify-center overflow-hidden">
-          {/* Background */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/breadcrumb-bg.png')" }}
+        {/* ======================= HERO / BREADCRUMB (like TIPS) ======================= */}
+        <section className="relative h-[260px] md:h-[320px] w-full flex items-center justify-center text-center px-6">
+          {/* Background image */}
+          <img
+            src="/breadcrumb-bg.png"
+            alt="About Haixun Global"
+            className="absolute inset-0 w-full h-full object-cover"
           />
+          {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/60" />
 
-          {/* Center card */}
-          <div className="relative z-10 w-full px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white/95 backdrop-blur-md rounded-3xl px-6 md:px-10 py-6 md:py-8 shadow-2xl text-center">
+          {/* Content */}
+          <div className="relative z-10 container mx-auto max-w-5xl pt-4 md:pt-6">
+            <p className="text-xs md:text-sm text-white/80 mb-2">
+              <Link to="/" className="hover:text-white transition-colors">
+                Home
+              </Link>
+              <span className="mx-2 opacity-70">›</span>
+              <span className="text-white">About Us</span>
+            </p>
 
-                {/* pill */}
-                <div
-                  className="inline-block mb-3 md:mb-4 px-4 py-1 rounded-full text-xs md:text-sm font-semibold"
-                  style={{ backgroundColor: `${BRAND_RED}15`, color: BRAND_RED }}
-                >
-                  About Haixun Global
-                </div>
-
-                {/* 🔥 RED TITLE */}
-                <h1
-                  className="text-3xl md:text-5xl font-bold"
-                  style={{ color: BRAND_RED }}
-                >
-                  About Us
-                </h1>
-
-                {/* breadcrumb */}
-                <p className="mt-3 text-xs md:text-sm text-slate-600">
-                  <Link to="/" className="hover:text-slate-900 font-medium">
-                    Home
-                  </Link>{" "}
-                  / <span className="text-slate-900 font-semibold">About Us</span>
-                </p>
-              </div>
-            </div>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
+              About Us
+            </h1>
           </div>
         </section>
 
@@ -204,7 +189,9 @@ const AboutUs = () => {
                     <Ship className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-2xl text-white font-semibold">LCL Services</h3>
+                  <h3 className="text-2xl text-white font-semibold">
+                    LCL Services
+                  </h3>
                   <p className="text-sm text-white/90 mt-2">
                     Amass Freight, Dubai is one of the leading logistics providers...
                   </p>
@@ -231,7 +218,9 @@ const AboutUs = () => {
                     <Truck className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-2xl text-white font-semibold">CFS Services</h3>
+                  <h3 className="text-2xl text-white font-semibold">
+                    CFS Services
+                  </h3>
                   <p className="text-sm text-white/90 mt-2">
                     Take full advantage of our state-of-the-art CFS...
                   </p>
@@ -271,7 +260,8 @@ const AboutUs = () => {
 
               <p className="text-sm md:text-base text-slate-600 max-w-xl">
                 Get in touch with our team for logistics solutions, freight
-                inquiries, and global shipping support.
+                inquiries, and global shipping support. We are here to assist you
+                across time zones and regions.
               </p>
 
               {/* phone */}
