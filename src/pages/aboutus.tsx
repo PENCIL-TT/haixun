@@ -5,7 +5,19 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Truck, Ship, MapPin, Mail } from "lucide-react";
+import {
+  Truck,
+  Ship,
+  MapPin,
+  Mail,
+  Boxes,
+  Package,
+  Warehouse,
+  Construction,
+  Plane,
+  FileSearch,
+  Route,
+} from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 const BRAND_RED = "#BC0018";
@@ -18,20 +30,20 @@ const ScrollToTop = () => {
   return null;
 };
 
-/** Core services: short content only + href for navigation */
+/** Core services: icon matches title + short content + href for navigation */
 const CORE_SERVICES = [
   {
     key: "lcl-services",
     title: "LCL Services",
-    icon: Ship,
+    icon: Boxes,
     href: "/services/lcl",
     short:
-      "Own consolidation service on many trade routes, competitive pricing with multiple sailings, and full transparency at origin, destination, and ocean freight charges.",
+      "Own consolidation service on key trade routes, competitive pricing with multiple sailings, and full transparency of origin, destination, and ocean freight charges.",
   },
   {
     key: "fcl-services",
     title: "FCL Services",
-    icon: Ship,
+    icon: Package,
     href: "/services/fcl",
     short:
       "Own fleet of containers and special equipment, multiple carrier options, and complete end-to-end handling from booking and loading to final delivery.",
@@ -39,42 +51,42 @@ const CORE_SERVICES = [
   {
     key: "warehouse-management",
     title: "Warehouse Management",
-    icon: Truck,
+    icon: Warehouse,
     href: "/services/warehouse-management",
     short:
-      "Warehousing for various commodities including cold storage, with strong focus on stock receipts, storage, distribution, and value-added services.",
+      "Warehousing for various commodities including cold storage, focusing on stock receipts, storage, distribution, and value-added services.",
   },
   {
     key: "project-logistics",
     title: "Project Logistics",
-    icon: Truck,
+    icon: Construction,
     href: "/services/project-logistics",
     short:
-      "Dedicated project division for special and complex cargo, over-dimension loads, floating cranes, and transparent project costing.",
+      "Dedicated project division for special and complex project cargo, over-dimension loads, and floating crane operations with transparent project costing.",
   },
   {
     key: "air-shipments",
     title: "Air Shipments",
-    icon: Truck,
+    icon: Plane,
     href: "/services/air-shipments",
     short:
-      "Customized sea–air and air–sea combinations, plus airfreight consolidation on major routes through an efficient global network.",
+      "Customized sea–air and air–sea solutions, plus airfreight consolidation on major routes through an efficient worldwide partner network.",
   },
   {
     key: "customs-declaration",
     title: "Customs Declaration & Inspection",
-    icon: Ship,
+    icon: FileSearch,
     href: "/services/customs-declaration",
     short:
-      "Leading customs clearing support to make clearance smooth and easy, handling all trade compliance paperwork for sea, land, and air shipments.",
+      "Smooth customs clearance with expert brokers handling import/export regulations and trade compliance paperwork across sea, land, and air.",
   },
   {
     key: "oog-shipments",
     title: "OOG Shipments – Inter Island Movements",
-    icon: Ship,
+    icon: Route,
     href: "/services/oog-shipments",
     short:
-      "End-to-end OOG and inter-island services, including cargo loading, lashing, surveyor, equipment, warehouse & yard, and domestic movements.",
+      "End-to-end OOG and inter-island services covering loading, lashing, surveyor, equipment, warehouse & yard facility, and domestic movements.",
   },
   {
     key: "lcl-consolidation",
@@ -82,7 +94,7 @@ const CORE_SERVICES = [
     icon: Ship,
     href: "/services/lcl-consolidation",
     short:
-      "Export/import LCL consolidation via hubs like Singapore to India, Middle East, USA, Europe, and more, with consolidation warehouses and value-added services.",
+      "Export/import LCL consolidation via hubs like Singapore connecting India, Middle East, USA, Europe, and more with consolidation warehouses and value-added services.",
   },
 ];
 
@@ -230,7 +242,7 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ======================= OUR CORE SERVICES (READ MORE → ROUTE) ======================= */}
+        {/* ======================= OUR CORE SERVICES (ICON + ANIMATION) ======================= */}
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
@@ -241,20 +253,34 @@ const AboutUs = () => {
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {CORE_SERVICES.map((service) => {
+              {CORE_SERVICES.map((service, idx) => {
                 const Icon = service.icon;
                 return (
                   <div key={service.key} className="w-full">
-                    <div
+                    <motion.div
                       className="rounded-3xl px-8 py-10 shadow-xl text-center h-full flex flex-col"
                       style={{ backgroundColor: BRAND_RED }}
+                      whileHover={{
+                        y: -6,
+                        boxShadow: "0 24px 60px rgba(0,0,0,0.35)",
+                      }}
+                      transition={{ type: "spring", stiffness: 260, damping: 20 }}
                     >
-                      <div
+                      {/* Animated icon bubble */}
+                      <motion.div
                         className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3"
                         style={{ backgroundColor: `${BRAND_RED}30` }}
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                          delay: idx * 0.15,
+                        }}
+                        whileHover={{ scale: 1.08 }}
                       >
                         <Icon className="w-8 h-8 text-white" />
-                      </div>
+                      </motion.div>
 
                       <h3 className="text-2xl text-white font-semibold">
                         {service.title}
@@ -266,14 +292,12 @@ const AboutUs = () => {
 
                       <div className="mt-5">
                         <Link to={getNavLink(service.href)}>
-                          <Button
-                            className="text-xs font-semibold rounded-full px-4 py-2 bg-white text-[#BC0018] hover:bg-white/90"
-                          >
+                          <Button className="text-xs font-semibold rounded-full px-4 py-2 bg-white text-[#BC0018] hover:bg-white/90">
                             Read more
                           </Button>
                         </Link>
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 );
               })}
