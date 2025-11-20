@@ -18,6 +18,58 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Bring all core services here as a reusable list
+const CORE_SERVICES = [
+  {
+    key: "lcl",
+    title: "LCL Services",
+    description:
+      "Amass Freight, Dubai is one of the leading logistics providers offering reliable Less-than-Container Load (LCL) consolidation services with extensive global coverage.",
+    icon: Ship,
+    href: "/services/lcl",
+  },
+  {
+    key: "cfs",
+    title: "CFS Services",
+    description:
+      "Take full advantage of our state-of-the-art Container Freight Station (CFS) facilities for efficient stuffing, de-stuffing, and cargo handling operations.",
+    icon: Truck,
+    href: "/services/cfs",
+  },
+  {
+    key: "fcl",
+    title: "FCL Services",
+    description:
+      "Comprehensive Full-Container Load (FCL) services designed for shippers with larger volumes, ensuring schedule integrity and cost-effective routing.",
+    icon: Ship,
+    href: "/services/fcl",
+  },
+  {
+    key: "air-freight",
+    title: "Air Freight Solutions",
+    description:
+      "Time-critical air freight solutions with strong carrier partnerships, ensuring speedy and secure movement of your urgent shipments worldwide.",
+    icon: Truck,
+    href: "/services/air-freight",
+  },
+  {
+    key: "warehousing",
+    title: "Warehousing & Distribution",
+    description:
+      "Strategically located warehouses, inventory management, and last-mile distribution services to keep your supply chain running smoothly.",
+    icon: Truck,
+    href: "/services/warehousing",
+  },
+  {
+    key: "customs",
+    title: "Customs Clearance",
+    description:
+      "End-to-end customs brokerage and documentation support to ensure smooth and compliant cross-border cargo movements.",
+    icon: Ship,
+    href: "/services/customs-clearance",
+  },
+];
+
 const AboutUs = () => {
   const { t } = useTranslation();
   const location = useLocation();
@@ -165,7 +217,7 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ======================= SERVICES ======================= */}
+        {/* ======================= OUR CORE SERVICES (ALL SERVICES) ======================= */}
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
@@ -175,64 +227,42 @@ const AboutUs = () => {
               Our Core Services
             </h2>
 
-            <div className="flex justify-center gap-10 flex-wrap">
-              {/* LCL CARD */}
-              <div className="w-full sm:w-[360px]">
-                <div
-                  className="rounded-3xl px-8 py-10 shadow-xl text-center"
-                  style={{ backgroundColor: BRAND_RED }}
-                >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {CORE_SERVICES.map((service) => {
+                const Icon = service.icon;
+                return (
                   <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2"
-                    style={{ backgroundColor: `${BRAND_RED}30` }}
+                    key={service.key}
+                    className="w-full"
                   >
-                    <Ship className="w-8 h-8 text-white" />
+                    <div
+                      className="rounded-3xl px-8 py-10 shadow-xl text-center h-full flex flex-col"
+                      style={{ backgroundColor: BRAND_RED }}
+                    >
+                      <div
+                        className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3"
+                        style={{ backgroundColor: `${BRAND_RED}30` }}
+                      >
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+
+                      <h3 className="text-2xl text-white font-semibold">
+                        {service.title}
+                      </h3>
+                      <p className="text-sm text-white/90 mt-3 flex-1">
+                        {service.description}
+                      </p>
+
+                      <Link
+                        to={getNavLink(service.href)}
+                        className="text-white underline mt-4 inline-block"
+                      >
+                        Read more →
+                      </Link>
+                    </div>
                   </div>
-
-                  <h3 className="text-2xl text-white font-semibold">
-                    LCL Services
-                  </h3>
-                  <p className="text-sm text-white/90 mt-2">
-                    Amass Freight, Dubai is one of the leading logistics providers...
-                  </p>
-
-                  <Link
-                    to={getNavLink("/services/lcl")}
-                    className="text-white underline mt-3 inline-block"
-                  >
-                    Read more →
-                  </Link>
-                </div>
-              </div>
-
-              {/* CFS CARD */}
-              <div className="w-full sm:w-[360px]">
-                <div
-                  className="rounded-3xl px-8 py-10 shadow-xl text-center"
-                  style={{ backgroundColor: BRAND_RED }}
-                >
-                  <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2"
-                    style={{ backgroundColor: `${BRAND_RED}30` }}
-                  >
-                    <Truck className="w-8 h-8 text-white" />
-                  </div>
-
-                  <h3 className="text-2xl text-white font-semibold">
-                    CFS Services
-                  </h3>
-                  <p className="text-sm text-white/90 mt-2">
-                    Take full advantage of our state-of-the-art CFS...
-                  </p>
-
-                  <Link
-                    to={getNavLink("/services/cfs")}
-                    className="text-white underline mt-3 inline-block"
-                  >
-                    Read more →
-                  </Link>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -286,9 +316,9 @@ const AboutUs = () => {
                   </p>
                   <p className="text-xs text-slate-600">
                     13C02, Block A,
-Zhaoxin Huijin Plaza 3085 Shennan East Road,
+                    Zhaoxin Huijin Plaza 3085 Shennan East Road,
                     <br />
-                   Luohu, Shenzhen.
+                    Luohu, Shenzhen.
                   </p>
                 </div>
 
