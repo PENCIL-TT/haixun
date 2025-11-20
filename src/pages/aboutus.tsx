@@ -18,141 +18,71 @@ const ScrollToTop = () => {
   return null;
 };
 
-/** All core services with full content */
+/** Core services: short content only + href for navigation */
 const CORE_SERVICES = [
   {
     key: "lcl-services",
     title: "LCL Services",
     icon: Ship,
+    href: "/services/lcl",
     short:
-      "Own consolidation services on key trade routes with competitive prices, multiple sailings, and transparent pricing.",
-    full: `HAIXUN operate own consolidation service on many trade routes. With its vast network of consolidators, the company is able to provide competitive price with multiple options of sailing.
-
-With regular consolidation boxes to important trade lanes, the company has the advantage of accommodating cargo which requires timely deliveries.
-
-HAIXUN provide complete transparency of all the pricing at the origin, destination and ocean freight charges.`,
+      "Own consolidation service on many trade routes, competitive pricing with multiple sailings, and full transparency at origin, destination, and ocean freight charges.",
   },
   {
     key: "fcl-services",
     title: "FCL Services",
     icon: Ship,
+    href: "/services/fcl",
     short:
-      "Own fleet of containers and special equipment, multiple carrier options, and end-to-end FCL handling.",
-    full: `HAIXUN has own fleet of containers including special equipment’s to accommodate special requirements of customers and specializes in many trade lanes.
-
-Being sea freight professionals with vast experience in the field helps to match frequent sailing and flexible service options. Multiple carrier options on any trade route with contracted rates help to secure the space, allocation, timing, pricing and frequency of your shipments.
-
-FCL is the most optimized container shipping way regarding cost, volume and weight of the cargo. We take special care at each step of the process which involves:
-• Fixing contract pricing with carriers  
-• Reserving space and making bookings  
-• Picking up empty containers at the container depot  
-• Loading at shipper facility  
-• Transporting by truck / rail to the port and vessel loading  
-• Monitoring vessel schedule till final delivery to consignee
-
-For import bookings we engage our overseas partners in the absence of our own network and monitor each step and keep our customers / consignees informed at all stages.`,
+      "Own fleet of containers and special equipment, multiple carrier options, and complete end-to-end handling from booking and loading to final delivery.",
   },
   {
     key: "warehouse-management",
     title: "Warehouse Management",
     icon: Truck,
+    href: "/services/warehouse-management",
     short:
-      "Comprehensive warehousing (including cold storage) and WM solutions that turn your warehouse into a growth driver.",
-    full: `HAIXUN is well equipped to handle the warehousing of various commodities including cold storage.
-
-Warehouse management (WM) is a key part of the supply chain and primarily aims to control the movement and storage of materials within a warehouse and process the associated transactions including shipping, receiving, put away and picking.
-
-With visibility into processes that precede and follow the supply chain link, your warehouse will become an accelerator and not a roadblock to drive greater profitability and customer satisfaction.
-
-The objective of WM is to handle the receipts of stock and manage supplies. WM today is part of supply chain management and also demand management. It also covers container storage, loading and unloading. An efficient WM gives a cutting edge to retail chain distribution.
-
-The company identifies the customer needs and assists to handle them in the best possible manner. The company has expertise in handling vanning and devanning of consolidation cargo and arranges to distribute/deliver to respective parties from the warehouse which delivers full satisfaction to its customers.
-
-With its network in domestic and global market, HX can identify the right kind of warehouse depending on customer’s requirement based on cost-effective, storage-specific, commodity-specific and proximity-specific needs.`,
+      "Warehousing for various commodities including cold storage, with strong focus on stock receipts, storage, distribution, and value-added services.",
   },
   {
     key: "project-logistics",
     title: "Project Logistics",
     icon: Truck,
+    href: "/services/project-logistics",
     short:
-      "Dedicated project division for complex, over-dimension cargoes, including floating crane operations and breakbulk.",
-    full: `With a dedicated project division having experts in the field inherited from major project handlers, HAIXUN is well equipped to handle all kinds of special and complex project cargoes including the ones which need to be handled using floating cranes.
-
-The expert team is well familiar with handling special and complex over-width and over-height cargo right from the ex-works until the door delivery smoothly and safely.
-
-Breakbulk handling experts have the right kind of strategy and contacts from the load point to the destination point and arrange for the right kind of resource as it requires more manpower and handling equipment.
-
-The projects are well studied and all costs are done in a very transparent manner wherein the customers know the exact costing which is important for their projects.`,
+      "Dedicated project division for special and complex cargo, over-dimension loads, floating cranes, and transparent project costing.",
   },
   {
     key: "air-shipments",
     title: "Air Shipments",
     icon: Truck,
+    href: "/services/air-shipments",
     short:
-      "Customized sea–air and air–sea combinations plus airfreight consolidation on major routes.",
-    full: `HAIXUN can provide customized sea–air and air–sea options to meet customer’s deadlines/timeliness and achieve cost savings.
-
-The company handles airfreight consolidation on many major routes through its efficient worldwide network.`,
+      "Customized sea–air and air–sea combinations, plus airfreight consolidation on major routes through an efficient global network.",
   },
   {
     key: "customs-declaration",
     title: "Customs Declaration & Inspection",
     icon: Ship,
+    href: "/services/customs-declaration",
     short:
-      "Smooth customs clearance and trade compliance support so cargo moves on time across sea, land, and air.",
-    full: `As one of the leading custom clearing agents, we ensure that all clearance formalities are done in a smooth and easy manner so that all our customers receive their goods on time.
-
-Our customs brokers help ease import and export regulations and all paperwork related to trade compliances and procedures to ensure that your consignments via sea, land and air leave on time.`,
+      "Leading customs clearing support to make clearance smooth and easy, handling all trade compliance paperwork for sea, land, and air shipments.",
   },
   {
     key: "oog-shipments",
     title: "OOG Shipments – Inter Island Movements",
     icon: Ship,
+    href: "/services/oog-shipments",
     short:
-      "End-to-end OOG and inter-island movement services with loading, lashing, equipment, and yard facilities.",
-    full: `OOG Shipments - Inter Island Movements
-
-Services Offered:
-• Cargo Loading  
-• Lashing  
-• Surveyor  
-• Inter Island Movement to Main Ports  
-• Export & Import Handling  
-• Ocean Freight  
-• Warehouse and Yard Facility  
-• Crane and Container Handling Equipment’s  
-• Import Stripping and Domestic Movements`,
+      "End-to-end OOG and inter-island services, including cargo loading, lashing, surveyor, equipment, warehouse & yard, and domestic movements.",
   },
   {
     key: "lcl-consolidation",
     title: "LCL Consolidation",
     icon: Ship,
+    href: "/services/lcl-consolidation",
     short:
-      "Extensive export/import LCL consolidation network via key hubs like Singapore, with value-added warehousing.",
-    full: `LCL Consolidation
-
-Export – Direct Consol to Nava Sheva Connecting:
-• ICD PPG, ICD Ludhiana  
-• ICD Garhiharsru, ICD Ahmedabad  
-
-Export – Direct Consol:
-• Singapore  
-• Colombo  
-• Karachi  
-
-Export Consol Via Singapore Hub to:
-• India, Middle East  
-• Bangladesh, Maldives  
-• Karachi, USA  
-• Europe Ports, Australia  
-
-Import Consolidation – Via Singapore Hub:
-• Asia, Middle East  
-• USA, Europe  
-
-Facilities:
-• LCL Consolidation / Deconsolidation Warehouse  
-• Packing and Value Added Services`,
+      "Export/import LCL consolidation via hubs like Singapore to India, Middle East, USA, Europe, and more, with consolidation warehouses and value-added services.",
   },
 ];
 
@@ -170,7 +100,6 @@ const AboutUs = () => {
 
   const sliderImages = ["/Dubai.jpg", "/jebelali1.png", "/burj-khalifa.jpg"];
   const [index, setIndex] = useState(0);
-  const [expandedService, setExpandedService] = useState(null);
 
   useEffect(() => {
     const id = setInterval(
@@ -180,17 +109,13 @@ const AboutUs = () => {
     return () => clearInterval(id);
   }, []);
 
-  const handleToggleService = (key) => {
-    setExpandedService((prev) => (prev === key ? null : key));
-  };
-
   return (
     <div className="bg-white text-gray-900 min-h-screen flex flex-col">
       <ScrollToTop />
       <Navigation />
 
       <main className="flex-grow pt-0">
-        {/* HERO / BREADCRUMB */}
+        {/* ======================= HERO / BREADCRUMB ======================= */}
         <section className="relative h-[260px] md:h-[320px] w-full flex items-center justify-center text-center px-6">
           <img
             src="/breadcrumb-bg.png"
@@ -214,7 +139,7 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* WHO WE ARE */}
+        {/* ======================= WHO WE ARE BLOCK ======================= */}
         <section className="relative bg-white py-20 md:py-24 overflow-hidden">
           <img
             src="/plan-location.png"
@@ -224,7 +149,7 @@ const AboutUs = () => {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* LEFT IMAGE */}
+              {/* LEFT IMAGE PANEL */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -267,7 +192,7 @@ const AboutUs = () => {
                 </div>
               </motion.div>
 
-              {/* RIGHT TEXT */}
+              {/* RIGHT TEXT PANEL */}
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -305,7 +230,7 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* OUR CORE SERVICES WITH READ MORE */}
+        {/* ======================= OUR CORE SERVICES (READ MORE → ROUTE) ======================= */}
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
@@ -318,8 +243,6 @@ const AboutUs = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {CORE_SERVICES.map((service) => {
                 const Icon = service.icon;
-                const isExpanded = expandedService === service.key;
-
                 return (
                   <div key={service.key} className="w-full">
                     <div
@@ -337,26 +260,18 @@ const AboutUs = () => {
                         {service.title}
                       </h3>
 
-                      {/* short content */}
-                      <p className="text-sm text-white/90 mt-3">
+                      <p className="text-sm text-white/90 mt-3 flex-1">
                         {service.short}
                       </p>
 
-                      {/* full content only when expanded */}
-                      {isExpanded && (
-                        <p className="mt-4 text-xs text-white/90 text-left whitespace-pre-line">
-                          {service.full}
-                        </p>
-                      )}
-
                       <div className="mt-5">
-                        <Button
-                          variant="outline"
-                          className="text-xs font-semibold rounded-full px-4 py-2 border-white/80 text-white hover:bg-white hover:text-[#BC0018]"
-                          onClick={() => handleToggleService(service.key)}
-                        >
-                          {isExpanded ? "Show less" : "Read more"}
-                        </Button>
+                        <Link to={getNavLink(service.href)}>
+                          <Button
+                            className="text-xs font-semibold rounded-full px-4 py-2 bg-white text-[#BC0018] hover:bg-white/90"
+                          >
+                            Read more
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -366,9 +281,10 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* GET IN TOUCH */}
+        {/* ======================= GET IN TOUCH / CONTACT BLOCK ======================= */}
         <section className="py-24 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* LEFT */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -432,6 +348,7 @@ const AboutUs = () => {
               </div>
             </motion.div>
 
+            {/* RIGHT: GOOGLE MAP EMBED */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
