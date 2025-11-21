@@ -240,7 +240,7 @@ const AboutUs = () => {
         <section
           className="py-24"
           style={{
-            // keep gradient ONLY here
+            // gradient only here
             background:
               "linear-gradient(135deg, #FFF5F6 0%, #FFECEF 100%)",
           }}
@@ -302,16 +302,14 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ================= GET IN TOUCH ================= */}
-        {/* pure white background, no gradient / pink glow */}
+        {/* ================= GET IN TOUCH (NO MAP) ================= */}
         <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-            {/* LEFT */}
+          <div className="max-w-7xl mx-auto px-4 lg:px-8">
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="space-y-6"
+              className="space-y-6 max-w-3xl"
             >
               <p
                 className="text-sm uppercase font-semibold"
@@ -374,25 +372,6 @@ const AboutUs = () => {
                     support@haixun-global.com
                   </p>
                 </div>
-              </div>
-            </motion.div>
-
-            {/* MAP */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.45 }}
-              className="relative"
-            >
-              <div className="rounded-3xl overflow-hidden h-[340px] md:h-[420px] border border-[#BC001822]">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.174783742364!2d-122.40137852347925!3d37.79228127197342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b1c95a1f%3A0x0000000000000000!2sYour%20Office!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  allowFullScreen
-                ></iframe>
               </div>
             </motion.div>
           </div>
