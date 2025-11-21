@@ -132,12 +132,10 @@ const AboutUs = () => {
             alt="About Haixun"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          {/* Simple dark overlay (no gradient) */}
+          {/* simple dark overlay (no gradient) */}
           <div
             className="absolute inset-0"
-            style={{
-              backgroundColor: "rgba(0,0,0,0.6)",
-            }}
+            style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
           />
 
           <div className="relative z-10 container mx-auto max-w-5xl">
@@ -242,6 +240,7 @@ const AboutUs = () => {
         <section
           className="py-24"
           style={{
+            // keep gradient ONLY here
             background:
               "linear-gradient(135deg, #FFF5F6 0%, #FFECEF 100%)",
           }}
@@ -304,7 +303,8 @@ const AboutUs = () => {
         </section>
 
         {/* ================= GET IN TOUCH ================= */}
-        <section className="py-24 bg-white border-top border-[#BC001833]">
+        {/* pure white background, no gradient / pink glow */}
+        <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             {/* LEFT */}
             <motion.div
@@ -345,7 +345,7 @@ const AboutUs = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
-                <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2 shadow-md">
+                <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2">
                   <p
                     className="font-semibold flex items-center gap-2"
                     style={{ color: BRAND_RED }}
@@ -360,7 +360,7 @@ const AboutUs = () => {
                   </p>
                 </div>
 
-                <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2 shadow-md">
+                <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2">
                   <p
                     className="font-semibold flex items-center gap-2"
                     style={{ color: BRAND_RED }}
@@ -369,7 +369,9 @@ const AboutUs = () => {
                     Email Us
                   </p>
                   <p className="text-xs text-gray-700">
-                    info@haixun-global.com <br /> support@haixun-global.com
+                    info@haixun-global.com
+                    <br />
+                    support@haixun-global.com
                   </p>
                 </div>
               </div>
@@ -382,7 +384,7 @@ const AboutUs = () => {
               transition={{ duration: 0.45 }}
               className="relative"
             >
-              <div className="rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(188,0,24,0.25)] h-[340px] md:h-[420px]">
+              <div className="rounded-3xl overflow-hidden h-[340px] md:h-[420px] border border-[#BC001822]">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.174783742364!2d-122.40137852347925!3d37.79228127197342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b1c95a1f%3A0x0000000000000000!2sYour%20Office!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                   width="100%"
