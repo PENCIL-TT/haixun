@@ -6,8 +6,6 @@ import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import {
-  MapPin,
-  Mail,
   Boxes,
   Package,
   Warehouse,
@@ -132,7 +130,7 @@ const AboutUs = () => {
             alt="About Haixun"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          {/* simple dark overlay (no gradient) */}
+
           <div
             className="absolute inset-0"
             style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
@@ -240,7 +238,6 @@ const AboutUs = () => {
         <section
           className="py-24"
           style={{
-            // gradient only here
             background:
               "linear-gradient(135deg, #FFF5F6 0%, #FFECEF 100%)",
           }}
@@ -299,81 +296,6 @@ const AboutUs = () => {
                 );
               })}
             </div>
-          </div>
-        </section>
-
-        {/* ================= GET IN TOUCH (NO MAP) ================= */}
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="space-y-6 max-w-3xl"
-            >
-              <p
-                className="text-sm uppercase font-semibold"
-                style={{ color: BRAND_RED }}
-              >
-                Safe Transportation & Logistics
-              </p>
-
-              <h2
-                className="text-4xl md:text-5xl font-bold"
-                style={{ color: BRAND_RED }}
-              >
-                Get In Touch
-              </h2>
-
-              <p className="text-base text-gray-700 max-w-xl">
-                Contact our global team for shipping support, logistics help,
-                freight inquiries, and project cargo solutions.
-              </p>
-
-              <div className="pt-4">
-                <p className="text-xs font-semibold text-gray-500">
-                  24/7 Support Center
-                </p>
-                <p
-                  className="text-3xl font-bold"
-                  style={{ color: BRAND_RED }}
-                >
-                  +86 75582222447
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
-                <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2">
-                  <p
-                    className="font-semibold flex items-center gap-2"
-                    style={{ color: BRAND_RED }}
-                  >
-                    <MapPin className="w-4 h-4" />
-                    Shenzhen Office • China
-                  </p>
-                  <p className="text-xs text-gray-700">
-                    13C02, Block A, Zhaoxin Huijin Plaza
-                    <br />
-                    3085 Shennan East Road, Luohu, Shenzhen.
-                  </p>
-                </div>
-
-                <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2">
-                  <p
-                    className="font-semibold flex items-center gap-2"
-                    style={{ color: BRAND_RED }}
-                  >
-                    <Mail className="w-4 h-4" />
-                    Email Us
-                  </p>
-                  <p className="text-xs text-gray-700">
-                    info@haixun-global.com
-                    <br />
-                    support@haixun-global.com
-                  </p>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </section>
       </main>
