@@ -53,7 +53,7 @@ const LCL = () => {
         <section
           className="relative border-b border-gray-200 py-20"
           style={{
-            backgroundImage: "url('/Screenshot 2025-11-21 at 5.07.40 PM.png')",
+            backgroundImage: "url('/breadcrumn-shape.png‎')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
