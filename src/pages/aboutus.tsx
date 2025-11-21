@@ -112,7 +112,10 @@ const AboutUs = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % sliderImages.length), 4000);
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % sliderImages.length),
+      4000
+    );
     return () => clearInterval(id);
   }, []);
 
@@ -129,17 +132,19 @@ const AboutUs = () => {
             alt="About Haixun"
             className="absolute inset-0 w-full h-full object-cover"
           />
+          {/* Simple dark overlay (no gradient) */}
           <div
             className="absolute inset-0"
             style={{
-              background:
-                "linear-gradient(to bottom, rgba(188,0,24,0.7), rgba(0,0,0,0.7))",
+              backgroundColor: "rgba(0,0,0,0.6)",
             }}
           />
 
           <div className="relative z-10 container mx-auto max-w-5xl">
             <p className="text-xs md:text-sm text-white/80 mb-2">
-              <Link to="/" className="hover:text-white">Home</Link>
+              <Link to="/" className="hover:text-white">
+                Home
+              </Link>
               <span className="mx-2 opacity-70">›</span>
               <span className="text-white">About Us</span>
             </p>
@@ -207,7 +212,10 @@ const AboutUs = () => {
                 {t("about.whoWeAre")}
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-bold" style={{ color: BRAND_RED }}>
+              <h2
+                className="text-4xl md:text-5xl font-bold"
+                style={{ color: BRAND_RED }}
+              >
                 {t("about.title")}
               </h2>
 
@@ -231,7 +239,13 @@ const AboutUs = () => {
         </section>
 
         {/* ================= SERVICES ================= */}
-        <section className="py-24 bg-[#FFF5F6]">
+        <section
+          className="py-24"
+          style={{
+            background:
+              "linear-gradient(135deg, #FFF5F6 0%, #FFECEF 100%)",
+          }}
+        >
           <div className="max-w-7xl mx-auto px-4 lg:px-8">
             <h2
               className="text-center text-4xl font-bold mb-14"
@@ -271,7 +285,9 @@ const AboutUs = () => {
                       {service.title}
                     </h3>
 
-                    <p className="text-sm text-gray-700 mt-3 flex-1">{service.short}</p>
+                    <p className="text-sm text-gray-700 mt-3 flex-1">
+                      {service.short}
+                    </p>
 
                     <Link to={getNavLink(service.href)} className="mt-5">
                       <Button
@@ -288,7 +304,7 @@ const AboutUs = () => {
         </section>
 
         {/* ================= GET IN TOUCH ================= */}
-        <section className="py-24 bg-white border-t border-[#BC001833]">
+        <section className="py-24 bg-white border-top border-[#BC001833]">
           <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             {/* LEFT */}
             <motion.div
@@ -297,40 +313,58 @@ const AboutUs = () => {
               transition={{ duration: 0.45 }}
               className="space-y-6"
             >
-              <p className="text-sm uppercase font-semibold" style={{ color: BRAND_RED }}>
+              <p
+                className="text-sm uppercase font-semibold"
+                style={{ color: BRAND_RED }}
+              >
                 Safe Transportation & Logistics
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-bold" style={{ color: BRAND_RED }}>
+              <h2
+                className="text-4xl md:text-5xl font-bold"
+                style={{ color: BRAND_RED }}
+              >
                 Get In Touch
               </h2>
 
               <p className="text-base text-gray-700 max-w-xl">
-                Contact our global team for shipping support, logistics help, freight
-                inquiries, and project cargo solutions.
+                Contact our global team for shipping support, logistics help,
+                freight inquiries, and project cargo solutions.
               </p>
 
               <div className="pt-4">
-                <p className="text-xs font-semibold text-gray-500">24/7 Support Center</p>
-                <p className="text-3xl font-bold" style={{ color: BRAND_RED }}>
+                <p className="text-xs font-semibold text-gray-500">
+                  24/7 Support Center
+                </p>
+                <p
+                  className="text-3xl font-bold"
+                  style={{ color: BRAND_RED }}
+                >
                   +86 75582222447
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
                 <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2 shadow-md">
-                  <p className="font-semibold flex items-center gap-2" style={{ color: BRAND_RED }}>
+                  <p
+                    className="font-semibold flex items-center gap-2"
+                    style={{ color: BRAND_RED }}
+                  >
                     <MapPin className="w-4 h-4" />
                     Shenzhen Office • China
                   </p>
                   <p className="text-xs text-gray-700">
-                    13C02, Block A, Zhaoxin Huijin Plaza<br />
+                    13C02, Block A, Zhaoxin Huijin Plaza
+                    <br />
                     3085 Shennan East Road, Luohu, Shenzhen.
                   </p>
                 </div>
 
                 <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2 shadow-md">
-                  <p className="font-semibold flex items-center gap-2" style={{ color: BRAND_RED }}>
+                  <p
+                    className="font-semibold flex items-center gap-2"
+                    style={{ color: BRAND_RED }}
+                  >
                     <Mail className="w-4 h-4" />
                     Email Us
                   </p>
