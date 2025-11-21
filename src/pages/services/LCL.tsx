@@ -60,14 +60,11 @@ const LCL = () => {
           }}
         >
           {/* NO GRADIENT OVERLAY */}
-
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            {/* Title */}
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 drop-shadow">
               <span className="text-kargon-red">LCL</span> Services
             </h1>
 
-            {/* Breadcrumb */}
             <nav className="flex justify-center items-center text-gray-800 text-lg md:text-2xl font-medium space-x-3">
               <Link to="/" className="hover:text-kargon-red">Home</Link>
               <span className="text-gray-700">›</span>
@@ -197,30 +194,32 @@ const LCL = () => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-16 bg-kargon-red text-white">
+        {/* CTA SECTION — UPDATED */}
+        <section className="py-16 bg-white text-kargon-red">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-kargon-red">
                 Ready to Ship with LCL?
               </h2>
 
-              <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+              <p className="text-xl mb-8 text-kargon-red max-w-2xl mx-auto">
                 Contact us today for competitive rates and dependable LCL shipping.
               </p>
 
               <Link
                 to="/contact"
-                className="inline-flex items-center bg-white text-kargon-red px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors duration-300"
+                className="inline-flex items-center bg-kargon-red text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-kargon-red/90 transition-colors duration-300"
               >
                 Get Quote Now
               </Link>
             </motion.div>
+
           </div>
         </section>
 
