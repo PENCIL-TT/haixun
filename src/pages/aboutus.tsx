@@ -258,47 +258,45 @@ const AboutUs = () => {
                 return (
                   <motion.div
                     key={service.key}
-                    className="group rounded-3xl px-8 py-10 text-center bg-white border border-[#BC001822] flex flex-col shadow-[0_20px_40px_rgba(188,0,24,0.15)] transition-all duration-300"
+                    className="group relative overflow-hidden rounded-3xl px-8 py-10 text-center bg-white border border-[#BC001822] flex flex-col shadow-[0_20px_40px_rgba(188,0,24,0.15)] transition-all duration-300"
                     whileHover={{ y: -10, scale: 1.03 }}
                     transition={{ duration: 0.25 }}
                   >
-                    {/* ICON */}
-                    <motion.div
-                      className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:bg-[#BC001820]"
-                      style={{ backgroundColor: `${BRAND_RED}15` }}
-                      animate={{ y: [0, -4, 0] }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        delay: idx * 0.12,
-                      }}
-                    >
-                      <Icon
-                        className="w-8 h-8 transition-all duration-300"
-                        style={{ color: BRAND_RED }}
-                      />
-                    </motion.div>
+                    {/* background change on hover */}
+                    <div className="absolute inset-0 bg-white group-hover:bg-[#BC0018] transition-colors duration-300" />
 
-                    {/* TITLE */}
-                    <h3
-                      className="text-2xl font-semibold transition-colors duration-300 group-hover:text-[#8A0012]"
-                      style={{ color: BRAND_RED }}
-                    >
-                      {service.title}
-                    </h3>
+                    <div className="relative z-10 flex flex-col h-full">
+                      {/* ICON */}
+                      <motion.div
+                        className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-all duration-300 bg-[#BC001822] group-hover:bg-[#ffffff33]"
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                          delay: idx * 0.12,
+                        }}
+                      >
+                        <Icon className="w-8 h-8 transition-all duration-300 text-[#BC0018] group-hover:text-white" />
+                      </motion.div>
 
-                    {/* DESCRIPTION */}
-                    <p className="text-sm text-gray-700 mt-3 flex-1 transition-colors duration-300 group-hover:text-gray-900">
-                      {service.short}
-                    </p>
+                      {/* TITLE */}
+                      <h3 className="text-2xl font-semibold transition-colors duration-300 text-[#BC0018] group-hover:text-white">
+                        {service.title}
+                      </h3>
 
-                    {/* BUTTON */}
-                    <Link to={getNavLink(service.href)} className="mt-5">
-                      <Button className="rounded-full px-4 py-2 text-xs font-semibold bg-[#BC0018] text-white hover:bg-[#a30015] transition-all duration-300 group-hover:shadow-lg">
-                        Read more
-                      </Button>
-                    </Link>
+                      {/* DESCRIPTION */}
+                      <p className="text-sm text-gray-700 mt-3 flex-1 transition-colors duration-300 group-hover:text-white group-hover:opacity-90">
+                        {service.short}
+                      </p>
+
+                      {/* BUTTON */}
+                      <Link to={getNavLink(service.href)} className="mt-5">
+                        <Button className="rounded-full px-4 py-2 text-xs font-semibold bg-[#BC0018] text-white transition-all duration-300 group-hover:bg-white group-hover:text-[#BC0018] group-hover:shadow-lg">
+                          Read more
+                        </Button>
+                      </Link>
+                    </div>
                   </motion.div>
                 );
               })}
