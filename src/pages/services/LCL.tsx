@@ -55,15 +55,9 @@ const LCL = () => {
             backgroundImage: "url('/breadcrumb-shape.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         >
-          {/* Bottom-left decorative image */}
-          <img
-            src="/ca line shape .png"
-            alt="decor"
-            className="absolute left-0 bottom-0 w-40 opacity-90 pointer-events-none"
-          />
-
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               <span className="text-kargon-red">LCL</span> Services
