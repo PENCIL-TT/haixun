@@ -48,39 +48,34 @@ const LCL = () => {
       <Navigation />
 
       <main className="flex-grow pt-20">
+
         {/* Breadcrumb + Header Section */}
         <section
           className="relative py-20"
           style={{
-            backgroundImage: "url('/breadcrumn-shape.png')", // image in /public
+            backgroundImage: "url('/breadcrumn-shape.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
         >
-          {/* Optional dark overlay to make text readable on photo */}
-          <div className="absolute inset-0 bg-black/40" />
+          {/* NO GRADIENT OVERLAY */}
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             {/* Title */}
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              <span className="text-kargon-red bg-white/90 px-4 py-1 rounded-xl">
-                LCL
-              </span>{" "}
-              <span className="ml-2 drop-shadow-lg">Services</span>
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 drop-shadow">
+              <span className="text-kargon-red">LCL</span> Services
             </h1>
 
-            {/* Centered Breadcrumb */}
-            <nav className="flex justify-center items-center text-white text-lg md:text-2xl font-medium space-x-3 drop-shadow">
-              <Link to="/" className="hover:text-kargon-red">
-                Home
-              </Link>
-              <span className="text-gray-200">›</span>
+            {/* Breadcrumb */}
+            <nav className="flex justify-center items-center text-gray-800 text-lg md:text-2xl font-medium space-x-3">
+              <Link to="/" className="hover:text-kargon-red">Home</Link>
+              <span className="text-gray-700">›</span>
 
               <Link to="/services" className="hover:text-kargon-red">
                 Services
               </Link>
-              <span className="text-gray-200">›</span>
+              <span className="text-gray-700">›</span>
 
               <span className="text-kargon-red font-semibold">
                 LCL Services
@@ -89,9 +84,10 @@ const LCL = () => {
           </div>
         </section>
 
-        {/* Hero / Intro Section */}
+        {/* Hero Section */}
         <section className="py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-slate-50" />
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -150,7 +146,6 @@ const LCL = () => {
                     className="w-full h-96 object-cover"
                     src="/lcl1.JPG"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </div>
 
                 <div className="absolute -bottom-6 -right-6 p-4 rounded-xl shadow-lg bg-kargon-red">
@@ -202,7 +197,7 @@ const LCL = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA */}
         <section className="py-16 bg-kargon-red text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
@@ -216,8 +211,7 @@ const LCL = () => {
               </h2>
 
               <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-                Contact us today for competitive rates and dependable LCL
-                shipping.
+                Contact us today for competitive rates and dependable LCL shipping.
               </p>
 
               <Link
@@ -229,6 +223,7 @@ const LCL = () => {
             </motion.div>
           </div>
         </section>
+
       </main>
 
       <Footer />
