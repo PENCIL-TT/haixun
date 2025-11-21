@@ -131,6 +131,7 @@ const AboutUs = () => {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
+          {/* simple dark overlay (no gradient) */}
           <div
             className="absolute inset-0"
             style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
@@ -187,7 +188,7 @@ const AboutUs = () => {
 
               <div
                 className="absolute -bottom-10 left-10 px-7 py-5 rounded-3xl shadow-xl text-white"
-                style={{ backgroundColor: BRANDRED }}
+                style={{ backgroundColor: BRAND_RED }}
               >
                 <h2 className="text-4xl font-bold">9+</h2>
                 <p className="text-sm">Years of Growth</p>
