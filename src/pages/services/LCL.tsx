@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import ContactForm from "@/components/ContactForm";
-import { Ship, CheckCircle, Clock, DollarSign, Globe } from "lucide-react";
+import { Ship, CheckCircle, DollarSign, Globe } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 const ScrollToTop = () => {
@@ -50,32 +49,41 @@ const LCL = () => {
 
       <main className="flex-grow pt-20">
         {/* Breadcrumb + Page Title */}
-        <section className="bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <section
+          className="relative bg-white border-b border-gray-200 py-20"
+          style={{
+            backgroundImage: "url('/breadcrumb-shape.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* Bottom-left decorative image */}
+          <img
+            src="/ca line shape .png"
+            alt="decor"
+            className="absolute left-0 bottom-0 w-40 opacity-90 pointer-events-none"
+          />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               <span className="text-kargon-red">LCL</span> Services
             </h1>
 
-            <nav className="flex items-center text-gray-600 text-sm space-x-2">
-              <Link to="/" className="hover:text-kargon-red font-medium">
+            <nav className="flex justify-center items-center text-gray-700 text-lg md:text-xl font-medium space-x-3">
+              <Link to="/" className="hover:text-kargon-red">
                 Home
               </Link>
-              <span className="text-gray-400">›</span>
-              <Link
-                to="/services"
-                className="hover:text-kargon-red font-medium"
-              >
+              <span className="text-gray-500">›</span>
+              <Link to="/services" className="hover:text-kargon-red">
                 Services
               </Link>
-              <span className="text-gray-400">›</span>
-              <span className="text-kargon-red font-semibold">
-                LCL Services
-              </span>
+              <span className="text-gray-500">›</span>
+              <span className="text-kargon-red font-semibold">LCL Services</span>
             </nav>
           </div>
         </section>
 
-        {/* Hero Section */}
+        {/* Hero / Intro Section */}
         <section className="py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-slate-50" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -88,7 +96,7 @@ const LCL = () => {
             >
               <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
                 Less Container Load shipping solutions for optimal convenience
-                and cost efficiency
+                and cost efficiency.
               </p>
             </motion.div>
 
@@ -114,11 +122,10 @@ const LCL = () => {
                   <p className="text-lg leading-relaxed text-gray-700">
                     LCL is an ocean freight transportation service that is often
                     preferred by businesses that don't have enough cargo to fill
-                    an entire shipping container. LCL is the best service that
-                    can be available in such scenario instead of paying for an
-                    entire container with much of the unused space, shippers can
-                    now consolidate goods with other consignees to fully utilize
-                    the available space and thereby reduce the overall costs.
+                    an entire shipping container. Instead of paying for an
+                    entire container with unused space, shippers can consolidate
+                    goods with other consignees to fully utilize the available
+                    space and reduce overall costs.
                   </p>
                   <p className="text-lg leading-relaxed text-gray-700">
                     It is our assurance to our customers that there is no need
@@ -169,7 +176,7 @@ const LCL = () => {
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Our LCL network offers unmatched connectivity and cadence across
-                major shipping routes
+                major shipping routes.
               </p>
             </motion.div>
 
@@ -210,7 +217,7 @@ const LCL = () => {
               </h2>
               <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
                 Contact us today for competitive rates and reliable LCL shipping
-                solutions
+                solutions.
               </p>
               <Link
                 to="/contact"
@@ -221,13 +228,6 @@ const LCL = () => {
             </motion.div>
           </div>
         </section>
-
-        {/* Contact Section (if you want to use ContactForm later) */}
-        {/* <section className="py-16 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ContactForm />
-          </div>
-        </section> */}
       </main>
 
       <Footer />
