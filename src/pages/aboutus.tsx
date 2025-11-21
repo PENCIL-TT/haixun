@@ -6,8 +6,6 @@ import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import {
-  Truck,
-  Ship,
   MapPin,
   Mail,
   Boxes,
@@ -17,6 +15,7 @@ import {
   Plane,
   FileSearch,
   Route,
+  Ship,
 } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
@@ -30,7 +29,6 @@ const ScrollToTop = () => {
   return null;
 };
 
-/** Core services: icon matches title + short content + href for navigation */
 const CORE_SERVICES = [
   {
     key: "lcl-services",
@@ -38,7 +36,7 @@ const CORE_SERVICES = [
     icon: Boxes,
     href: "/services/lcl",
     short:
-      "Own consolidation service on key trade routes, competitive pricing with multiple sailings, and full transparency of origin, destination, and ocean freight charges.",
+      "Own consolidation service on key trade routes, competitive pricing with multiple sailings and full transparency.",
   },
   {
     key: "fcl-services",
@@ -46,7 +44,7 @@ const CORE_SERVICES = [
     icon: Package,
     href: "/services/fcl",
     short:
-      "Own fleet of containers and special equipment, multiple carrier options, and complete end-to-end handling from booking and loading to final delivery.",
+      "Own fleet of containers and special equipment with multiple carrier options and end-to-end handling.",
   },
   {
     key: "warehouse-management",
@@ -54,7 +52,7 @@ const CORE_SERVICES = [
     icon: Warehouse,
     href: "/services/warehouse-management",
     short:
-      "Warehousing for various commodities including cold storage, focusing on stock receipts, storage, distribution, and value-added services.",
+      "Comprehensive warehousing for commodities including cold storage and value-added supply chain services.",
   },
   {
     key: "project-logistics",
@@ -62,7 +60,7 @@ const CORE_SERVICES = [
     icon: Construction,
     href: "/services/project-logistics",
     short:
-      "Dedicated project division for special and complex project cargo, over-dimension loads, and floating crane operations with transparent project costing.",
+      "Specialized handling for heavy, over-dimension cargo, floating crane operations and project-specific logistics.",
   },
   {
     key: "air-shipments",
@@ -70,7 +68,7 @@ const CORE_SERVICES = [
     icon: Plane,
     href: "/services/air-shipments",
     short:
-      "Customized sea–air and air–sea solutions, plus airfreight consolidation on major routes through an efficient worldwide partner network.",
+      "Custom air-sea and sea-air solutions with global partner network and route-optimized air freight services.",
   },
   {
     key: "customs-declaration",
@@ -78,7 +76,7 @@ const CORE_SERVICES = [
     icon: FileSearch,
     href: "/services/customs-declaration",
     short:
-      "Smooth customs clearance with expert brokers handling import/export regulations and trade compliance paperwork across sea, land, and air.",
+      "Smooth customs clearance with expert brokers handling compliance paperwork and import/export regulations.",
   },
   {
     key: "oog-shipments",
@@ -86,7 +84,7 @@ const CORE_SERVICES = [
     icon: Route,
     href: "/services/oog-shipments",
     short:
-      "End-to-end OOG and inter-island services covering loading, lashing, surveyor, equipment, warehouse & yard facility, and domestic movements.",
+      "End-to-end OOG handling including loading, lashing, surveyor, equipment, warehouse and island movements.",
   },
   {
     key: "lcl-consolidation",
@@ -94,7 +92,7 @@ const CORE_SERVICES = [
     icon: Ship,
     href: "/services/lcl-consolidation",
     short:
-      "Export/import LCL consolidation via hubs like Singapore connecting India, Middle East, USA, Europe, and more with consolidation warehouses and value-added services.",
+      "Global LCL consolidation via Singapore with connected hubs across India, Middle East, USA and Europe.",
   },
 ];
 
@@ -105,19 +103,16 @@ const AboutUs = () => {
   const detected = getCurrentCountryFromPath(location.pathname);
   const currentCountry = detected ?? { code: "SG", name: "Singapore" };
 
-  const getNavLink = (basePath: string) => {
-    if (currentCountry.code === "SG") return basePath;
-    return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
+  const getNavLink = (base: string) => {
+    if (currentCountry.code === "SG") return base;
+    return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${base}`;
   };
 
   const sliderImages = ["/Dubai.jpg", "/jebelali1.png", "/burj-khalifa.jpg"];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(
-      () => setIndex((i) => (i + 1) % sliderImages.length),
-      4000
-    );
+    const id = setInterval(() => setIndex((i) => (i + 1) % sliderImages.length), 4000);
     return () => clearInterval(id);
   }, []);
 
@@ -127,124 +122,117 @@ const AboutUs = () => {
       <Navigation />
 
       <main className="flex-grow pt-0">
-        {/* ======================= HERO / BREADCRUMB ======================= */}
-        <section className="relative h-[260px] md:h-[320px] w-full flex items-center justify-center text-center px-6">
+        {/* ================= HERO ================= */}
+        <section className="relative h-[260px] md:h-[320px] flex items-center justify-center text-center px-6">
           <img
             src="/breadcrumb-bg.png"
-            alt="About Haixun Global"
+            alt="About Haixun"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(188,0,24,0.7), rgba(0,0,0,0.7))",
+            }}
+          />
 
-          <div className="relative z-10 container mx-auto max-w-5xl pt-4 md:pt-6">
+          <div className="relative z-10 container mx-auto max-w-5xl">
             <p className="text-xs md:text-sm text-white/80 mb-2">
-              <Link to="/" className="hover:text-white transition-colors">
-                Home
-              </Link>
+              <Link to="/" className="hover:text-white">Home</Link>
               <span className="mx-2 opacity-70">›</span>
               <span className="text-white">About Us</span>
             </p>
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
+            <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
               About Us
             </h1>
           </div>
         </section>
 
-        {/* ======================= WHO WE ARE BLOCK ======================= */}
-        <section className="relative bg-white py-20 md:py-24 overflow-hidden">
-          <img
-            src="/plan-location.png"
-            alt="plane-path"
-            className="pointer-events-none hidden lg:block absolute -left-40 top-[60%] w-[360px] opacity-25"
-          />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* LEFT IMAGE PANEL */}
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.45 }}
-                className="relative"
-              >
-                <div className="relative rounded-[32px] overflow-hidden shadow-[0_28px_60px_rgba(0,0,0,0.22)] bg-slate-900/5">
-                  <div className="w-full aspect-[4/3] bg-slate-200 relative">
-                    {sliderImages.map((src, i) => (
-                      <motion.img
-                        key={src}
-                        src={src}
-                        alt={src}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === index ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
+        {/* ================= WHO WE ARE ================= */}
+        <section className="relative bg-white py-20 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            {/* LEFT */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45 }}
+              className="relative"
+            >
+              <div className="rounded-[32px] overflow-hidden shadow-[0_28px_60px_rgba(188,0,24,0.25)]">
+                <div className="w-full aspect-[4/3] relative">
+                  {sliderImages.map((src, i) => (
+                    <motion.img
+                      key={src}
+                      src={src}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: i === index ? 1 : 0 }}
+                      transition={{ duration: 0.7 }}
+                    />
+                  ))}
                 </div>
+              </div>
 
-                {/* circular badge */}
-                <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-white shadow-lg hidden sm:flex items-center justify-center">
-                  <div
-                    className="w-20 h-20 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: `${BRAND_RED}20` }}
-                  >
-                    <Ship className="w-10 h-10" style={{ color: BRAND_RED }} />
-                  </div>
-                </div>
-
-                {/* red stats box */}
+              <div className="absolute -top-12 -left-12 w-32 h-32 rounded-full bg-white shadow-xl hidden md:flex items-center justify-center">
                 <div
-                  className="absolute -bottom-10 left-10 rounded-3xl px-8 py-5 text-white shadow-xl"
-                  style={{ backgroundColor: BRAND_RED }}
+                  className="w-20 h-20 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: `${BRAND_RED}30` }}
                 >
-                  <span className="text-4xl font-bold">9+</span>
-                  <p className="text-sm text-white/90">Years of Growth</p>
+                  <Ship className="w-10 h-10" style={{ color: BRAND_RED }} />
                 </div>
-              </motion.div>
+              </div>
 
-              {/* RIGHT TEXT PANEL */}
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.45 }}
-                className="space-y-6 md:space-y-7"
+              <div
+                className="absolute -bottom-10 left-10 px-7 py-5 rounded-3xl shadow-xl text-white"
+                style={{ backgroundColor: BRAND_RED }}
               >
-                <p
-                  className="text-sm font-semibold uppercase tracking-wide"
-                  style={{ color: BRAND_RED }}
-                >
-                  {t("about.whoWeAre")}
-                </p>
+                <h2 className="text-4xl font-bold">9+</h2>
+                <p className="text-sm">Years of Growth</p>
+              </div>
+            </motion.div>
 
-                <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
-                  {t("about.title")}
-                </h1>
+            {/* RIGHT */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45 }}
+              className="space-y-6"
+            >
+              <p
+                className="text-sm font-semibold uppercase"
+                style={{ color: BRAND_RED }}
+              >
+                {t("about.whoWeAre")}
+              </p>
 
-                <p className="text-lg text-gray-700">{t("about.subtitle")}</p>
-                <p className="text-base text-gray-700">{t("about.paragraph1")}</p>
-                <p className="text-base text-gray-700">{t("about.paragraph2")}</p>
-                <p className="text-base text-gray-700">{t("about.paragraph3")}</p>
+              <h2 className="text-4xl md:text-5xl font-bold" style={{ color: BRAND_RED }}>
+                {t("about.title")}
+              </h2>
 
-                <div className="pt-10">
-                  <Link to={getNavLink("/contact")}>
-                    <Button
-                      className="text-white px-7 py-5 text-sm rounded-full"
-                      style={{ backgroundColor: BRAND_RED }}
-                    >
-                      {t("nav.contact")}
-                    </Button>
-                  </Link>
-                </div>
-              </motion.div>
-            </div>
+              <p className="text-lg text-gray-700">{t("about.subtitle")}</p>
+              <p className="text-gray-700">{t("about.paragraph1")}</p>
+              <p className="text-gray-700">{t("about.paragraph2")}</p>
+              <p className="text-gray-700">{t("about.paragraph3")}</p>
+
+              <div className="pt-6">
+                <Link to={getNavLink("/contact")}>
+                  <Button
+                    className="text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:brightness-110"
+                    style={{ backgroundColor: BRAND_RED }}
+                  >
+                    {t("nav.contact")}
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* ======================= OUR CORE SERVICES (ICON + ANIMATION) ======================= */}
-        <section className="py-24 bg-white relative">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* ================= SERVICES ================= */}
+        <section className="py-24 bg-[#FFF5F6]">
+          <div className="max-w-7xl mx-auto px-4 lg:px-8">
             <h2
               className="text-center text-4xl font-bold mb-14"
               style={{ color: BRAND_RED }}
@@ -252,62 +240,56 @@ const AboutUs = () => {
               Our Core Services
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
               {CORE_SERVICES.map((service, idx) => {
                 const Icon = service.icon;
                 return (
-                  <div key={service.key} className="w-full">
+                  <motion.div
+                    key={service.key}
+                    className="rounded-3xl px-8 py-10 text-center bg-white shadow-[0_20px_40px_rgba(188,0,24,0.15)] border border-[#BC001822] flex flex-col"
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <motion.div
-                      className="rounded-3xl px-8 py-10 shadow-xl text-center h-full flex flex-col"
-                      style={{ backgroundColor: BRAND_RED }}
-                      whileHover={{
-                        y: -6,
-                        boxShadow: "0 24px 60px rgba(0,0,0,0.35)",
+                      className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                      style={{ backgroundColor: `${BRAND_RED}15` }}
+                      animate={{ y: [0, -4, 0] }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        delay: idx * 0.12,
                       }}
-                      transition={{ type: "spring", stiffness: 260, damping: 20 }}
                     >
-                      {/* Animated icon bubble */}
-                      <motion.div
-                        className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3"
-                        style={{ backgroundColor: `${BRAND_RED}30` }}
-                        animate={{ y: [0, -4, 0] }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                          delay: idx * 0.15,
-                        }}
-                        whileHover={{ scale: 1.08 }}
-                      >
-                        <Icon className="w-8 h-8 text-white" />
-                      </motion.div>
-
-                      <h3 className="text-2xl text-white font-semibold">
-                        {service.title}
-                      </h3>
-
-                      <p className="text-sm text-white/90 mt-3 flex-1">
-                        {service.short}
-                      </p>
-
-                      <div className="mt-5">
-                        <Link to={getNavLink(service.href)}>
-                          <Button className="text-xs font-semibold rounded-full px-4 py-2 bg-white text-[#BC0018] hover:bg-white/90">
-                            Read more
-                          </Button>
-                        </Link>
-                      </div>
+                      <Icon className="w-8 h-8" style={{ color: BRAND_RED }} />
                     </motion.div>
-                  </div>
+
+                    <h3
+                      className="text-2xl font-semibold"
+                      style={{ color: BRAND_RED }}
+                    >
+                      {service.title}
+                    </h3>
+
+                    <p className="text-sm text-gray-700 mt-3 flex-1">{service.short}</p>
+
+                    <Link to={getNavLink(service.href)} className="mt-5">
+                      <Button
+                        className="rounded-full px-4 py-2 text-xs font-semibold bg-[#BC0018] text-white hover:bg-[#a30015]"
+                      >
+                        Read more
+                      </Button>
+                    </Link>
+                  </motion.div>
                 );
               })}
             </div>
           </div>
         </section>
 
-        {/* ======================= GET IN TOUCH / CONTACT BLOCK ======================= */}
-        <section className="py-24 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* ================= GET IN TOUCH ================= */}
+        <section className="py-24 bg-white border-t border-[#BC001833]">
+          <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             {/* LEFT */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -315,71 +297,58 @@ const AboutUs = () => {
               transition={{ duration: 0.45 }}
               className="space-y-6"
             >
-              <p
-                className="text-sm font-semibold uppercase tracking-wide"
-                style={{ color: BRAND_RED }}
-              >
-                Safe Transportation &amp; Logistics
+              <p className="text-sm uppercase font-semibold" style={{ color: BRAND_RED }}>
+                Safe Transportation & Logistics
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+              <h2 className="text-4xl md:text-5xl font-bold" style={{ color: BRAND_RED }}>
                 Get In Touch
               </h2>
 
-              <p className="text-sm md:text-base text-slate-600 max-w-xl">
-                Get in touch with our team for logistics solutions, freight
-                inquiries, and global shipping support. We are here to assist you
-                across time zones and regions.
+              <p className="text-base text-gray-700 max-w-xl">
+                Contact our global team for shipping support, logistics help, freight
+                inquiries, and project cargo solutions.
               </p>
 
-              <div className="pt-4 space-y-2">
-                <p className="text-xs font-semibold text-slate-500">
-                  24/7 Support Center
-                </p>
-                <p
-                  className="text-2xl md:text-3xl font-bold"
-                  style={{ color: BRAND_RED }}
-                >
+              <div className="pt-4">
+                <p className="text-xs font-semibold text-gray-500">24/7 Support Center</p>
+                <p className="text-3xl font-bold" style={{ color: BRAND_RED }}>
                   +86 75582222447
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                <div className="bg-white rounded-2xl shadow-md px-6 py-5 space-y-2">
-                  <p className="font-semibold text-slate-900 flex items-center gap-2">
-                    <MapPin className="w-4 h-4" style={{ color: BRAND_RED }} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
+                <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2 shadow-md">
+                  <p className="font-semibold flex items-center gap-2" style={{ color: BRAND_RED }}>
+                    <MapPin className="w-4 h-4" />
                     Shenzhen Office • China
                   </p>
-                  <p className="text-xs text-slate-600">
-                    13C02, Block A,
-                    Zhaoxin Huijin Plaza 3085 Shennan East Road,
-                    <br />
-                    Luohu, Shenzhen.
+                  <p className="text-xs text-gray-700">
+                    13C02, Block A, Zhaoxin Huijin Plaza<br />
+                    3085 Shennan East Road, Luohu, Shenzhen.
                   </p>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-md px-6 py-5 space-y-2">
-                  <p className="font-semibold text-slate-900 flex items-center gap-2">
-                    <Mail className="w-4 h-4" style={{ color: BRAND_RED }} />
+                <div className="bg-[#FFF5F6] border border-[#BC001822] rounded-2xl p-6 space-y-2 shadow-md">
+                  <p className="font-semibold flex items-center gap-2" style={{ color: BRAND_RED }}>
+                    <Mail className="w-4 h-4" />
                     Email Us
                   </p>
-                  <p className="text-xs text-slate-600">
-                    info@haixun-global.com
-                    <br />
-                    support@haixun-global.com
+                  <p className="text-xs text-gray-700">
+                    info@haixun-global.com <br /> support@haixun-global.com
                   </p>
                 </div>
               </div>
             </motion.div>
 
-            {/* RIGHT: GOOGLE MAP EMBED */}
+            {/* MAP */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.45 }}
               className="relative"
             >
-              <div className="w-full h-[320px] md:h-[420px] rounded-3xl overflow-hidden shadow-xl">
+              <div className="rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(188,0,24,0.25)] h-[340px] md:h-[420px]">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.174783742364!2d-122.40137852347925!3d37.79228127197342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b1c95a1f%3A0x0000000000000000!2sYour%20Office!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                   width="100%"
@@ -387,7 +356,6 @@ const AboutUs = () => {
                   style={{ border: 0 }}
                   loading="lazy"
                   allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
             </motion.div>
