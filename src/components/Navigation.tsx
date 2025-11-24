@@ -3,8 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 import CountrySelector from "@/components/CountrySelector";
 import { getCurrentCountryFromPath, detectCountryByIP } from "@/services/countryDetection";
 import {
@@ -28,12 +27,11 @@ function FlagIcon({
   return (
     <img
       src={src}
-      alt=""                /* alt intentionally empty so no text shows */
-      aria-hidden="true"    /* decorative */
+      alt="" // decorative only
+      aria-hidden="true"
       className={className}
       draggable={false}
       onError={(e) => {
-        // If missing, hide image (no text fallback ever rendered)
         (e.currentTarget as HTMLImageElement).style.display = "none";
       }}
     />
@@ -41,13 +39,18 @@ function FlagIcon({
 }
 
 const Navigation = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
   const [ipCountry, setIpCountry] = useState<{ code: string; name: string } | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
+
+  // When clicking the language button, always switch to Chinese
+  const handleLanguageSwitch = () => {
+    i18n.changeLanguage("zh");
+  };
 
   // We use the URL to decide the current country flag
   const currentCountry = getCurrentCountryFromPath(location.pathname);
@@ -75,10 +78,10 @@ const Navigation = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   const isActive = (path: string) => location.pathname === path;
 
   const getNavLink = (basePath: string) => {
@@ -99,12 +102,22 @@ const Navigation = () => {
     { name: "Facebook", href: "https://www.facebook.com/Amassmiddleeast?mibextid=ZbWKwL", Icon: FaFacebookF },
   ];
 
+  const desktopLinkColor = (active: boolean) =>
+    active
+      ? "text-red-600"
+      : isScrolled || !isHomePage
+      ? "text-gray-900"
+      : "text-white";
+
+  const desktopLangButtonClasses =
+    "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors";
+
   return (
-    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
-      isScrolled || !isHomePage
-        ? 'bg-white shadow-md' 
-        : 'bg-transparent'
-    }`}>
+    <header
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
+        isScrolled || !isHomePage ? "bg-white shadow-md" : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto px-3 sm:px-4 md:px-6 py-2 sm:py-4 lg:py-[18px]">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -122,78 +135,85 @@ const Navigation = () => {
           <div className="hidden lg:flex items-center gap-6">
             <Link
               to="/"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
-              }`}
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
+                isActive("/")
+              )}`}
             >
-              {t('nav.home')}
+              {t("nav.home")}
             </Link>
 
             <DropdownMenu>
-              <DropdownMenuTrigger className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors flex items-center gap-1 ${
-                location.pathname.includes("/services") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
-              }`}>
-                {t('nav.services')} <ChevronDown className="w-4 h-4" />
+              <DropdownMenuTrigger
+                className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors flex items-center gap-1 ${
+                  location.pathname.includes("/services")
+                    ? "text-red-600"
+                    : desktopLinkColor(false)
+                }`}
+              >
+                {t("nav.services")} <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-64 bg-white border-gray-200 shadow-lg z-[100]">
                 <DropdownMenuItem asChild>
                   <Link to="/services" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.allServices')}
+                    {t("services.allServices")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/lcl" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.lcl.title')}
+                    {t("services.lcl.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/cfs" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.cfs.title')}
+                    {t("services.cfs.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/sea-freight" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.oceanFreight.title')}
+                    {t("services.oceanFreight.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/air-freight" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.air.title')}
+                    {t("services.air.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/warehousing" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.warehouse.title')}
+                    {t("services.warehouse.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/project-cargo" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.projectCargo.title')}
+                    {t("services.projectCargo.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/customs-clearance" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.customs.title')}
+                    {t("services.customs.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/consolidation" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.consolidation.title')}
+                    {t("services.consolidation.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/liquid-cargo" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.liquidCargo.title')}
+                    {t("services.liquidCargo.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/services/third-party-logistics" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.thirdPartyLogistics.title')}
+                  <Link
+                    to="/services/third-party-logistics"
+                    className="w-full cursor-pointer hover:bg-gray-100"
+                  >
+                    {t("services.thirdPartyLogistics.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/services/liner-agency" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t('services.linerAgency.title')}
+                    {t("services.linerAgency.title")}
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -201,50 +221,61 @@ const Navigation = () => {
 
             <Link
               to="/about-us"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/about-us") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
-              }`}
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
+                isActive("/about-us")
+              )}`}
             >
-              {t('nav.about')}
+              {t("nav.about")}
             </Link>
 
             <Link
               to="/blog"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/blog") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
-              }`}
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
+                isActive("/blog")
+              )}`}
             >
-              {t('nav.news')}
+              {t("nav.news")}
             </Link>
 
             <Link
               to="/advantages"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/advantages") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
-              }`}
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
+                isActive("/advantages")
+              )}`}
             >
-              {t('nav.advantage')}
+              {t("nav.advantage")}
             </Link>
 
             <Link
               to="/global-presence"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/global-presence") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
-              }`}
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
+                isActive("/global-presence")
+              )}`}
             >
-              {t('nav.globalPresence')}
+              {t("nav.globalPresence")}
             </Link>
 
             <Link
               to="/contact"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${
-                isActive("/contact") ? "text-red-600" : (isScrolled || !isHomePage) ? "text-gray-900" : "text-white"
-              }`}
+              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
+                isActive("/contact")
+              )}`}
             >
-              {t('nav.contact')}
+              {t("nav.contact")}
             </Link>
 
-            <LanguageSwitcher />
+            {/* Desktop Chinese language button */}
+            <button
+              type="button"
+              onClick={handleLanguageSwitch}
+              className={`${desktopLangButtonClasses} ${
+                isScrolled || !isHomePage
+                  ? "border-gray-300 text-gray-900 hover:bg-gray-900 hover:text-white"
+                  : "border-white/40 text-white hover:bg-white hover:text-black"
+              }`}
+            >
+              中文
+            </button>
           </div>
 
           {/* Mobile Toggle */}
@@ -255,9 +286,15 @@ const Navigation = () => {
               aria-label="Toggle Menu"
             >
               {isMenuOpen ? (
-                <X className={(isScrolled || !isHomePage) ? "text-gray-900" : "text-white"} size={24} />
+                <X
+                  className={isScrolled || !isHomePage ? "text-gray-900" : "text-white"}
+                  size={24}
+                />
               ) : (
-                <Menu className={(isScrolled || !isHomePage) ? "text-gray-900" : "text-white"} size={24} />
+                <Menu
+                  className={isScrolled || !isHomePage ? "text-gray-900" : "text-white"}
+                  size={24}
+                />
               )}
             </button>
           </div>
@@ -276,7 +313,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.home')}
+                {t("nav.home")}
               </Link>
 
               {/* Services Collapsible */}
@@ -285,8 +322,12 @@ const Navigation = () => {
                   onClick={() => setIsCompanyDropdownOpen(!isCompanyDropdownOpen)}
                   className="flex items-center justify-between font-medium py-2 text-lg hover:text-red-600 transition-colors text-gray-900"
                 >
-                  {t('nav.services')}
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isCompanyDropdownOpen ? 'rotate-180' : ''}`} />
+                  {t("nav.services")}
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      isCompanyDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
                 {isCompanyDropdownOpen && (
                   <div className="flex flex-col pl-4 space-y-2 mt-2">
@@ -295,84 +336,84 @@ const Navigation = () => {
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.allServices')}
+                      {t("services.allServices")}
                     </Link>
                     <Link
                       to="/services/lcl"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.lcl.title')}
+                      {t("services.lcl.title")}
                     </Link>
                     <Link
                       to="/services/cfs"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.cfs.title')}
+                      {t("services.cfs.title")}
                     </Link>
                     <Link
                       to="/services/sea-freight"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.oceanFreight.title')}
+                      {t("services.oceanFreight.title")}
                     </Link>
                     <Link
                       to="/services/air-freight"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.air.title')}
+                      {t("services.air.title")}
                     </Link>
                     <Link
                       to="/services/warehousing"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.warehouse.title')}
+                      {t("services.warehouse.title")}
                     </Link>
                     <Link
                       to="/services/project-cargo"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.projectCargo.title')}
+                      {t("services.projectCargo.title")}
                     </Link>
                     <Link
                       to="/services/customs-clearance"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.customs.title')}
+                      {t("services.customs.title")}
                     </Link>
                     <Link
                       to="/services/consolidation"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.consolidation.title')}
+                      {t("services.consolidation.title")}
                     </Link>
                     <Link
                       to="/services/liquid-cargo"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.liquidCargo.title')}
+                      {t("services.liquidCargo.title")}
                     </Link>
                     <Link
                       to="/services/third-party-logistics"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.thirdPartyLogistics.title')}
+                      {t("services.thirdPartyLogistics.title")}
                     </Link>
                     <Link
                       to="/services/liner-agency"
                       className="py-2 text-base hover:text-red-600 transition-colors text-gray-700"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('services.linerAgency.title')}
+                      {t("services.linerAgency.title")}
                     </Link>
                   </div>
                 )}
@@ -385,7 +426,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.about')}
+                {t("nav.about")}
               </Link>
 
               <Link
@@ -395,7 +436,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.news')}
+                {t("nav.news")}
               </Link>
 
               <Link
@@ -405,7 +446,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.advantage')}
+                {t("nav.advantage")}
               </Link>
 
               <Link
@@ -415,7 +456,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.globalPresence')}
+                {t("nav.globalPresence")}
               </Link>
 
               <Link
@@ -425,10 +466,20 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.contact')}
+                {t("nav.contact")}
               </Link>
 
-              <LanguageSwitcher />
+              {/* Mobile Chinese language button */}
+              <button
+                type="button"
+                onClick={() => {
+                  handleLanguageSwitch();
+                  setIsMenuOpen(false);
+                }}
+                className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
+              >
+                中文
+              </button>
             </nav>
           </div>
         </div>
