@@ -58,24 +58,18 @@ const AboutUs = () => {
       <Navigation />
 
       <main className="flex-grow pt-0">
-        {/* ======================= HERO / BREADCRUMB ======================= */}
+
+        {/* ======================= HERO (NO BREADCRUMB) ======================= */}
         <section className="relative h-[260px] md:h-[320px] w-full flex items-center justify-center text-center px-6">
           <img
             src="/breadcrumb-bg.png"
-            alt="About Haixun Global"
+            alt="Services Banner"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/60" />
           <div className="relative z-10 container mx-auto max-w-5xl pt-4 md:pt-6">
-            <p className="text-xs md:text-sm text-white/80 mb-2">
-              <Link to="/" className="hover:text-white transition-colors">
-                Home
-              </Link>
-              <span className="mx-2 opacity-70">›</span>
-              <span className="text-white">About Us</span>
-            </p>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
-              About Us
+              Services
             </h1>
           </div>
         </section>
@@ -90,7 +84,8 @@ const AboutUs = () => {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* LEFT IMAGE PANEL */}
+
+              {/* LEFT IMAGE SLIDER */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -103,7 +98,7 @@ const AboutUs = () => {
                       <motion.img
                         key={src}
                         src={src}
-                        alt={src}
+                        alt="slider"
                         className="absolute inset-0 w-full h-full object-cover"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: i === index ? 1 : 0 }}
@@ -133,7 +128,7 @@ const AboutUs = () => {
                 </div>
               </motion.div>
 
-              {/* RIGHT TEXT */}
+              {/* RIGHT TEXT SECTION */}
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -171,7 +166,7 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ======================= SERVICES (8 BOXES, HAIXUN STYLE) ======================= */}
+        {/* ======================= SERVICES SECTION (8 BOXES) ======================= */}
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
@@ -182,6 +177,7 @@ const AboutUs = () => {
             </h2>
 
             <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+
               {/* 1. LCL Services */}
               <div className="rounded-3xl border border-slate-200 bg-white px-8 py-10 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
                 <div>
@@ -192,8 +188,7 @@ const AboutUs = () => {
                     LCL Services
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    HAIXUN operate own consolidation service on many trade routes.
-                    HAIXUN provide complete LCL solutions for your cargo...
+                    HAIXUN operate own consolidation service on many trade routes...
                   </p>
                 </div>
                 <Link to={getNavLink("/services/lcl")} className="mt-6 inline-flex items-center">
@@ -219,8 +214,7 @@ const AboutUs = () => {
                     FCL Services
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    HAIXUN has own fleet of containers including special equipment
-                    to accommodate special cargo requirements...
+                    HAIXUN has own fleet of containers including special equipment...
                   </p>
                 </div>
                 <Link to={getNavLink("/services/fcl")} className="mt-6 inline-flex items-center">
@@ -247,13 +241,10 @@ const AboutUs = () => {
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     HAIXUN is well equipped to handle warehousing of various
-                    commodities including cold and specialized storage needs...
+                    commodities...
                   </p>
                 </div>
-                <Link
-                  to={getNavLink("/services/warehouse-management")}
-                  className="mt-6 inline-flex items-center"
-                >
+                <Link to={getNavLink("/services/warehouse-management")} className="mt-6 inline-flex items-center">
                   <span
                     className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
                     style={{ color: BRAND_RED }}
@@ -276,14 +267,10 @@ const AboutUs = () => {
                     Project Logistics
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    With dedicated project division having experts in the field,
-                    we manage complex project logistics from end to end...
+                    With dedicated project division having experts in the field...
                   </p>
                 </div>
-                <Link
-                  to={getNavLink("/services/project-logistics")}
-                  className="mt-6 inline-flex items-center"
-                >
+                <Link to={getNavLink("/services/project-logistics")} className="mt-6 inline-flex items-center">
                   <span
                     className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
                     style={{ color: BRAND_RED }}
@@ -306,14 +293,10 @@ const AboutUs = () => {
                     Air Shipments
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    HAIXUN can provide customized sea–air and air–sea options to
-                    meet customer deadlines and time-critical shipments...
+                    HAIXUN can provide customized sea–air and air–sea options...
                   </p>
                 </div>
-                <Link
-                  to={getNavLink("/services/air-shipments")}
-                  className="mt-6 inline-flex items-center"
-                >
+                <Link to={getNavLink("/services/air-shipments")} className="mt-6 inline-flex items-center">
                   <span
                     className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
                     style={{ color: BRAND_RED }}
@@ -326,7 +309,7 @@ const AboutUs = () => {
                 </Link>
               </div>
 
-              {/* 6. Customs Declaration & Ins. */}
+              {/* 6. Customs Declaration */}
               <div className="rounded-3xl border border-slate-200 bg-white px-8 py-10 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
                 <div>
                   <div className="w-16 h-16 rounded-full bg-[#F5F5F7] flex items-center justify-center mb-6">
@@ -336,14 +319,10 @@ const AboutUs = () => {
                     Customs Declaration & Ins.
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    We ensure that all clearance formalities are done in a smooth
-                    and easy manner so that your cargo moves without delay...
+                    We ensure all clearance formalities are executed smoothly...
                   </p>
                 </div>
-                <Link
-                  to={getNavLink("/services/customs-declaration")}
-                  className="mt-6 inline-flex items-center"
-                >
+                <Link to={getNavLink("/services/customs-declaration")} className="mt-6 inline-flex items-center">
                   <span
                     className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
                     style={{ color: BRAND_RED }}
@@ -366,14 +345,10 @@ const AboutUs = () => {
                     OOG Shipments
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Services offered: cargo loading, lashing, surveyor coordination
-                    and inter-island movement to main ports for OOG cargo...
+                    Cargo loading, lashing, surveyor coordination and inter-island...
                   </p>
                 </div>
-                <Link
-                  to={getNavLink("/services/oog-shipments")}
-                  className="mt-6 inline-flex items-center"
-                >
+                <Link to={getNavLink("/services/oog-shipments")} className="mt-6 inline-flex items-center">
                   <span
                     className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
                     style={{ color: BRAND_RED }}
@@ -396,14 +371,10 @@ const AboutUs = () => {
                     LCL Consolidation
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    We ensure that all consolidation and related formalities are
-                    handled smoothly so that all smaller shipments move efficiently...
+                    We ensure all consolidation and formalities are handled smoothly...
                   </p>
                 </div>
-                <Link
-                  to={getNavLink("/services/lcl-consolidation")}
-                  className="mt-6 inline-flex items-center"
-                >
+                <Link to={getNavLink("/services/lcl-consolidation")} className="mt-6 inline-flex items-center">
                   <span
                     className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
                     style={{ color: BRAND_RED }}
@@ -415,13 +386,16 @@ const AboutUs = () => {
                   </span>
                 </Link>
               </div>
+
             </div>
           </div>
         </section>
 
-        {/* ======================= GET IN TOUCH ======================= */}
+        {/* ======================= CONTACT SECTION ======================= */}
         <section className="py-24 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* LEFT */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -441,8 +415,7 @@ const AboutUs = () => {
 
               <p className="text-sm md:text-base text-slate-600 max-w-xl">
                 Get in touch with our team for logistics solutions, freight
-                inquiries, and global shipping support. We are here to assist you
-                across time zones and regions.
+                inquiries, and global shipping support.
               </p>
 
               <div className="pt-4 space-y-2">
@@ -484,6 +457,7 @@ const AboutUs = () => {
               </div>
             </motion.div>
 
+            {/* RIGHT MAP */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -502,8 +476,10 @@ const AboutUs = () => {
                 ></iframe>
               </div>
             </motion.div>
+
           </div>
         </section>
+
       </main>
 
       <Footer />
