@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import CountrySelector from "@/components/CountrySelector";
 import { getCurrentCountryFromPath, detectCountryByIP } from "@/services/countryDetection";
 import {
@@ -27,7 +28,7 @@ function FlagIcon({
   return (
     <img
       src={src}
-      alt="" // decorative only
+      alt=""
       aria-hidden="true"
       className={className}
       draggable={false}
@@ -39,18 +40,13 @@ function FlagIcon({
 }
 
 const Navigation = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
   const [ipCountry, setIpCountry] = useState<{ code: string; name: string } | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
-
-  // When clicking the language button, always switch to Chinese
-  const handleLanguageSwitch = () => {
-    i18n.changeLanguage("zh");
-  };
 
   // We use the URL to decide the current country flag
   const currentCountry = getCurrentCountryFromPath(location.pathname);
@@ -89,11 +85,6 @@ const Navigation = () => {
     return `/${currentCountry.name.toLowerCase().replace(" ", "-")}${basePath}`;
   };
 
-  const isCompanyLinkActive = () =>
-    isActive(getNavLink("/about-us")) ||
-    isActive(getNavLink("/gallery")) ||
-    isActive(getNavLink("/career"));
-
   // Check if we're on homepage
   const isHomePage = location.pathname === "/";
 
@@ -108,9 +99,6 @@ const Navigation = () => {
       : isScrolled || !isHomePage
       ? "text-gray-900"
       : "text-white";
-
-  const desktopLangButtonClasses =
-    "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors";
 
   return (
     <header
@@ -189,7 +177,10 @@ const Navigation = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/services/customs-clearance" className="w-full cursor-pointer hover:bg-gray-100">
+                  <Link
+                    to="/services/customs-clearance"
+                    className="w-full cursor-pointer hover:bg-gray-100"
+                  >
                     {t("services.customs.title")}
                   </Link>
                 </DropdownMenuItem>
@@ -264,18 +255,8 @@ const Navigation = () => {
               {t("nav.contact")}
             </Link>
 
-            {/* Desktop Chinese language button */}
-            <button
-              type="button"
-              onClick={handleLanguageSwitch}
-              className={`${desktopLangButtonClasses} ${
-                isScrolled || !isHomePage
-                  ? "border-gray-300 text-gray-900 hover:bg-gray-900 hover:text-white"
-                  : "border-white/40 text-white hover:bg-white hover:text-black"
-              }`}
-            >
-              中文
-            </button>
+            {/* Desktop language toggle (EN ⇄ 中文) */}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Toggle */}
@@ -469,17 +450,8 @@ const Navigation = () => {
                 {t("nav.contact")}
               </Link>
 
-              {/* Mobile Chinese language button */}
-              <button
-                type="button"
-                onClick={() => {
-                  handleLanguageSwitch();
-                  setIsMenuOpen(false);
-                }}
-                className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
-              >
-                中文
-              </button>
+              {/* Mobile language toggle (EN ⇄ 中文) */}
+              <LanguageSwitcher />
             </nav>
           </div>
         </div>
